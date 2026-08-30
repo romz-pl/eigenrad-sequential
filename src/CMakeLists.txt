@@ -3,6 +3,7 @@ SET( EXE_NAME eigenrad )
 add_executable( ${EXE_NAME}
     bndr.cpp
     clpmtx.cpp
+    clpmtxband.cpp
     element.cpp
     main.cpp
     mesh.cpp
