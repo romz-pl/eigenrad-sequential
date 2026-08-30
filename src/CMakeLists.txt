@@ -5,6 +5,7 @@ add_executable( ${EXE_NAME}
     clpmtx.cpp
     clpmtxband.cpp
     element.cpp
+    eltinfo.cpp
     fun1D.cpp
     gauleg.cpp
     gauss.cpp
