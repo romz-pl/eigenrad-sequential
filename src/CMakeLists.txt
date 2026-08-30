@@ -4,6 +4,7 @@ add_executable( ${EXE_NAME}
     bndr.cpp
     clpmtx.cpp
     clpmtxband.cpp
+    eigprob.cpp
     element.cpp
     eltinfo.cpp
     fun1D.cpp
