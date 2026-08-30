@@ -12,6 +12,7 @@ add_executable( ${EXE_NAME}
     lobatto.cpp
     main.cpp
     mesh.cpp
+    paramdb.cpp
 )
 
 target_link_libraries(${EXE_NAME}
