@@ -1,2 +1,1 @@
-# eigenrad-sequential
-Adaptive radial Schrödinger solver for central potentials.
+# EIGENRAD: adaptive radial Schrödinger solver for central potentials
