@@ -6,6 +6,7 @@ add_executable( ${EXE_NAME}
     clpmtxband.cpp
     element.cpp
     fun1D.cpp
+    gauleg.cpp
     main.cpp
     mesh.cpp
 )
