@@ -7,6 +7,8 @@ add_executable( ${EXE_NAME}
     element.cpp
     fun1D.cpp
     gauleg.cpp
+    gauss.cpp
+    lobatto.cpp
     main.cpp
     mesh.cpp
 )
