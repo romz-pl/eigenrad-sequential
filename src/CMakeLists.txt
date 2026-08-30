@@ -14,6 +14,7 @@ add_executable( ${EXE_NAME}
     main.cpp
     mesh.cpp
     paramdb.cpp
+    potential_coulomb.cpp
 )
 
 target_link_libraries(${EXE_NAME}

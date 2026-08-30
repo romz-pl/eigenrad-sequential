@@ -14,9 +14,9 @@ project(EIGENRAD CXX)
 set( CMAKE_CXX_STANDARD 23 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 set( CMAKE_CXX_EXTENSIONS OFF )
-set( CMAKE_BUILD_TYPE Release )
+# set( CMAKE_BUILD_TYPE Release )
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -fopenmp -march=native -mtune=native")
+# set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -fopenmp -march=native -mtune=native")
 
 find_package(BLAS REQUIRED)
 find_package(LAPACK REQUIRED)
