@@ -18,6 +18,8 @@ set( CMAKE_BUILD_TYPE Release )
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -fopenmp -march=native -mtune=native")
 
+find_package(BLAS REQUIRED)
+find_package(LAPACK REQUIRED)
 
 # Configure a project for testing with CTest/CDash
 # See https://cmake.org/cmake/help/latest/module/CTest.html
