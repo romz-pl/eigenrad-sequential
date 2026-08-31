@@ -1,4 +1,4 @@
-set( TEST_NAME potential_coulomb )
+set( TEST_NAME lobatto )
 
 add_executable( ${TEST_NAME}
     main.cpp

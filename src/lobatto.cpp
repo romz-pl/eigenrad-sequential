@@ -1,7 +1,7 @@
+#include "lobatto.h"
+
 #include <cassert>
 #include <cmath>
-#include "lobatto.h"
-#include "gauss.h"
 
 const size_t Lobatto::MAXP = 11;
 ClpMtx Lobatto::m_mtxS;
@@ -90,46 +90,6 @@ void Lobatto::CalcK()
 
 }
 
-/*
-//
-// Returns integral $\int_{-1}^1 \psi_i(x) \psi_j(x) dx$.
-// Integral is evaluated based on the Gaussian quadratures
-//
-double Lobatto::CalcNumericK( size_t i, size_t j )
-{
-    double v = 0;
-
-    for( size_t n = 0; n < Gauss::Size(); n++ )
-    {
-        const double x = Gauss::X( n );
-        const double w = Gauss::W( n );
-        v += w * Basis( i, x ) * Basis( j, x );
-    }
-    return v;
-}
-
-//
-// This checks the function CalcK.
-// Returns true, if numericaly and analitically values of matric K are equal.
-//
-//
-bool Lobatto::CheckMtxK( )
-{
-    const double eps = 1E-4;
-
-    for( size_t i = 0; i < m_mtxK.RowNo(); i++ )
-    {
-        for( size_t j = 0; j < m_mtxK.ColNo(); j++ )
-        {
-            const double a = m_mtxK.Get( i, j );
-            const double b = CalcNumericK( i, j );
-            if( fabs( a - b ) > eps )
-                return false;
-        }
-    }
-    return true;
-}
-*/
 
 //
 // Returns the value of basis function $\psi_i(s)$
