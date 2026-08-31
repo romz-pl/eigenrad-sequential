@@ -85,9 +85,6 @@ void Lobatto::CalcK()
             m_mtxK.Set( i, j ) = m_mtxK.Get( j, i );
         }
     }
-
-    // assert( CheckMtxK() );
-
 }
 
 
