@@ -12,7 +12,6 @@ add_library( ${LIB_NAME}
     gauss.cpp
     lobatto.cpp
     mesh.cpp
-    paramdb.cpp
     potential_coulomb.cpp
 )
 
@@ -21,6 +20,7 @@ SET( EXE_NAME eigenrad )
 
 add_executable( ${EXE_NAME}
     main.cpp
+    paramdb.cpp
 )
 
 target_link_libraries(${EXE_NAME}

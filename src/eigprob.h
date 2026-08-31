@@ -69,11 +69,11 @@
 class EigProb
 {
 public:
-    EigProb( size_t ell );
+    EigProb( size_t ell, double rc, size_t eigNode, size_t eigDeg );
     ~EigProb() = default;
 
-    void Solve( const Fun1D &g, size_t eigNo );
-    void SolveAdapt( const Fun1D& g, size_t eigNo );
+    void Solve( const Fun1D &g, size_t eigNo, double abstol );
+    void SolveAdapt( const Fun1D& g, size_t eigNo, double absMaxCoef, double abstol );
 
     double GetEigVal( size_t eig ) const;
     double GetEigFun( size_t eig, double x ) const;

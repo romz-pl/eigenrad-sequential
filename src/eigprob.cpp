@@ -7,21 +7,15 @@
 #include "eigprob.h"
 #include "lobatto.h"
 #include "gauss.h"
-#include "paramdb.h"
 
 const double EigProb::m_gamma = 0.5;
 
 //
 // Constructor
 //
-EigProb::EigProb( size_t ell )
+EigProb::EigProb( size_t ell, double rc, size_t eigNode, size_t eigDeg )
     : m_ell( ell )
 {
-
-    const double rc      = ParamDb::GetDouble( "Atom_Rc" );
-    const size_t eigNode = ParamDb::GetSize_t( "Solver_EigNode" );
-    const size_t eigDeg  = ParamDb::GetSize_t( "Solver_EigDeg" );
-
     m_mesh.GenLin( 0, rc, eigNode, eigDeg );
     m_mesh.CreateCnnt( BndrType_Dir, BndrType_Dir );
 }
@@ -29,10 +23,8 @@ EigProb::EigProb( size_t ell )
 //
 // Solves the eigenproblem, WITHOUT adaptive procedure
 //
-void EigProb::Solve( const Fun1D& g, size_t eigNo )
+void EigProb::Solve( const Fun1D& g, size_t eigNo, double abstol )
 {
-    const double abstol = ParamDb::GetDouble( "Solver_EigAbsTol" );
-
     Malloc();
     Assemble( g );
     m_s.EigenGen(eigNo, abstol, m_w, m_z, m_o);
@@ -41,17 +33,15 @@ void EigProb::Solve( const Fun1D& g, size_t eigNo )
 //
 // Solve the eigenproblem adatively
 //
-void EigProb::SolveAdapt( const Fun1D& g, size_t eigNo )
+void EigProb::SolveAdapt( const Fun1D& g, size_t eigNo, double absMaxCoef, double abstol )
 {
-    const double absMaxCoef = ParamDb::GetDouble( "Solver_EigAbsMaxCoef" );
-
     std::vector< EltInfo > eltInfo( eigNo );
     std::vector< size_t > eltToSplit;
 
 
     while( true )
     {
-        Solve( g, eigNo );
+        Solve( g, eigNo, abstol );
         MaxMinCoef( eltInfo );
         std::sort( eltInfo.begin(), eltInfo.end() );
         const auto newEnd = std::unique( eltInfo.begin(), eltInfo.end() );

@@ -29,10 +29,17 @@ int main(int argc, char* argv[])
 
         ParamDb db( argv[ 1 ] );
         potential_coulomb pot;
+
         const size_t ell = ParamDb::GetSize_t( "Solver_Ell" );
         const size_t eigNo = ParamDb::GetSize_t( "Solver_EigNo" );
-        EigProb eigProb( ell );
-        eigProb.SolveAdapt( pot, eigNo);
+        const double rc      = ParamDb::GetDouble( "Atom_Rc" );
+        const size_t eigNode = ParamDb::GetSize_t( "Solver_EigNode" );
+        const size_t eigDeg  = ParamDb::GetSize_t( "Solver_EigDeg" );
+        const double abstol = ParamDb::GetDouble( "Solver_EigAbsTol" );
+        const double absMaxCoef = ParamDb::GetDouble( "Solver_EigAbsMaxCoef" );
+
+        EigProb eigProb( ell, rc, eigNode, eigDeg );
+        eigProb.SolveAdapt( pot, eigNo, absMaxCoef, abstol );
 
         for(size_t eig = 0; eig < eigNo; eig++ )
             std::cout << eigProb.GetEigVal(eig) << "\n";
