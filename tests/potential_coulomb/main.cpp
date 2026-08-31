@@ -67,7 +67,7 @@ INSTANTIATE_TEST_SUITE_P(
             {0, 80.0}, {1, 100.0}, {2, 140.0}, {3, 160.0}, {4, 180.0}
         };
         for (const auto& ec : ell_rcs)
-            for (size_t deg = 2; deg <= 10; deg++)
+            for (size_t deg = 2; deg < Lobatto::MAXP; deg++)
                 params.push_back({deg, ec.ell, ec.rc});
         return params;
     }()),
