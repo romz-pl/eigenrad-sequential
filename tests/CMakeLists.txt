@@ -1,1 +1,1 @@
-add_subdirectory( potential_coulomb_00 )
+add_subdirectory( potential_coulomb )
