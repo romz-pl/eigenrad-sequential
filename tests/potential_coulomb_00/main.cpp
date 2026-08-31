@@ -38,7 +38,7 @@ static void calculate_eigen(size_t deg, size_t ell, double rc)
 struct Param
 {
     size_t deg;
-    int ell;
+    size_t ell;
     double rc;
 };
 
@@ -62,9 +62,9 @@ INSTANTIATE_TEST_SUITE_P(
     Coulomb,
     ::testing::ValuesIn([]() {
         std::vector<Param> params;
-        struct EllRc { int ell; double rc; };
+        struct EllRc { size_t ell; double rc; };
         const EllRc ell_rcs[] = {
-            {0, 80.0}, {1, 100.0}, {2, 140.0}, {3, 160.0}, {4, 80.0}
+            {0, 80.0}, {1, 100.0}, {2, 140.0}, {3, 160.0}, {4, 180.0}
         };
         for (const auto& ec : ell_rcs)
             for (size_t deg = 2; deg <= 10; deg++)
