@@ -32,8 +32,7 @@ TEST(coulomb, ell_0_eigno_4)
     ASSERT_NO_THROW( eigProb.SolveAdapt( pot, eigNo, absMaxCoef, abstol ) );
 
 
-    // const double abs_error = 1E-6;
-    const double abs_error = 1E-3;
+    const double abs_error = 1E-6;
     for(size_t n = 0; n < eigNo; n++ )
     {
         const double v0 = eigProb.GetEigVal( n );
