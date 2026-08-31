@@ -1,5 +1,4 @@
-#ifndef RATOM_EIGPROB_H
-#define RATOM_EIGPROB_H
+#pragma once
 
 //
 // 1. Class EigProb solves differential eigenvalue problem, with form
@@ -121,6 +120,3 @@ private:
     // Constant \gamma
     static const double m_gamma;
 };
-
-#endif
-

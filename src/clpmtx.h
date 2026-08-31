@@ -1,5 +1,4 @@
-#ifndef RATOM_CLPMTX_H
-#define RATOM_CLPMTX_H
+#pragma once
 
 //
 // Wrapper for the rectangular matrix from LAPACK library
@@ -47,6 +46,3 @@ private:
     // Array with data
     std::vector< double > m_array;
 };
-
-#endif
-

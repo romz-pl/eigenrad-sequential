@@ -1,5 +1,4 @@
-#ifndef RATOM_GAUSS_H
-#define RATOM_GAUSS_H
+#pragma once
 
 
 //
@@ -71,6 +70,3 @@ private:
     // Quadrature nodes
     static std::vector< double > m_x;
 };
-
-#endif
-

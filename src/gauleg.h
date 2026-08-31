@@ -1,5 +1,4 @@
-#ifndef RATOM_GAULEG_H
-#define RATOM_GAULEG_H
+#pragma once
 
 //
 // Generates abscissas and weights of the 1D Gauss-Legendre integration schema
@@ -12,5 +11,3 @@
 
 void gauleg( double x1, double x2, std::vector< double >& x, std::vector< double >& w, size_t n );
 
-
-#endif

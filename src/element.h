@@ -1,5 +1,4 @@
-#ifndef RATOM_ELEMENT_H
-#define RATOM_ELEMENT_H
+#pragma once
 
 
 //
@@ -96,6 +95,3 @@ double Element::Jac() const
 {
     return m_c2;
 }
-
-#endif
-

@@ -1,6 +1,4 @@
-#ifndef RATOM_MESH_H
-#define RATOM_MESH_H
-
+#pragma once
 
 /** \brief One dimmensional mesh.
 *
@@ -50,6 +48,3 @@ private:
     // vertex coordinates (rozmiar o jeden wiekszy od m_elt.size())
     std::vector<double> m_x;
 };
-
-#endif
-

@@ -1,5 +1,4 @@
-#ifndef RATOM_ELTINFO_H
-#define RATOM_ELTINFO_H
+#pragma once
 
 //
 // Information about the element in the mesh.
@@ -55,6 +54,3 @@ private:
     // Element ID
     size_t m_eltId;
 };
-
-#endif
-

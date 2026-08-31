@@ -1,5 +1,4 @@
-#ifndef RATOM_PARAMDB_H
-#define RATOM_PARAMDB_H
+#pragma once
 
 
 //
@@ -43,6 +42,3 @@ private:
     static std::map< std::string, std::string > m_map;
 
 };
-
-#endif
-

@@ -13,5 +13,5 @@ public:
     {
         assert( r > 0 );
         return -1.0 / r;
-    };
+    }
 };

@@ -1,5 +1,4 @@
-#ifndef RATOM_FUN1D_H
-#define RATOM_FUN1D_H
+#pragma once
 
 
 /** \brief Represents function from R into R.
@@ -17,6 +16,3 @@ public:
 
     virtual double Get(double x) const = 0;
 };
-
-#endif
-

@@ -1,5 +1,4 @@
-#ifndef RATOM_BNDR_H
-#define RATOM_BNDR_H
+#pragma once
 
 //
 // Boundary conditions
@@ -37,6 +36,3 @@ public:
     // Value of boundary contition
     double m_val;
 };
-
-#endif
-

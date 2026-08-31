@@ -1,5 +1,4 @@
-#ifndef RATOM_LOBATTO_H
-#define RATOM_LOBATTO_H
+#pragma once
 
 //
 // Lobatto functions and integral evaluation
@@ -125,7 +124,3 @@ double Lobatto::GetS( size_t i, size_t j )
 
     return m_mtxS.Get( i, j );
 }
-
-
-#endif
-

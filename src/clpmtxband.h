@@ -1,5 +1,4 @@
-#ifndef RATOM_CLPMTXBAND_H
-#define RATOM_CLPMTXBAND_H
+#pragma once
 
 //
 // Wrapper for band matrix from LAPACK library
@@ -50,6 +49,3 @@ private:
     // Auxiliary mememer, works as "zero".
     double m_zero;
 };
-
-#endif
-
