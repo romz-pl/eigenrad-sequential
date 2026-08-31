@@ -64,6 +64,8 @@
 #include "clpmtxband.h"
 #include "clpmtx.h"
 #include "mesh.h"
+#include "gauss.h"
+#include "lobatto.h"
 
 
 class EigProb
@@ -93,6 +95,12 @@ private:
 
 
 private:
+    // Lobat functions. Initialization in constructor!
+    Lobatto m_lobatto;
+
+    // Gauss quadrature. Initialization in constructor!
+    Gauss m_gauss;
+
     // Stifness matrix
     ClpMtxBand m_s;
 

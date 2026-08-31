@@ -1,7 +1,5 @@
 #include <iostream>
 #include "eigprob.h"
-#include "gauss.h"
-#include "lobatto.h"
 #include "paramdb.h"
 #include "potential_coulomb.h"
 
@@ -12,10 +10,6 @@ int main(int argc, char* argv[])
 {
     Intro(stdout);
 
-    // argc = 2;
-    // argv[ 1 ] = "/home/romz/code/eigenrad-sequential/results/aaa.inp";
-
-
     if(argc != 2)
     {
         printf("Usage: eigenrad <input_file>\n\n");
@@ -24,18 +18,15 @@ int main(int argc, char* argv[])
 
     try
     {
-        Lobatto m_lobatto;
-        Gauss m_gauss;
-
         ParamDb db( argv[ 1 ] );
         potential_coulomb pot;
 
-        const size_t ell = ParamDb::GetSize_t( "Solver_Ell" );
-        const size_t eigNo = ParamDb::GetSize_t( "Solver_EigNo" );
+        const size_t ell     = ParamDb::GetSize_t( "Solver_Ell" );
+        const size_t eigNo   = ParamDb::GetSize_t( "Solver_EigNo" );
         const double rc      = ParamDb::GetDouble( "Solver_Rc" );
         const size_t eigNode = ParamDb::GetSize_t( "Solver_EigNode" );
         const size_t eigDeg  = ParamDb::GetSize_t( "Solver_EigDeg" );
-        const bool adapt = ParamDb::GetBool( "Solver_EigAdapt" );
+        const bool adapt     = ParamDb::GetBool  ( "Solver_EigAdapt" );
 
         if( adapt )
         {
@@ -56,11 +47,6 @@ int main(int argc, char* argv[])
             for(size_t eig = 0; eig < eigNo; eig++ )
                 std::cout << eigProb.GetEigVal(eig) << "\n";
         }
-
-
-
-        printf("\n\n********** CALCULATIONS FINISHED SUCCESSFULLY! **********\n\n\n");
-        return 0;
     }
     catch( std::exception& e )
     {
@@ -73,8 +59,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-
-    std::cout << "EIGENRAD\n";
+    printf("\n\n********** CALCULATIONS FINISHED SUCCESSFULLY! **********\n\n\n");
     return 0;
 }
 
