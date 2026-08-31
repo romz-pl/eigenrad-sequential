@@ -23,19 +23,17 @@ find_package(LAPACK REQUIRED)
 
 # Configure a project for testing with CTest/CDash
 # See https://cmake.org/cmake/help/latest/module/CTest.html
-# include(CTest)
-
+include(CTest)
 
 # Defines functions to help use the Google Test infrastructure
 # See https://cmake.org/cmake/help/latest/module/FindGTest.html
-# find_package(GTest REQUIRED)
-# include(GoogleTest)
-
-
-# Find the OpenSSL encryption library.
-# See https://cmake.org/cmake/help/latest/module/FindOpenSSL.html
-# find_package(OpenSSL REQUIRED COMPONENTS SSL)
+find_package(GTest REQUIRED)
+include(GoogleTest)
 
 
 # Add subdirectory for this project
 add_subdirectory(src)
+
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()
