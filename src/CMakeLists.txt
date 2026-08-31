@@ -15,6 +15,11 @@ add_library( ${LIB_NAME}
     potential_coulomb.cpp
 )
 
+target_include_directories( ${LIB_NAME}
+    PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
 
 SET( EXE_NAME eigenrad )
 

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "../../src/eigprob.h"
-#include "../../src/potential_coulomb.h"
+#include <eigprob.h>
+#include <potential_coulomb.h>
 
 //
 // It returns the eigenvalue for the Coulomb potential.
