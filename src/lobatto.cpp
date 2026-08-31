@@ -239,7 +239,8 @@ double Lobatto::Poly6( double s )
     const double s2 = s * s;
     // const double s4 = s2 * s2;
     // const double v = ( s2 - 1 ) * ( 21 * s4 - 14 * s2 + 1 );
-    const double v = ( s2 - 1 ) * ( 21 * s2 * s2 - 14 * s2 + 1 );
+    // const double v = ( s2 - 1 ) * ( 21 * s2 * s2 - 14 * s2 + 1 );
+    const double v = ( s2 - 1 ) * ( s2 * (21 * s2 - 14) + 1 );
     return c * v;
 }
 
@@ -251,9 +252,10 @@ double Lobatto::Poly7( double s )
     assert( s >= -1 && s <= 1 );
     constexpr double c = sqrt( 13. / 2. ) / 16.;
     const double s2 = s * s;
-    //const double s4 = s2 * s2;
-    //const double v = ( s2 - 1 ) * ( 33 * s4 - 30 * s2 + 5 ) * s;
-    const double v = ( s2 - 1 ) * ( 33 * s2 * s2 - 30 * s2 + 5 ) * s;
+    // const double s4 = s2 * s2;
+    // const double v = ( s2 - 1 ) * ( 33 * s4 - 30 * s2 + 5 ) * s;
+    // const double v = ( s2 - 1 ) * ( 33 * s2 * s2 - 30 * s2 + 5 ) * s;
+    const double v = ( s2 - 1 ) * ( s2 * (33 * s2 - 30) + 5 ) * s;
     return c * v;
 }
 
@@ -265,10 +267,11 @@ double Lobatto::Poly8( double s )
     assert( s >= -1 && s <= 1 );
     constexpr double c = sqrt( 15. / 2. ) / 128.;
     const double s2 = s * s;
-    //const double s4 = s2 * s2;
-    //const double s6 = s4 * s2;
-    //const double v = ( s2 - 1 ) * ( 429 * s6 - 495 * s4 + 135 * s2 - 5 );
-    const double v = ( s2 - 1 ) * ( 429 * s2 * s2 * s2 - 495 * s2 * s2 + 135 * s2 - 5 );
+    // const double s4 = s2 * s2;
+    // const double s6 = s4 * s2;
+    // const double v = ( s2 - 1 ) * ( 429 * s6 - 495 * s4 + 135 * s2 - 5 );
+    // const double v = ( s2 - 1 ) * ( 429 * s2 * s2 * s2 - 495 * s2 * s2 + 135 * s2 - 5 );
+    const double v = ( s2 - 1 ) * ( s2 * ( s2 * (429 * s2 - 495) + 135) - 5 );
     return c * v;
 }
 
@@ -280,10 +283,11 @@ double Lobatto::Poly9( double s )
     assert( s >= -1 && s <= 1 );
     constexpr double c = sqrt( 17. / 2. ) / 128.;
     const double s2 = s * s;
-    //const double s4 = s2 * s2;
-    //const double s6 = s4 * s2;
-    //const double v = ( s2 - 1 ) * ( 715 * s6 - 1001 * s4 + 385 * s2 - 35 ) * s;
-    const double v = ( s2 - 1 ) * ( 715 * s2 * s2 * s2 - 1001 * s2 * s2 + 385 * s2 - 35 ) * s;
+    // const double s4 = s2 * s2;
+    // const double s6 = s4 * s2;
+    // const double v = ( s2 - 1 ) * ( 715 * s6 - 1001 * s4 + 385 * s2 - 35 ) * s;
+    // const double v = ( s2 - 1 ) * ( 715 * s2 * s2 * s2 - 1001 * s2 * s2 + 385 * s2 - 35 ) * s;
+    const double v = ( s2 - 1 ) * ( s2 * ( s2 * (715 * s2 - 1001) + 385) - 35 ) * s;
     return c * v;
 }
 
@@ -295,10 +299,11 @@ double Lobatto::Poly10( double s )
     assert( s >= -1 && s <= 1 );
     constexpr double c = sqrt( 19. / 2. ) / 256;
     const double s2 = s * s;
-    const double s4 = s2 * s2;
-    const double s6 = s4 * s2;
-    const double s8 = s6 * s2;
-    const double v = ( s2 - 1 ) * ( 2431 * s8 - 4004 * s6 + 2002 * s4 - 308 * s2 + 7 );
+    // const double s4 = s2 * s2;
+    // const double s6 = s4 * s2;
+    // const double s8 = s6 * s2;
+    // const double v = ( s2 - 1 ) * ( 2431 * s8 - 4004 * s6 + 2002 * s4 - 308 * s2 + 7 );
+    const double v = ( s2 - 1 ) * ( s2 * ( s2 * ( s2 * (2431 * s2 - 4004) + 2002) - 308) + 7 );
     return c * v;
 }
 
