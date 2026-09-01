@@ -40,3 +40,6 @@ The **EIGENRAD** package provides the native definition of the potentials V used
 + Coulomb potential
 + Hartwigsen-Goedecker-Hutter pseudopotential for hydrogen
 
+## Implementation
+
+The **EIGENRAD** package is written in C++ and uses the following external libraries: BLAS, [LAPACK](https://github.com/reference-lapack/lapack), and [GoogleTest (gtest)](https://github.com/google/googletest). The build system is implemented using [CMake](https://cmake.org/).
