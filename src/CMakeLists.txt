@@ -13,6 +13,7 @@ add_library( ${LIB_NAME}
     lobatto.cpp
     mesh.cpp
     potential_coulomb.cpp
+    potential_hgh_hydrogen.cpp
 )
 
 target_include_directories( ${LIB_NAME}
