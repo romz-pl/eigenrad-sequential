@@ -21,7 +21,7 @@ The EIGENRAD package numerically solves the radial Schrödinger equation. It use
 Details of the algorithm is fully described in the article:
 
 + Z. Romanowski, *Application of h-adaptive, high order finite element method to solve radial Schrödinger equation*,
-   [Molecular Physics vol. 107, pp. 1339-1348  (2009)](https://www.tandfonline.com/doi/abs/10.1080/00268970902873554)
+   [Molecular Physics vol. 107, pp. 1339-1348  (2009)](https://doi.org/10.1080/00268970902873554)
 
 The algorithm was also used for solution of Kohn_sham equation for atomic system. The results were described in the article:
 
