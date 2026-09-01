@@ -1,4 +1,4 @@
-# Coulomb potential
+# Coulomb potential, L = 0
 
 ![ELL=0, N=1](./ell0_n1.svg)
 
