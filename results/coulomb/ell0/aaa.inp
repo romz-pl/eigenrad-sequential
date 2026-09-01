@@ -11,7 +11,7 @@ Solver_EigDeg 6
 Solver_EigAbsMaxCoef 1E-4
 Solver_EigAbsTol 1E-14
 Solver_Ell 0
-Solver_EigNo 3
+Solver_EigNo 4
 
 Out_EigNode 10
-Out_EigPath eig.dat
+Out_directory ./results/coulomb/ell0
