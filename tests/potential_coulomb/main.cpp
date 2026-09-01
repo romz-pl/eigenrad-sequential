@@ -15,7 +15,7 @@ static double eigen_value( size_t ell, size_t n )
 
 static void calculate_eigen(size_t deg, size_t ell, double rc)
 {
-    potential_coulomb pot;
+    potential_coulomb pot(1.0);
 
     const size_t eigNo = 4;
     const size_t eigNode = 4;

@@ -24,6 +24,7 @@ target_include_directories( ${LIB_NAME}
 SET( EXE_NAME eigenrad )
 
 add_executable( ${EXE_NAME}
+    create_potential.cpp
     main.cpp
     paramdb.cpp
 )

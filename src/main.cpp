@@ -1,4 +1,5 @@
 #include <iostream>
+#include "create_potential.h"
 #include "eigprob.h"
 #include "paramdb.h"
 #include "potential_coulomb.h"
@@ -19,7 +20,7 @@ int main(int argc, char* argv[])
     try
     {
         ParamDb db( argv[ 1 ] );
-        potential_coulomb pot;
+
 
         const size_t ell     = ParamDb::GetSize_t( "Solver_Ell" );
         const size_t eigNo   = ParamDb::GetSize_t( "Solver_EigNo" );
@@ -27,13 +28,18 @@ int main(int argc, char* argv[])
         const size_t eigNode = ParamDb::GetSize_t( "Solver_EigNode" );
         const size_t eigDeg  = ParamDb::GetSize_t( "Solver_EigDeg" );
         const bool adapt     = ParamDb::GetBool  ( "Solver_EigAdapt" );
+        // const double potential_coulomb_Z = ParamDb::GetDouble( "potential_coulomb_Z" );
+
+        // potential_coulomb pot(potential_coulomb_Z);
+
+        std::unique_ptr<Fun1D> pot = create_potential();
 
         if( adapt )
         {
             const double abstol = ParamDb::GetDouble( "Solver_EigAbsTol" );
             const double absMaxCoef = ParamDb::GetDouble( "Solver_EigAbsMaxCoef" );
             EigProb eigProb( ell, rc, eigNode, eigDeg );
-            eigProb.SolveAdapt( pot, eigNo, absMaxCoef, abstol );
+            eigProb.SolveAdapt( *pot, eigNo, absMaxCoef, abstol );
 
             for(size_t eig = 0; eig < eigNo; eig++ )
                 std::cout << eigProb.GetEigVal(eig) << "\n";
@@ -42,7 +48,7 @@ int main(int argc, char* argv[])
         {
             const double abstol = ParamDb::GetDouble( "Solver_EigAbsTol" );
             EigProb eigProb( ell, rc, eigNode, eigDeg );
-            eigProb.Solve( pot, eigNo, abstol );
+            eigProb.Solve( *pot, eigNo, abstol );
 
             for(size_t eig = 0; eig < eigNo; eig++ )
                 std::cout << eigProb.GetEigVal(eig) << "\n";
@@ -75,4 +81,8 @@ void Intro(FILE* out)
         "===============================================================================\n\n\n");
 }
 
-
+//
+// cmake -B build && cmake --build build/ &&  ctest --test-dir build && ./build/src/eigenrad ./results/aaa.inp
+//
+// cmake -B build && cmake --build build/ &&  ./build/src/eigenrad ./results/aaa.inp
+//
