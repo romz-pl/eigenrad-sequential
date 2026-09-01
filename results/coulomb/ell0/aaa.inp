@@ -13,5 +13,5 @@ Solver_EigAbsTol 1E-14
 Solver_Ell 0
 Solver_EigNo 4
 
-Out_EigNode 10
+Out_EigNode 30
 Out_directory ./results/coulomb/ell0
