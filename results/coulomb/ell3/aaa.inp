@@ -1,0 +1,15 @@
+potential_name coulomb
+# potential_name hgh_hydrogen
+
+potential_coulomb_Z 1
+
+Solver_Ell 3
+Solver_Rc 140
+Solver_EigNode 4
+Solver_EigDeg 6
+Solver_EigAbsMaxCoef 1E-4
+Solver_EigAbsTol 1E-14
+Solver_EigNo 4
+
+Out_points 30
+Out_directory ./results/coulomb/ell3
