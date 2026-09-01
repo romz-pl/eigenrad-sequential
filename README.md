@@ -16,7 +16,7 @@ $$
 
 ## Implemented Algorithm
 
-The **EIGENRAD** package numerically solves the radial Schrödinger equation. It uses the $h$-adaptive, high-order finite element method with Lobbato polynomials. The Galerkin formulation of the finite element method was applied for discretization and matrix formulation.
+The **EIGENRAD** package numerically solves the radial Schrödinger equation. It uses the **$h$-adaptive, high-order finite element method with Lobbato polynomials**. The Galerkin formulation of the finite element method was applied for discretization and matrix formulation.
 
 The following article fully describes the details of the algorithm:
 
@@ -27,3 +27,7 @@ The algorithm was also used to solve the Kohn-Sham equation for an atomic system
 
 + Z. Romanowski, *Adaptive solver of a Kohn-Sham equation for an atom*,
    [Modelling and Simulation in Materials Science and Engineering vol. 17, 045001 (2009)](https://doi.org/10.1088/0965-0393/17/4/045001)
+
+The application of Lobbato polynomials in the high-order finite element method is described in the following book:
+
++ P. Šolín, L. Segeth, I. Doležel, *High-Order Finite Element Method* [2003](https://doi.org/10.1201/9780203488041)
