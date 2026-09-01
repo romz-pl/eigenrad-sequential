@@ -2,7 +2,6 @@
 #include "create_potential.h"
 #include "eigprob.h"
 #include "paramdb.h"
-#include "potential_coulomb.h"
 
 static void Intro(FILE* out);
 
@@ -28,9 +27,6 @@ int main(int argc, char* argv[])
         const size_t eigNode = ParamDb::GetSize_t( "Solver_EigNode" );
         const size_t eigDeg  = ParamDb::GetSize_t( "Solver_EigDeg" );
         const bool adapt     = ParamDb::GetBool  ( "Solver_EigAdapt" );
-        // const double potential_coulomb_Z = ParamDb::GetDouble( "potential_coulomb_Z" );
-
-        // potential_coulomb pot(potential_coulomb_Z);
 
         std::unique_ptr<Fun1D> pot = create_potential();
 
