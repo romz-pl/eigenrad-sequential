@@ -8,7 +8,7 @@ $$
 -\frac{1}{2}\frac{\mathrm{d}^2 P_{n, \ell}(r)}{\mathrm{d} r^2} + \left[V(r) + \frac{\ell (\ell + 1)}{2 r^2}\right] P_{n, \ell}(r) = E_{n, \ell}  P_{n, \ell}
 $$
 
-with angular momentum $\ell = 0, 1, 2, \ldots$ and potential function $V : [0, \infty] \rightarrow \mathbb{R}$. The index $n$ in the pair $(E_{n, \ell}, P_{n, \ell})$ refers to the calculated eigenvalue-eigenfunction pair. The equation is defined on the infinite interval $[0, \infty]$ and the eigenfunctions $P_{n, \ell}$ for each of indices $(n, \ell)$ fulfill the zero Dirichlet boundary conditions:
+with angular momentum $\ell = 0, 1, 2, \ldots$ and potential function $V : [0, \infty] \rightarrow \mathbb{R}$. The index $n = 1, 2, 3, \ldots$ in the pair $(E_{n, \ell}, P_{n, \ell})$ refers to the calculated eigenvalue-eigenfunction pair. The equation is defined on the infinite interval $[0, \infty]$ and the eigenfunctions $P_{n, \ell}$ for each of indices $(n, \ell)$ fulfill the zero Dirichlet boundary conditions:
 
 $$
 \lim_{r \rightarrow 0}P_{n, \ell}(r) = \lim_{r \rightarrow \infty}P_{n, \ell}(r) = 0
@@ -37,8 +37,8 @@ The application of Lobbato polynomials in the high-order finite element method i
 
 The **EIGENRAD** package provides the native definition of the potentials V used in theoretical physics and chemistry. The following is the list of currently implemented potentials:
 
-+ Coulomb potential
-+ Hartwigsen-Goedecker-Hutter pseudopotential for hydrogen
++ [Coulomb potential](./doc/coulomb-potential.md)
++ [Hartwigsen-Goedecker-Hutter pseudopotential for hydrogen](./doc/hgh-for-hydrogen.md)
 
 ## Implementation
 
