@@ -26,4 +26,4 @@ Details of the algorithm is fully described in the article:
 The algorithm was also used for solution of Kohn_sham equation for atomic system. The results were described in the article:
 
 + Z. Romanowski, *Adaptive solver of a Kohn-Sham equation for an atom*,
-   [Modelling and Simulation in Materials Science and Engineering vol. 17, 045001 (2009)](https://iopscience.iop.org/article/10.1088/0965-0393/17/4/045001/meta)
+   [Modelling and Simulation in Materials Science and Engineering vol. 17, 045001 (2009)](https://doi.org/10.1088/0965-0393/17/4/045001)
