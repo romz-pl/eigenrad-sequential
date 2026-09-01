@@ -1,6 +1,6 @@
 # EIGENRAD: adaptive Schrödinger solver
 
-## Problem Definition
+## Problem
 
 The **EIGENRAD** package searches for the smallest eigenvalues, $E_{n, \ell}$, and the corresponding eigenvectors, $P_{n, \ell}$, of the **radial Schrödinger equation** in the following form:
 
@@ -14,7 +14,7 @@ $$
 \lim_{r \rightarrow 0}P_{n, \ell}(r) = \lim_{r \rightarrow \infty}P_{n, \ell}(r) = 0
 $$
 
-## Implemented Algorithm
+## Algorithm
 
 The **EIGENRAD** package numerically solves the radial Schrödinger equation. It uses the **$h$-adaptive, high-order finite element method with Lobbato polynomials**. The Galerkin formulation of the finite element method was applied for discretization and matrix formulation.
 
@@ -31,3 +31,12 @@ The algorithm was also used to solve the Kohn-Sham equation for an atomic system
 The application of Lobbato polynomials in the high-order finite element method is described in the following book:
 
 + P. Šolín, L. Segeth, I. Doležel, *High-Order Finite Element Method* [2003](https://doi.org/10.1201/9780203488041)
+
+
+## Potentials
+
+The **EIGENRAD** package provides the native definition of the potentials V used in theoretical physics and chemistry. The following is the list of currently implemented potentials:
+
++ Coulumb potentials
++ Hartwigsen-Goedecker-Hutter pseudopotential for hydrogen
++ 
