@@ -1,6 +1,8 @@
 # Hartwigsen-Goedecker-Hutter pseudopotential for hydrogen
 
-The potenial has the form
+## Potential definition
+
+The potential is defined by the following equation:
 
 $$
 V(r) = -\frac{Z_\mathrm{ion}}{r} \mathrm{erf}(w / \sqrt{2}) + \mathrm{exp}(-w^2 / 2) [C_1 + C_2 w^2 + C_3 w^3 + C_4 w^4]
@@ -21,3 +23,12 @@ $$
 For details about the Hartwigsen-Goedecker-Hutter pseudopotential, refer to the following article:
 
 + C. Hartwigsen, S. Goedecker, and J. Hutter, *Relativistic separable dual-space Gaussian pseudopotentials from H to Rn*, [Phys. Rev. B 58, 3641](https://doi.org/10.1103/PhysRevB.58.3641)
+
+
+## Eigenvalues
+
+According to the definition of the pseudopotential for the hydrogen atom, this potential has eigenvalues that are close to those of the hydrogen atom. Therefore:
+
+$$
+E_{n, \ell} = -\frac{1}{2 (n + \ell)^2}
+$$
