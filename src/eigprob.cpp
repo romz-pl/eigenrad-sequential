@@ -211,11 +211,10 @@ double EigProb::GetEigVal( size_t eig ) const
 
 //
 // Writes eigen-function $eig$ to file
-// If "pointNo == 0", then eigenfunction is stored in mesh nodes only.
 // Argument "pointNo" determines number of addtional points netween mesh nodes
 // where the eigenfunction is stored.
 //
-void EigProb::WriteEigFun( const std::string& path, size_t eig, size_t pointNo ) const
+void EigProb::WriteEigFun( const std::string& path, size_t eig, size_t points ) const
 {
     std::ofstream out( path.c_str(), std::ios::out );
     if( !out )
@@ -225,7 +224,7 @@ void EigProb::WriteEigFun( const std::string& path, size_t eig, size_t pointNo )
     out << std::scientific;
 
     out << "# \n";
-    out << "# Output from RAtom program.\n";
+    out << "# Output from EIGENRAD program.\n";
     out << "# \n";
     out << "# Eigenfunction for specific electronic state.\n";
     out << "# The first column contains radius $r$ in bohr units.\n";
@@ -238,15 +237,15 @@ void EigProb::WriteEigFun( const std::string& path, size_t eig, size_t pointNo )
     {
         throw std::runtime_error( "Eigenfunction not calculated in function EigProb::WriteEigFun" );
     }
-    assert( pointNo > 0 );
+    assert( points > 0 );
 
 
     double x;
     for( size_t n = 0; n < m_mesh.XNo() - 1; n++ )
     {
         x = m_mesh.X( n );
-        const double dx = ( m_mesh.X( n + 1 ) - m_mesh.X( n ) ) / pointNo;
-        for( size_t i = 0; i < pointNo; i++ )
+        const double dx = ( m_mesh.X( n + 1 ) - m_mesh.X( n ) ) / points;
+        for( size_t i = 0; i < points; i++ )
         {
             out  << x << " " << GetEigFun( eig, x ) << std::endl;
             x += dx;

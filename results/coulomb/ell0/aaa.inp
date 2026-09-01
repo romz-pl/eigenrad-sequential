@@ -3,15 +3,13 @@ potential_name coulomb
 
 potential_coulomb_Z 1
 
-
-Solver_EigAdapt Yes
+Solver_Ell 0
 Solver_Rc 100
 Solver_EigNode 4
 Solver_EigDeg 6
 Solver_EigAbsMaxCoef 1E-4
 Solver_EigAbsTol 1E-14
-Solver_Ell 0
 Solver_EigNo 4
 
-Out_EigNode 30
+Out_points 30
 Out_directory ./results/coulomb/ell0

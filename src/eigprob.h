@@ -80,7 +80,7 @@ public:
     double GetEigFun( size_t eig, double x ) const;
 
 
-    void WriteEigFun( const std::string &path, size_t eig, size_t pointNo ) const;
+    void WriteEigFun( const std::string &path, size_t eig, size_t points ) const;
 
 private:
     void Malloc();

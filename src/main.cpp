@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
         const size_t eigDeg     = ParamDb::GetSize_t( "Solver_EigDeg" );
         const double abstol     = ParamDb::GetDouble( "Solver_EigAbsTol" );
         const double absMaxCoef = ParamDb::GetDouble( "Solver_EigAbsMaxCoef" );
-        const size_t pointNo    = ParamDb::GetSize_t( "Out_EigNode" );
+        const size_t points     = ParamDb::GetSize_t( "Out_points" );
         const std::string directory  = ParamDb::GetString( "Out_directory" );
 
         std::unique_ptr<Fun1D> pot = create_potential();
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
             std::string filename = std::format("ell{}_n{}.dat", ell, eig + 1);
             const std::string path = directory + "/" + filename;
             // const std::filesystem::path path = std::filesystem::path{directory} / filename;
-            eigProb.WriteEigFun( path, eig, pointNo );
+            eigProb.WriteEigFun( path, eig, points );
         }
     }
     catch( std::exception& e )
