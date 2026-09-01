@@ -20,34 +20,26 @@ int main(int argc, char* argv[])
     {
         ParamDb db( argv[ 1 ] );
 
-
-        const size_t ell     = ParamDb::GetSize_t( "Solver_Ell" );
-        const size_t eigNo   = ParamDb::GetSize_t( "Solver_EigNo" );
-        const double rc      = ParamDb::GetDouble( "Solver_Rc" );
-        const size_t eigNode = ParamDb::GetSize_t( "Solver_EigNode" );
-        const size_t eigDeg  = ParamDb::GetSize_t( "Solver_EigDeg" );
-        const bool adapt     = ParamDb::GetBool  ( "Solver_EigAdapt" );
+        const size_t ell        = ParamDb::GetSize_t( "Solver_Ell" );
+        const size_t eigNo      = ParamDb::GetSize_t( "Solver_EigNo" );
+        const double rc         = ParamDb::GetDouble( "Solver_Rc" );
+        const size_t eigNode    = ParamDb::GetSize_t( "Solver_EigNode" );
+        const size_t eigDeg     = ParamDb::GetSize_t( "Solver_EigDeg" );
+        const double abstol     = ParamDb::GetDouble( "Solver_EigAbsTol" );
+        const double absMaxCoef = ParamDb::GetDouble( "Solver_EigAbsMaxCoef" );
+        const size_t pointNo    = ParamDb::GetSize_t( "Out_EigNode" );
+        const std::string path  = ParamDb::GetString( "Out_EigPath" );
 
         std::unique_ptr<Fun1D> pot = create_potential();
 
-        if( adapt )
-        {
-            const double abstol = ParamDb::GetDouble( "Solver_EigAbsTol" );
-            const double absMaxCoef = ParamDb::GetDouble( "Solver_EigAbsMaxCoef" );
-            EigProb eigProb( ell, rc, eigNode, eigDeg );
-            eigProb.SolveAdapt( *pot, eigNo, absMaxCoef, abstol );
+        EigProb eigProb( ell, rc, eigNode, eigDeg );
+        eigProb.SolveAdapt( *pot, eigNo, absMaxCoef, abstol );
 
-            for(size_t eig = 0; eig < eigNo; eig++ )
-                std::cout << eigProb.GetEigVal(eig) << "\n";
-        }
-        else
+        for(size_t eig = 0; eig < eigNo; eig++ )
         {
-            const double abstol = ParamDb::GetDouble( "Solver_EigAbsTol" );
-            EigProb eigProb( ell, rc, eigNode, eigDeg );
-            eigProb.Solve( *pot, eigNo, abstol );
-
-            for(size_t eig = 0; eig < eigNo; eig++ )
-                std::cout << eigProb.GetEigVal(eig) << "\n";
+            std::cout << eigProb.GetEigVal(eig) << "\n";
+            const std::string w = path + "_" + std::to_string(eig);
+            eigProb.WriteEigFun( w, eig, pointNo );
         }
     }
     catch( std::exception& e )
