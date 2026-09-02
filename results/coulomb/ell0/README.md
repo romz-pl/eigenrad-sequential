@@ -2,8 +2,8 @@
 
 <table>
 <tr>
-    <td>![ELL=0, N=0](./ell0_n0_log.svg)</td>
-    <td>![ELL=0, N=0](./ell0_n0_lin.svg)</td>
+    <td><img src="./ell0_n0_log.svg" alt="ELL=0, N=0"></td>
+    <td><img src="./ell0_n0_lin.svg" alt="ELL=0, N=0"></td>
 </tr>
 </table>
 
