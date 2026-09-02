@@ -1,32 +1,16 @@
-# set title 'Coulomb potential'
 set xlabel 'radius [bohr]'
 set ylabel 'Eigenfunction'
 set terminal svg enhanced font "Arial,12"
 
+do for [scale in "lin log"] {
+    if (scale eq "log") { set logscale x }
 
-set output "ell4_n0_lin.svg"
-plot 'ell4_n0.dat' title 'Coulomb potential, L = 4, n = 0'
+    do for [n=0:3] {
+        set output sprintf("ell4_n%d_%s.svg", n, scale)
+        plot sprintf("ell4_n%d.dat", n) title sprintf("Coulomb potential, L = 4, n = %d", n)
+    }
 
-set output "ell4_n1_lin.svg"
-plot 'ell4_n1.dat' title 'Coulomb potential, L = 4, n = 1'
+    unset logscale x
+}
 
-set output "ell4_n2_lin.svg"
-plot 'ell4_n2.dat' title 'Coulomb potential, L = 4, n = 2'
-
-set output "ell4_n3_lin.svg"
-plot 'ell4_n3.dat' title 'Coulomb potential, L = 4, n = 3'
-
-
-set logscale x
-
-set output "ell4_n0_log.svg"
-plot 'ell4_n0.dat' title 'Coulomb potential, L = 4, n = 0'
-
-set output "ell4_n1_log.svg"
-plot 'ell4_n1.dat' title 'Coulomb potential, L = 4, n = 1'
-
-set output "ell4_n2_log.svg"
-plot 'ell4_n2.dat' title 'Coulomb potential, L = 4, n = 2'
-
-set output "ell4_n3_log.svg"
-plot 'ell4_n3.dat' title 'Coulomb potential, L = 4, n = 3'
+set output
