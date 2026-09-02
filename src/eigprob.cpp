@@ -5,7 +5,7 @@
 #include <cfloat>
 #include <cmath>
 #include <print>
-#include <cstdio>
+#include <chrono>
 #include "eigprob.h"
 #include "lobatto.h"
 #include "gauss.h"
@@ -22,7 +22,10 @@ EigProb::EigProb(size_t ell,
                  const Fun1D& g,
                  size_t eigNo,
                  double absMaxCoef,
-                 double abstol )
+                 double abstol,
+                 bool create_log_file,
+                 const std::string& out_directory,
+                 size_t out_points )
     : m_ell( ell )
     , m_rc( rc )
     , m_eigNode( eigNode )
@@ -31,10 +34,58 @@ EigProb::EigProb(size_t ell,
     , m_eigNo( eigNo )
     , m_absMaxCoef( absMaxCoef )
     , m_abstol( abstol )
+    , m_create_log_file( create_log_file )
+    , m_out_directory( out_directory )
+    , m_out_points( out_points )
 
 {
+    if( m_create_log_file )
+    {
+        const std::string path = out_directory + "/" + "eigenrad.log";
+        m_log = std::fopen(path.c_str(), "w");
+        if( m_log == nullptr )
+        {
+            throw std::runtime_error( "Cannot open file: " + path );
+        }
+        write_intro();
+        std::print(m_log, "{}\n\n", get_now_as_string());
+    }
+
     m_mesh.GenLin( 0, m_rc, m_eigNode, m_eigDeg );
     m_mesh.CreateCnnt( BndrType_Dir, BndrType_Dir );
+}
+
+EigProb::~EigProb()
+{
+    if( m_create_log_file )
+    {
+        assert( m_log );
+        std::print( m_log, "{}\n\n", get_now_as_string());
+        std::print( m_log, "=== END OF LOG FILE ===\n" );
+        std::fclose( m_log );
+    }
+}
+
+std::string EigProb::get_now_as_string()
+{
+    const auto now = std::chrono::floor<std::chrono::seconds>( std::chrono::system_clock::now() );
+    const auto local = std::chrono::zoned_time{
+        std::chrono::current_zone(), now
+    };
+
+    return std::format("DATETIME: {:%d %b %Y %H:%M:%S}", local);
+}
+
+void EigProb::write_intro() const
+{
+    std::print( m_log,
+            "===============================================================================\n"
+            " EEEEE I   GGG  EEEEE N   N RRRR   AAA  DDDD         Zbigniew Romanowski       \n"
+            " E     I  G     E     NN  N R   R A   A D   D                                  \n"
+            " EEE   I  G  GG EEE   N N N RRRR  AAAAA D   D        romz@wp.pl                \n"
+            " E     I  G   G E     N  NN R  R  A   A D   D                                  \n"
+            " EEEEE I   GGG  EEEEE N   N R   R A   A DDDD         https://github.com/romz-pl\n"
+            "===============================================================================\n\n\n");
 }
 
 //
@@ -50,7 +101,7 @@ void EigProb::Solve( )
 //
 // Solve the eigenproblem adatively
 //
-void EigProb::SolveAdapt( const std::string& path )
+void EigProb::SolveAdapt( )
 {
     std::vector< EltInfo > eltInfo( m_eigNo );
     std::vector< size_t > eltToSplit;
@@ -59,7 +110,7 @@ void EigProb::SolveAdapt( const std::string& path )
     while( true )
     {
         Solve( );
-        write_coefficients( path );
+        write_coefficients( );
         MaxMinCoef( eltInfo );
         std::sort( eltInfo.begin(), eltInfo.end() );
         const auto newEnd = std::unique( eltInfo.begin(), eltInfo.end() );
@@ -89,22 +140,18 @@ void EigProb::SolveAdapt( const std::string& path )
 //
 // Write Lobbato coefficients into the file
 //
-void EigProb::write_coefficients( const std::string& path ) const
+void EigProb::write_coefficients( ) const
 {
-    if(path.empty())
+    if( !m_create_log_file )
         return;
 
-    FILE* file = std::fopen(path.c_str(), "a");
-    if(file == nullptr)
-    {
-        throw std::runtime_error( "Cannot open file: " + path );
-    }
+    assert( m_log );
 
     const size_t N = m_mesh.EltNo(); // Number of elements
 
-    std::print( file, "-------\n" );
-    std::print( file, "Number of elements: {}\n", N );
-    std::print( file, "Number of degrees of freedom: {}\n", m_mesh.Dim( BndrType_Dir, BndrType_Dir ) );
+    std::print( m_log, "-------\n" );
+    std::print( m_log, "Number of elements: {}\n", N );
+    std::print( m_log, "Number of degrees of freedom: {}\n", m_mesh.Dim( BndrType_Dir, BndrType_Dir ) );
 
 
 
@@ -112,7 +159,7 @@ void EigProb::write_coefficients( const std::string& path ) const
     // Element loop
     for( size_t n = 0; n < N; n++ )
     {
-        std::print( file, "\n{} {:15.6e} {:15.6e}\n", n, m_mesh.X(n), m_mesh.X(n + 1));
+        std::print( m_log, "\n{} {:15.6e} {:15.6e}\n", n, m_mesh.X(n), m_mesh.X(n + 1));
         const Element& e = m_mesh.Elt( n );
         const size_t DofNo = e.DofNo();
 
@@ -127,14 +174,11 @@ void EigProb::write_coefficients( const std::string& path ) const
                     continue;
 
 
-                std::print( file, "{:15.6e} ", m_z.Get(ni, eig) );
+                std::print( m_log, "{:15.6e} ", m_z.Get(ni, eig) );
             }
-            std::print( file, "\n" );
+            std::print( m_log, "\n" );
         }
     }
-
-    std::fclose(file);
-
 }
 
 
@@ -276,14 +320,24 @@ double EigProb::GetEigVal( size_t eig ) const
     return m_w[ eig ];
 }
 
+void EigProb::WriteAllEigFun() const
+{
+    for(size_t eig = 0; eig < m_eigNo; eig++ )
+    {
 
+        std::string filename = std::format("ell{}_n{}.dat", m_ell, eig);
+        const std::string path = m_out_directory + "/" + filename;
+        // const std::filesystem::path path = std::filesystem::path{directory} / filename;
+        WriteEigFun( path, eig );
+    }
+}
 
 //
 // Writes eigen-function $eig$ to file
 // Argument "pointNo" determines number of addtional points netween mesh nodes
 // where the eigenfunction is stored.
 //
-void EigProb::WriteEigFun( const std::string& path, size_t eig, size_t points ) const
+void EigProb::WriteEigFun( const std::string& path, size_t eig ) const
 {
     std::ofstream out( path.c_str(), std::ios::out );
     if( !out )
@@ -306,15 +360,15 @@ void EigProb::WriteEigFun( const std::string& path, size_t eig, size_t points ) 
     {
         throw std::runtime_error( "Eigenfunction not calculated in function EigProb::WriteEigFun" );
     }
-    assert( points > 0 );
+    assert( m_out_points > 0 );
 
 
     double x;
     for( size_t n = 0; n < m_mesh.XNo() - 1; n++ )
     {
         x = m_mesh.X( n );
-        const double dx = ( m_mesh.X( n + 1 ) - m_mesh.X( n ) ) / points;
-        for( size_t i = 0; i < points; i++ )
+        const double dx = ( m_mesh.X( n + 1 ) - m_mesh.X( n ) ) / m_out_points;
+        for( size_t i = 0; i < m_out_points; i++ )
         {
             out  << x << " " << GetEigFun( eig, x ) << std::endl;
             x += dx;

@@ -57,6 +57,7 @@
 #include <cstddef>
 #include <vector>
 #include <string>
+#include <cstdio>
 #include "eltinfo.h"
 #include "fun1D.h"
 #include "eltinfo.h"
@@ -77,29 +78,36 @@ public:
             const Fun1D& g,
             size_t eigNo,
             double absMaxCoef,
-            double abstol );
+            double abstol,
+            bool create_log_file,
+            const std::string& out_directory,
+            size_t out_points            );
 
-    ~EigProb() = default;
+    ~EigProb();
 
-    void Solve( );
-    void SolveAdapt( const std::string& path );
+    void Solve();
+    void SolveAdapt();
 
     double GetEigVal( size_t eig ) const;
     double GetEigFun( size_t eig, double x ) const;
 
 
-    void WriteEigFun( const std::string &path, size_t eig, size_t points ) const;
-    void write_coefficients( const std::string& path ) const;
+    void WriteAllEigFun() const;
+    void WriteEigFun( const std::string &path, size_t eig ) const;
+    void write_coefficients() const;
 
 private:
     void Malloc();
-    void Assemble( );
+    void Assemble();
     void MaxMinCoef( std::vector< EltInfo >& eltInfo ) const;
 
     double CalcS( const Element& e, size_t ni, size_t nj ) const;
     double CalcK( const Element& e, size_t ni, size_t nj ) const;
 
     double GetPot( double r ) const;
+
+    void write_intro() const;
+    static std::string get_now_as_string();
 
 
 private:
@@ -123,6 +131,8 @@ private:
 
     Mesh m_mesh;
 
+    FILE *m_log = nullptr;
+
     // Angular quantum number
     const size_t m_ell;
 
@@ -139,6 +149,12 @@ private:
     const double m_absMaxCoef;
 
     const double m_abstol;
+
+    const bool m_create_log_file;
+
+    const std::string m_out_directory;
+
+    const size_t m_out_points;
 
     // Constant \gamma
     static const double m_gamma;
