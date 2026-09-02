@@ -4,7 +4,7 @@ potential_name coulomb
 potential_coulomb_Z 1
 
 Solver_Ell 2
-Solver_Rc 140
+Solver_Rc 200
 Solver_EigNode 4
 Solver_EigDeg 6
 Solver_EigAbsMaxCoef 1E-4
