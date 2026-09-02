@@ -152,7 +152,7 @@ void EigProb::write_coefficients( ) const
     std::print( m_log, "-------\n" );
     std::print( m_log, "Number of elements: {}\n", N );
     std::print( m_log, "Number of degrees of freedom: {}\n", m_mesh.Dim( BndrType_Dir, BndrType_Dir ) );
-    std::print( m_log, "Interval: [0, {:15.6e}]\n", m_mesh.XBack());
+    std::print( m_log, "Domain: [0, {:15.6e}]\n", m_mesh.XBack());
 
 
 
