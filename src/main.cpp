@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 
         for(size_t eig = 0; eig < eigNo; eig++ )
         {
-            std::print( "{:15.6e}\n", eigProb.GetEigVal(eig) );
+            std::print( "{:16.9e}\n", eigProb.GetEigVal(eig) );
         }
 
     }
