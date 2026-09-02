@@ -94,7 +94,7 @@ void EigProb::write_coefficients( const std::string& path ) const
     if(path.empty())
         return;
 
-    FILE* file = std::fopen(path.c_str(), "w");
+    FILE* file = std::fopen(path.c_str(), "a");
     if(file == nullptr)
     {
         throw std::runtime_error( "Cannot open file: " + path );
