@@ -1,11 +1,31 @@
 # Coulomb potential, L = 2
 
-![ELL=2, N=0](./ell2_n0.svg)
+<table>
+<tr>
+    <td><img src="./ell0_n0_log.svg"></td>
+    <td><img src="./ell0_n0_lin.svg"></td>
+</tr>
+</table>
 
-![ELL=2, N=1](./ell2_n1.svg)
+<table>
+<tr>
+    <td><img src="./ell0_n1_log.svg"></td>
+    <td><img src="./ell0_n1_lin.svg"></td>
+</tr>
+</table>
 
-![ELL=2, N=2](./ell2_n2.svg)
+<table>
+<tr>
+    <td><img src="./ell0_n2_log.svg"></td>
+    <td><img src="./ell0_n2_lin.svg"></td>
+</tr>
+</table>
 
-![ELL=2, N=3](./ell2_n3.svg)
+<table>
+<tr>
+    <td><img src="./ell0_n3_log.svg"></td>
+    <td><img src="./ell0_n3_lin.svg"></td>
+</tr>
+</table>
 
 
