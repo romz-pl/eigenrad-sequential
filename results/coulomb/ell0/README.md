@@ -1,7 +1,14 @@
 # Coulomb potential, L = 0
 
-![ELL=0, N=0](./ell0_n0_log.svg)
-![ELL=0, N=0](./ell0_n0_lin.svg)
+<table>
+<tr>
+    <td>![ELL=0, N=0](./ell0_n0_log.svg)</td>
+    <td>![ELL=0, N=0](./ell0_n0_lin.svg)</td>
+</tr>
+</table>
+
+
+
 
 ![ELL=0, N=0](./ell0_n0_log.svg)
 ![ELL=0, N=0](./ell0_n0_lin.svg)
