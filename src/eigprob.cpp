@@ -73,7 +73,7 @@ std::string EigProb::get_now_as_string()
         std::chrono::current_zone(), now
     };
 
-    return std::format("DATETIME: {:%d %b %Y %H:%M:%S}", local);
+    return std::format("\nDATETIME: {:%d %b %Y %H:%M:%S}", local);
 }
 
 void EigProb::write_intro() const
@@ -152,7 +152,7 @@ void EigProb::write_coefficients( ) const
     std::print( m_log, "-------\n" );
     std::print( m_log, "Number of elements: {}\n", N );
     std::print( m_log, "Number of degrees of freedom: {}\n", m_mesh.Dim( BndrType_Dir, BndrType_Dir ) );
-
+    std::print( m_log, "Interval: [0, {:15.6e}]\n", m_mesh.XBack());
 
 
 

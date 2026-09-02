@@ -7,11 +7,13 @@
 ===============================================================================
 
 
-DATETIME: 02 Sep 2026 23:03:26
+
+DATETIME: 02 Sep 2026 23:21:01
 
 -------
 Number of elements: 3
 Number of degrees of freedom: 17
+Interval: [0,    1.800000e+02]
 
 0    0.000000e+00    6.000000e+01
    2.354973e-01   -3.396686e-02   -2.138619e-01    9.837969e-02    9.415734e-02   -1.782492e-02 
@@ -33,6 +35,7 @@ Number of degrees of freedom: 17
 -------
 Number of elements: 4
 Number of degrees of freedom: 23
+Interval: [0,    1.800000e+02]
 
 0    0.000000e+00    3.000000e+01
    3.747114e-02    1.454959e-01   -4.286886e-03   -4.208070e-02    3.849392e-03   -2.049455e-01 
@@ -60,6 +63,7 @@ Number of degrees of freedom: 23
 -------
 Number of elements: 5
 Number of degrees of freedom: 29
+Interval: [0,    1.800000e+02]
 
 0    0.000000e+00    1.500000e+01
    7.006818e-02    1.184957e-03   -1.335724e-02   -6.962181e-04    1.641749e-03    1.285347e-01 
@@ -93,6 +97,7 @@ Number of degrees of freedom: 29
 -------
 Number of elements: 8
 Number of degrees of freedom: 47
+Interval: [0,    1.800000e+02]
 
 0    0.000000e+00    7.500000e+00
   -1.277044e-02   -4.660776e-03   -5.221332e-05    3.060721e-04    1.029102e-06   -1.800167e-02 
@@ -144,6 +149,7 @@ Number of degrees of freedom: 47
 -------
 Number of elements: 10
 Number of degrees of freedom: 59
+Interval: [0,    1.800000e+02]
 
 0    0.000000e+00    7.500000e+00
    1.277044e-02    4.660776e-03    5.221332e-05   -3.060721e-04   -1.029102e-06    1.800167e-02 
@@ -207,6 +213,7 @@ Number of degrees of freedom: 59
 -------
 Number of elements: 12
 Number of degrees of freedom: 71
+Interval: [0,    1.800000e+02]
 
 0    0.000000e+00    7.500000e+00
    1.277044e-02    4.660776e-03    5.221332e-05   -3.060721e-04   -1.029102e-06    1.800167e-02 
@@ -279,6 +286,7 @@ Number of degrees of freedom: 71
    1.518144e-05    9.224153e-06   -4.230633e-06    1.184777e-06   -2.716219e-07    4.374545e-08 
   -1.142359e-03   -5.138780e-04    1.893312e-04   -3.375988e-05    5.799012e-06   -4.331415e-07 
   -1.904879e-02   -5.122733e-03    1.414896e-03   -5.676503e-05    5.199853e-06    2.708075e-06 
-DATETIME: 02 Sep 2026 23:03:26
+
+DATETIME: 02 Sep 2026 23:21:01
 
 === END OF LOG FILE ===
