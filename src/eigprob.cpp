@@ -363,21 +363,48 @@ void EigProb::WriteEigFun( const std::string& path, size_t eig ) const
     assert( m_out_points > 0 );
 
 
-    double x;
+    double r;
     for( size_t n = 0; n < m_mesh.XNo() - 1; n++ )
     {
-        x = m_mesh.X( n );
-        const double dx = ( m_mesh.X( n + 1 ) - m_mesh.X( n ) ) / m_out_points;
+        r = m_mesh.X( n );
+        const double dr = ( m_mesh.X( n + 1 ) - m_mesh.X( n ) ) / m_out_points;
         for( size_t i = 0; i < m_out_points; i++ )
         {
-            out  << x << " " << GetEigFun( eig, x ) << std::endl;
-            x += dx;
+            const double v = GetEigFun( eig, r );
+            out << r << " " << v << " ";
+            if(n == 0 && i == 0)
+            {
+                // linear extrapolation for r = 0
+                // y(r) = a * r + b
+                // y(0) = b
+                //
+                // Solve the set of two linear equations
+                // y(w)   = y0 = a * w + b
+                // y(2*w) = y1 = a * 2 * w + b
+                //
+                // a = (y1 - y0) / w
+                // b = 2 * y0 - y1
+                //
+                //
+                constexpr double w = 1E-4;
+                const double y0 = GetEigFun( eig, w ) / w;
+                const double y1 = GetEigFun( eig, 2 * w ) / ( 2 * w);
+                const double b = 2 * y0 - y1;
+                out << b;
+            }
+            else
+            {
+                out << v / r;
+            }
+
+            out << std::endl;
+            r += dr;
         }
     }
 
     // The last point must be written (to avoid the rounding errors)
-    x = m_mesh.XBack();
-    out  << x << " " << GetEigFun( eig, x ) << std::endl;
+    r = m_mesh.XBack();
+    out  << r << " " << GetEigFun( eig, r ) << std::endl;
 }
 
 

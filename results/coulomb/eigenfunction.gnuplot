@@ -7,8 +7,11 @@ do for [L=0:4] {
         if (scale eq "log") { set logscale x }
 
         do for [n=0:3] {
-            set output sprintf("./ell%d/ell%d_n%d_%s.svg", L, L, n, scale)
-            plot sprintf("./ell%d/ell%d_n%d.dat", L, L, n) title sprintf("Coulomb potential, L = %d, n = %d", L, n)
+            set output sprintf("./ell%d/P/ell%d_n%d_%s.svg", L, L, n, scale)
+            plot sprintf("./ell%d/ell%d_n%d.dat", L, L, n) using 1:2 title sprintf("Function P(r), L = %d, n = %d", L, n)
+
+            set output sprintf("./ell%d/R/ell%d_n%d_%s.svg", L, L, n, scale)
+            plot sprintf("./ell%d/ell%d_n%d.dat", L, L, n) using 1:3 title sprintf("Function R(r) = P(r) / r, L = %d, n = %d", L, n)
         }
 
         unset logscale x
