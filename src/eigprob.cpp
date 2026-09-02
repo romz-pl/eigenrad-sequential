@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <cfloat>
 #include <cmath>
+#include <print>
+#include <cstdio>
 #include "eigprob.h"
 #include "lobatto.h"
 #include "gauss.h"
@@ -13,35 +15,51 @@ const double EigProb::m_gamma = 0.5;
 //
 // Constructor
 //
-EigProb::EigProb( size_t ell, double rc, size_t eigNode, size_t eigDeg )
+EigProb::EigProb(size_t ell,
+                 double rc,
+                 size_t eigNode,
+                 size_t eigDeg,
+                 const Fun1D& g,
+                 size_t eigNo,
+                 double absMaxCoef,
+                 double abstol )
     : m_ell( ell )
+    , m_rc( rc )
+    , m_eigNode( eigNode )
+    , m_eigDeg( eigDeg )
+    , m_g( g )
+    , m_eigNo( eigNo )
+    , m_absMaxCoef( absMaxCoef )
+    , m_abstol( abstol )
+
 {
-    m_mesh.GenLin( 0, rc, eigNode, eigDeg );
+    m_mesh.GenLin( 0, m_rc, m_eigNode, m_eigDeg );
     m_mesh.CreateCnnt( BndrType_Dir, BndrType_Dir );
 }
 
 //
 // Solves the eigenproblem, WITHOUT adaptive procedure
 //
-void EigProb::Solve( const Fun1D& g, size_t eigNo, double abstol )
+void EigProb::Solve( )
 {
     Malloc();
-    Assemble( g );
-    m_s.EigenGen(eigNo, abstol, m_w, m_z, m_o);
+    Assemble( );
+    m_s.EigenGen(m_eigNo, m_abstol, m_w, m_z, m_o);
 }
 
 //
 // Solve the eigenproblem adatively
 //
-void EigProb::SolveAdapt( const Fun1D& g, size_t eigNo, double absMaxCoef, double abstol )
+void EigProb::SolveAdapt( const std::string& path )
 {
-    std::vector< EltInfo > eltInfo( eigNo );
+    std::vector< EltInfo > eltInfo( m_eigNo );
     std::vector< size_t > eltToSplit;
 
 
     while( true )
     {
-        Solve( g, eigNo, abstol );
+        Solve( );
+        write_coefficients( path );
         MaxMinCoef( eltInfo );
         std::sort( eltInfo.begin(), eltInfo.end() );
         const auto newEnd = std::unique( eltInfo.begin(), eltInfo.end() );
@@ -52,7 +70,7 @@ void EigProb::SolveAdapt( const Fun1D& g, size_t eigNo, double absMaxCoef, doubl
             if( eltInfo[i].GetMaxMinCoef() > maxCoef )
                 maxCoef = eltInfo[i].GetMaxMinCoef();
         }
-        if( maxCoef < absMaxCoef )
+        if( maxCoef < m_absMaxCoef )
             break;
 
         // The Elt was splitted
@@ -66,6 +84,57 @@ void EigProb::SolveAdapt( const Fun1D& g, size_t eigNo, double absMaxCoef, doubl
         m_mesh.AddToMesh( eltToSplit );
         m_mesh.CreateCnnt( BndrType_Dir, BndrType_Dir );
     }
+}
+
+//
+// Write Lobbato coefficients into the file
+//
+void EigProb::write_coefficients( const std::string& path ) const
+{
+    if(path.empty())
+        return;
+
+    FILE* file = std::fopen(path.c_str(), "w");
+    if(file == nullptr)
+    {
+        throw std::runtime_error( "Cannot open file: " + path );
+    }
+
+    const size_t N = m_mesh.EltNo(); // Number of elements
+
+    std::print( file, "-------\n" );
+    std::print( file, "Number of elements: {}\n", N );
+    std::print( file, "Number of degrees of freedom: {}\n", m_mesh.Dim( BndrType_Dir, BndrType_Dir ) );
+
+
+
+
+    // Element loop
+    for( size_t n = 0; n < N; n++ )
+    {
+        std::print( file, "\n{} {:15.6e} {:15.6e}\n", n, m_mesh.X(n), m_mesh.X(n + 1));
+        const Element& e = m_mesh.Elt( n );
+        const size_t DofNo = e.DofNo();
+
+        for( size_t eig = 0; eig < m_eigNo; eig++ )
+        {
+
+            // Loop over basis functions
+            for( size_t i = 0; i < DofNo; i++ )
+            {
+                const int ni = e.m_dof[ i ];
+                if( ni < 0 )
+                    continue;
+
+
+                std::print( file, "{:15.6e} ", m_z.Get(ni, eig) );
+            }
+            std::print( file, "\n" );
+        }
+    }
+
+    std::fclose(file);
+
 }
 
 
@@ -86,7 +155,7 @@ void EigProb::Malloc()
 //
 // Assembling algorithm for eigenvalue problem
 //
-void EigProb::Assemble( const Fun1D& g )
+void EigProb::Assemble( )
 {
     const size_t N = m_mesh.EltNo(); // Number of elements
 
@@ -113,7 +182,7 @@ void EigProb::Assemble( const Fun1D& g )
                 const int nj = e.m_dof[ j ];
                 if( nj > -1 )
                 {
-                    m_s.Set( ni, nj ) += CalcS( g, e, psiI, psiJ );
+                    m_s.Set( ni, nj ) += CalcS( e, psiI, psiJ );
                     m_o.Set( ni, nj ) += CalcK( e, psiI, psiJ );
                 }
             }
@@ -125,7 +194,7 @@ void EigProb::Assemble( const Fun1D& g )
 // Returns the element (ni, nj) of the stiffness matrix element.
 // The elements are read from precomputed array.
 //
-double EigProb::CalcS( const Fun1D& g, const Element& e, size_t ni, size_t nj ) const
+double EigProb::CalcS( const Element& e, size_t ni, size_t nj ) const
 {
     const double v1 = m_gamma * Lobatto::GetS( ni, nj );
     double v0 = 0;
@@ -135,7 +204,7 @@ double EigProb::CalcS( const Fun1D& g, const Element& e, size_t ni, size_t nj ) 
         const double s = Gauss::X( n );
         const double w = Gauss::W( n );
         const double r = e.X( s );
-        v0 += w * Lobatto::Basis( ni, s ) * Lobatto::Basis( nj, s ) * GetPot( g, r );
+        v0 += w * Lobatto::Basis( ni, s ) * Lobatto::Basis( nj, s ) * GetPot( r );
     }
 
     const double jac = e.Jac();
@@ -146,10 +215,10 @@ double EigProb::CalcS( const Fun1D& g, const Element& e, size_t ni, size_t nj ) 
 // For given $r$ it returns the value
 //    g(r) + L*(L + 1)/(2 r^2)
 //
-double EigProb::GetPot( const Fun1D& g, double r ) const
+double EigProb::GetPot( double r ) const
 {
     assert( r > 0 );
-    const double a = g.Get( r );
+    const double a = m_g.Get( r );
     const double b = m_ell * ( m_ell + 1 ) / ( 2 * r * r );
     return a + b;
 }

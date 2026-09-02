@@ -22,8 +22,8 @@ static void calculate_eigen(size_t deg, size_t ell, double rc)
     const double abstol = 1E-14;
     const double absMaxCoef = 1E-4;
 
-    EigProb eigProb( ell, rc, eigNode, deg );
-    ASSERT_NO_THROW( eigProb.SolveAdapt( pot, eigNo, absMaxCoef, abstol ) );
+    EigProb eigProb( ell, rc, eigNode, deg, pot, eigNo, absMaxCoef, abstol );
+    ASSERT_NO_THROW( eigProb.SolveAdapt( std::string() ) );
 
     const double abs_error = 1E-6;
     for(size_t n = 0; n < eigNo; n++ )

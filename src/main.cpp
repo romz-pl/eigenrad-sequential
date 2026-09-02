@@ -1,6 +1,7 @@
 #include <iostream>
 // #include <filesystem>
 #include <format>
+#include <print>
 #include "create_potential.h"
 #include "eigprob.h"
 #include "paramdb.h"
@@ -34,18 +35,28 @@ int main(int argc, char* argv[])
 
         std::unique_ptr<Fun1D> pot = create_potential();
 
-        EigProb eigProb( ell, rc, eigNode, eigDeg );
-        eigProb.SolveAdapt( *pot, eigNo, absMaxCoef, abstol );
+        EigProb eigProb( ell,
+                        rc,
+                        eigNode,
+                        eigDeg,
+                        *pot,
+                        eigNo,
+                        absMaxCoef,
+                        abstol );
+
+        const std::string path = directory + "/" + "coefficients.dat";
+        eigProb.SolveAdapt( path );
 
         for(size_t eig = 0; eig < eigNo; eig++ )
         {
-            std::cout << eigProb.GetEigVal(eig) << "\n";
+            std::print( "{:15.6e}\n", eigProb.GetEigVal(eig) );
 
             std::string filename = std::format("ell{}_n{}.dat", ell, eig + 1);
             const std::string path = directory + "/" + filename;
             // const std::filesystem::path path = std::filesystem::path{directory} / filename;
             eigProb.WriteEigFun( path, eig, points );
         }
+
     }
     catch( std::exception& e )
     {

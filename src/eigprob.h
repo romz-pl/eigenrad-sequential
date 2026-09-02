@@ -70,27 +70,36 @@
 class EigProb
 {
 public:
-    EigProb( size_t ell, double rc, size_t eigNode, size_t eigDeg );
+    EigProb( size_t ell,
+            double rc,
+            size_t eigNode,
+            size_t eigDeg,
+            const Fun1D& g,
+            size_t eigNo,
+            double absMaxCoef,
+            double abstol );
+
     ~EigProb() = default;
 
-    void Solve( const Fun1D &g, size_t eigNo, double abstol );
-    void SolveAdapt( const Fun1D& g, size_t eigNo, double absMaxCoef, double abstol );
+    void Solve( );
+    void SolveAdapt( const std::string& path );
 
     double GetEigVal( size_t eig ) const;
     double GetEigFun( size_t eig, double x ) const;
 
 
     void WriteEigFun( const std::string &path, size_t eig, size_t points ) const;
+    void write_coefficients( const std::string& path ) const;
 
 private:
     void Malloc();
-    void Assemble( const Fun1D &g );
+    void Assemble( );
     void MaxMinCoef( std::vector< EltInfo >& eltInfo ) const;
 
-    double CalcS( const Fun1D& g, const Element& e, size_t ni, size_t nj ) const;
+    double CalcS( const Element& e, size_t ni, size_t nj ) const;
     double CalcK( const Element& e, size_t ni, size_t nj ) const;
 
-    double GetPot( const Fun1D &g, double r ) const;
+    double GetPot( double r ) const;
 
 
 private:
@@ -116,6 +125,20 @@ private:
 
     // Angular quantum number
     const size_t m_ell;
+
+    const double m_rc;
+
+    const size_t m_eigNode;
+
+    const size_t m_eigDeg;
+
+    const Fun1D& m_g;
+
+    const size_t m_eigNo;
+
+    const double m_absMaxCoef;
+
+    const double m_abstol;
 
     // Constant \gamma
     static const double m_gamma;
