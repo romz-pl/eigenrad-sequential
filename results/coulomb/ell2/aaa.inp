@@ -12,4 +12,5 @@ Solver_EigAbsTol 1E-14
 Solver_EigNo 4
 
 Out_points 30
+Out_create_log_file Yes
 Out_directory ./results/coulomb/ell2
