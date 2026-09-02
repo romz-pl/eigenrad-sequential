@@ -5,7 +5,7 @@ set terminal svg enhanced font "Arial,12"
 
 
 set output "ell4_n0_lin.svg"
-plot 'ell4_n0.dat' title 'Coulomb potential, L = 4, n = o'
+plot 'ell4_n0.dat' title 'Coulomb potential, L = 4, n = 0'
 
 set output "ell4_n1_lin.svg"
 plot 'ell4_n1.dat' title 'Coulomb potential, L = 4, n = 1'
@@ -20,7 +20,7 @@ plot 'ell4_n3.dat' title 'Coulomb potential, L = 4, n = 3'
 set logscale x
 
 set output "ell4_n0_log.svg"
-plot 'ell4_n0.dat' title 'Coulomb potential, L = 4, n = o'
+plot 'ell4_n0.dat' title 'Coulomb potential, L = 4, n = 0'
 
 set output "ell4_n1_log.svg"
 plot 'ell4_n1.dat' title 'Coulomb potential, L = 4, n = 1'
