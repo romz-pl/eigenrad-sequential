@@ -118,6 +118,8 @@ private:
     static std::string get_now_as_string();
     void append_step_info( size_t step );
 
+    void log_elements_to_split( const std::vector< size_t >& eltToSplit ) const;
+
 
 private:
     // Lobat functions. Initialization in constructor!

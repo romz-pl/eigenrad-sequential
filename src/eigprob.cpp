@@ -137,13 +137,12 @@ void EigProb::SolveAdapt( )
             eltToSplit.push_back( ii->GetEltId() );
         }
 
+        log_elements_to_split( eltToSplit );
         m_mesh.AddToMesh( eltToSplit );
         m_mesh.CreateCnnt( BndrType_Dir, BndrType_Dir );
         step++;
     }
 }
-
-
 
 
 //
@@ -327,6 +326,9 @@ void EigProb::MaxMinCoef( std::vector< EltInfo >& eltInfo ) const
 
 void EigProb::write_intro() const
 {
+    if( !m_create_log_file )
+        return;
+
     std::print( m_log,
                "===============================================================================\n"
                " EEEEE I   GGG  EEEEE N   N RRRR   AAA  DDDD         Zbigniew Romanowski       \n"
@@ -335,6 +337,18 @@ void EigProb::write_intro() const
                " E     I  G   G E     N  NN R  R  A   A D   D                                  \n"
                " EEEEE I   GGG  EEEEE N   N R   R A   A DDDD         https://github.com/romz-pl\n"
                "===============================================================================\n\n\n");
+}
+
+void EigProb::log_elements_to_split( const std::vector< size_t >& eltToSplit ) const
+{
+    if( !m_create_log_file )
+        return;
+
+    std::print( m_log, "\n----- ELEMENTS TO SPLIT -----\n" );
+    for(const size_t e : eltToSplit)
+    {
+        std::print( m_log, "{}\n", e);
+    }
 }
 
 void EigProb::write_step_eigenvalues() const
