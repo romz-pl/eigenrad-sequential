@@ -13,7 +13,7 @@ do for [ell=0:4] {
     set output sprintf("./ell%d/eigenvalue_log.svg", ell)
 
     plot for [n=0:3] file(ell) using 1:(column(n+4)) \
-        with linespoints lw 1.5 pt 7 ps 2 \
+        with linespoints lw 1.5 pt 7 ps 1 \
         lc rgb word(colors, n+1) \
         title sprintf("Eigval n=%d", n)
 }
