@@ -340,7 +340,7 @@ void EigProb::write_intro() const
 void EigProb::write_step_eigenvalues() const
 {
     const std::string path = m_out_directory + "/" + "eigenvalues.dat";
-    FILE* out = std::fopen(path.c_str(), "w");
+    FILE* out = std::fopen( path.c_str(), "w" );
     if( out == nullptr )
     {
         throw std::runtime_error( "Cannot open file: " + path );
@@ -348,21 +348,21 @@ void EigProb::write_step_eigenvalues() const
 
     std::print( out,
         "# Eigenvalues for each adaptive steps.\n"
-        "# Format suitable for gnuplot.\n"
+        "# This is a format suitable for GNUplot.\n"
         "# Column 1: step\n"
         "# Column 2: dofs\n"
         "# Column 3: rmax\n"
         "# Column 4, 5,...: eigenvalues\n"
         );
 
-    for (const auto& si : m_step_info)
+    for( const auto& si : m_step_info )
     {
-        std::print(out, "{} {} {:16.9E}", si.m_step, si.m_dofs, si.m_rmax );
+        std::print( out, "{} {} {:16.9E}", si.m_step, si.m_dofs, si.m_rmax );
 
-        for (const auto v : si.m_eigenvalues)
-            std::print(out, " {:16.9E}", v );
+        for( const auto v : si.m_eigenvalues )
+            std::print( out, " {:16.9E}", v );
 
-        std::print(out, "\n");
+        std::print( out, "\n" );
     }
 
     std::fclose( out );
@@ -371,34 +371,34 @@ void EigProb::write_step_eigenvalues() const
 void EigProb::write_step_eigenvalues_convergence() const
 {
     const std::string path = m_out_directory + "/" + "eigenvalues-convergence.dat";
-    FILE* out = std::fopen(path.c_str(), "w");
+    FILE* out = std::fopen( path.c_str(), "w" );
     if( out == nullptr )
     {
         throw std::runtime_error( "Cannot open file: " + path );
     }
 
     std::print( out,
-               "# Data for each adaptive steps.\n"
-               "# Format suitable for gnuplot.\n"
-               "# Column 1: step\n"
-               "# Column 2: dofs\n"
-               "# Column 3: rmax\n"
-               "# Column 4, 5,...: eigenvalues\n"
-               );
+       "# Data for each adaptive steps.\n"
+       "# This is a format suitable for GNUplot.\n"
+       "# Column 1: step\n"
+       "# Column 2: dofs\n"
+       "# Column 3: rmax\n"
+       "# Column 4, 5,...: eigenvalues\n"
+       );
 
     const step_info base = m_step_info.back();
 
-    for (const auto& si : m_step_info)
+    for( const auto& si : m_step_info )
     {
-        std::print(out, "{} {} {:16.9E}", si.m_step, si.m_dofs, si.m_rmax );
+        std::print( out, "{} {} {:16.9E}", si.m_step, si.m_dofs, si.m_rmax );
 
-        for (size_t i = 0; i < base.m_eigenvalues.size(); i++ )
+        for( size_t i = 0; i < base.m_eigenvalues.size(); i++ )
         {
             const double v = si.m_eigenvalues[i] - base.m_eigenvalues[i];
-            std::print(out, " {:16.9E}", v );
+            std::print( out, " {:16.9E}", v );
         }
 
-        std::print(out, "\n");
+        std::print( out, "\n" );
     }
 
     std::fclose( out );
@@ -406,7 +406,7 @@ void EigProb::write_step_eigenvalues_convergence() const
 
 void EigProb::write_all_eigenfunctions() const
 {
-    for(size_t eig = 0; eig < m_eigNo; eig++ )
+    for( size_t eig = 0; eig < m_eigNo; eig++ )
     {
         std::string filename = std::format("ell{}_n{}.dat", m_ell, eig);
         const std::string path = m_out_directory + "/" + filename;
