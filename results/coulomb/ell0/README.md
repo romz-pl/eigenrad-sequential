@@ -13,7 +13,13 @@
 | 6    | 71   | -5.000 000 000E-01 | -1.250 000 000E-01 | -5.555 555 554E-02 | -3.124 999 875E-02 |
 
 
-<img src="./eigenvalue_log.svg">
+
+<table>
+<tr>
+    <td><img src="./eigenvalue_log.svg"></td>
+    <td><img src="./dofs.svg"></td>
+</tr>
+</table>
 
 ## Eigenfunction: L = 0, n = 0, $E_{n, l}$ = -5.000000000E-01
 
