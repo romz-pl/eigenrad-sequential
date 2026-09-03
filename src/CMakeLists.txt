@@ -14,6 +14,7 @@ add_library( ${LIB_NAME}
     mesh.cpp
     potential_coulomb.cpp
     potential_hgh_hydrogen.cpp
+    step_info.cpp
 )
 
 target_include_directories( ${LIB_NAME}
