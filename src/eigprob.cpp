@@ -514,6 +514,7 @@ void EigProb::write_coefficients( ) const
 
     assert( m_log );
 
+
     // Element loop
     for( size_t n = 0; n < m_mesh.EltNo(); n++ )
     {
@@ -521,8 +522,11 @@ void EigProb::write_coefficients( ) const
         const Element& e = m_mesh.Elt( n );
         const size_t DofNo = e.DofNo();
 
+        double max_coef = 0;
+
         for( size_t eig = 0; eig < m_eigNo; eig++ )
         {
+            double min_coef = DBL_MAX;
 
             // Loop over basis functions
             for( size_t i = 0; i < DofNo; i++ )
@@ -531,11 +535,19 @@ void EigProb::write_coefficients( ) const
                 if( ni < 0 )
                     continue;
 
+                const double coef = m_z.Get(ni, eig);
+                const double abs_coef = std::fabs(coef);
+                if( abs_coef < min_coef )
+                    min_coef = abs_coef;
 
-                std::print( m_log, "{:15.6E} ", m_z.Get(ni, eig) );
+                std::print( m_log, "{:15.6E} ", coef );
             }
-            std::print( m_log, "\n" );
+            std::print( m_log, "| {:15.6E}\n", min_coef );
+
+            if( max_coef < min_coef )
+                max_coef = min_coef;
         }
+        std::print( m_log, "max(min|c_i|) = {:15.6E}\n", max_coef );
     }
 }
 
