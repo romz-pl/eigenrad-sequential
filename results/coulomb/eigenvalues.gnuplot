@@ -26,7 +26,7 @@ do for [ell=0:4] {
     set output sprintf("./ell%d/dofs.svg", ell)
 
     plot file(ell) using 1:2 \
-        with points pt 3 ps 2 \
+        with linespoints pt 3 ps 2 \
         lc rgb "red" \
         title "Dofs"
 }

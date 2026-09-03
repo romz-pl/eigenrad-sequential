@@ -124,7 +124,8 @@
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<use xlink:href='#gpPt2' transform='translate(64.14,381.96) scale(9.00)' color='rgb(255,   0,   0)'/>
+	<path stroke='rgb(255,   0,   0)'  d='M515.48,36.01 L558.04,36.01 M64.14,381.96 L166.28,347.30 L268.41,312.64 L370.55,208.65 L472.68,139.33 L574.82,70.00
+		 '/>	<use xlink:href='#gpPt2' transform='translate(64.14,381.96) scale(9.00)' color='rgb(255,   0,   0)'/>
 	<use xlink:href='#gpPt2' transform='translate(166.28,347.30) scale(9.00)' color='rgb(255,   0,   0)'/>
 	<use xlink:href='#gpPt2' transform='translate(268.41,312.64) scale(9.00)' color='rgb(255,   0,   0)'/>
 	<use xlink:href='#gpPt2' transform='translate(370.55,208.65) scale(9.00)' color='rgb(255,   0,   0)'/>
