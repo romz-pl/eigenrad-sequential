@@ -67,6 +67,15 @@
 #include "gauss.h"
 #include "lobatto.h"
 
+class step_info
+{
+public:
+    size_t m_step = 0;
+    size_t m_dofs = 0;
+    double m_rmax = 0;
+    std::vector< double > m_eigenvalues;
+};
+
 
 class EigProb
 {
@@ -94,10 +103,12 @@ public:
 
 
     void write_solution( size_t step ) const;
-    void write_all_egenfunctions() const;
-    void write_egenfunction( const std::string &path, size_t eig ) const;
+    void write_all_eigenfunctions() const;
+    void write_eigenfunction( const std::string &path, size_t eig ) const;
     void write_coefficients() const;
-    void write_egenvalues( size_t step ) const;
+    void write_eigenvalues( size_t step ) const;
+    void write_step_eigenvalues() const;
+    void write_step_eigenvalues_convergence() const;
 
 private:
     void Malloc();
@@ -111,6 +122,7 @@ private:
 
     void write_intro() const;
     static std::string get_now_as_string();
+    void append_step_info( size_t step );
 
 
 private:
@@ -133,6 +145,8 @@ private:
     ClpMtxBand m_o;
 
     Mesh m_mesh;
+
+    std::vector< step_info > m_step_info;
 
     FILE *m_log = nullptr;
 

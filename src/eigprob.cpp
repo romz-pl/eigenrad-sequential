@@ -87,6 +87,21 @@ void EigProb::Solve( )
     m_s.EigenGen(m_eigNo, m_abstol, m_w, m_z, m_o);
 }
 
+void EigProb::append_step_info( size_t step )
+{
+    step_info si;
+    si.m_step = step;
+    si.m_dofs = GetDofs();
+    si.m_rmax = m_mesh.XBack();
+
+    for(size_t eig = 0; eig < m_eigNo; eig++ )
+    {
+        si.m_eigenvalues.push_back( GetEigVal(eig) );
+    }
+    m_step_info.push_back( si );
+}
+
+
 //
 // Solve the eigenproblem adatively
 //
@@ -99,6 +114,7 @@ void EigProb::SolveAdapt( )
     while( true )
     {
         Solve( );
+        append_step_info( step );
         write_solution( step );
         MaxMinCoef( eltInfo );
         std::sort( eltInfo.begin(), eltInfo.end() );
@@ -321,14 +337,81 @@ void EigProb::write_intro() const
                "===============================================================================\n\n\n");
 }
 
-void EigProb::write_all_egenfunctions() const
+void EigProb::write_step_eigenvalues() const
+{
+    const std::string path = m_out_directory + "/" + "eigenvalues.dat";
+    FILE* out = std::fopen(path.c_str(), "w");
+    if( out == nullptr )
+    {
+        throw std::runtime_error( "Cannot open file: " + path );
+    }
+
+    std::print( out,
+        "# Eigenvalues for each adaptive steps.\n"
+        "# Format suitable for gnuplot.\n"
+        "# Column 1: step\n"
+        "# Column 2: dofs\n"
+        "# Column 3: rmax\n"
+        "# Column 4, 5,...: eigenvalues\n"
+        );
+
+    for (const auto& si : m_step_info)
+    {
+        std::print(out, "{} {} {:16.9E}", si.m_step, si.m_dofs, si.m_rmax );
+
+        for (const auto v : si.m_eigenvalues)
+            std::print(out, " {:16.9E}", v );
+
+        std::print(out, "\n");
+    }
+
+    std::fclose( out );
+}
+
+void EigProb::write_step_eigenvalues_convergence() const
+{
+    const std::string path = m_out_directory + "/" + "eigenvalues-convergence.dat";
+    FILE* out = std::fopen(path.c_str(), "w");
+    if( out == nullptr )
+    {
+        throw std::runtime_error( "Cannot open file: " + path );
+    }
+
+    std::print( out,
+               "# Data for each adaptive steps.\n"
+               "# Format suitable for gnuplot.\n"
+               "# Column 1: step\n"
+               "# Column 2: dofs\n"
+               "# Column 3: rmax\n"
+               "# Column 4, 5,...: eigenvalues\n"
+               );
+
+    const step_info base = m_step_info.back();
+
+    for (const auto& si : m_step_info)
+    {
+        std::print(out, "{} {} {:16.9E}", si.m_step, si.m_dofs, si.m_rmax );
+
+        for (size_t i = 0; i < base.m_eigenvalues.size(); i++ )
+        {
+            const double v = si.m_eigenvalues[i] - base.m_eigenvalues[i];
+            std::print(out, " {:16.9E}", v );
+        }
+
+        std::print(out, "\n");
+    }
+
+    std::fclose( out );
+}
+
+void EigProb::write_all_eigenfunctions() const
 {
     for(size_t eig = 0; eig < m_eigNo; eig++ )
     {
         std::string filename = std::format("ell{}_n{}.dat", m_ell, eig);
         const std::string path = m_out_directory + "/" + filename;
         // const std::filesystem::path path = std::filesystem::path{directory} / filename;
-        write_egenfunction( path, eig );
+        write_eigenfunction( path, eig );
     }
 }
 
@@ -337,7 +420,7 @@ void EigProb::write_all_egenfunctions() const
 // Argument "pointNo" determines number of addtional points netween mesh nodes
 // where the eigenfunction is stored.
 //
-void EigProb::write_egenfunction( const std::string& path, size_t eig ) const
+void EigProb::write_eigenfunction( const std::string& path, size_t eig ) const
 {
     std::ofstream out( path.c_str(), std::ios::out );
     if( !out )
@@ -442,7 +525,7 @@ void EigProb::write_coefficients( ) const
     }
 }
 
-void EigProb::write_egenvalues( size_t step ) const
+void EigProb::write_eigenvalues( size_t step ) const
 {
     if( !m_create_log_file )
         return;
@@ -472,6 +555,6 @@ void EigProb::write_solution( size_t step ) const
     std::print( m_log, "Domain: [0, {:15.9E}]\n", m_mesh.XBack());
 
     write_coefficients();
-    write_egenvalues( step );
+    write_eigenvalues( step );
 
 }

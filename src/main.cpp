@@ -44,7 +44,9 @@ int main(int argc, char* argv[])
                         out_points );
 
         eigProb.SolveAdapt();
-        eigProb.write_all_egenfunctions();
+        eigProb.write_all_eigenfunctions();
+        eigProb.write_step_eigenvalues();
+        eigProb.write_step_eigenvalues_convergence();
 
         for(size_t eig = 0; eig < eigNo; eig++ )
         {
