@@ -24,12 +24,12 @@
 
 <table>
 <tr>
-    <td><img src="./P/ell2_n0_log.svg"></td>
-    <td><img src="./P/ell2_n0_lin.svg"></td>
+    <td><img src="./P/n0_log.svg"></td>
+    <td><img src="./P/n0_lin.svg"></td>
 </tr>
 <tr>
-    <td><img src="./R/ell2_n0_log.svg"></td>
-    <td><img src="./R/ell2_n0_lin.svg"></td>
+    <td><img src="./R/n0_log.svg"></td>
+    <td><img src="./R/n0_lin.svg"></td>
 </tr>
 </table>
 
@@ -37,12 +37,12 @@
 
 <table>
 <tr>
-    <td><img src="./P/ell2_n1_log.svg"></td>
-    <td><img src="./P/ell2_n1_lin.svg"></td>
+    <td><img src="./P/n1_log.svg"></td>
+    <td><img src="./P/n1_lin.svg"></td>
 </tr>
 <tr>
-    <td><img src="./R/ell2_n1_log.svg"></td>
-    <td><img src="./R/ell2_n1_lin.svg"></td>
+    <td><img src="./R/n1_log.svg"></td>
+    <td><img src="./R/n1_lin.svg"></td>
 </tr>
 </table>
 
@@ -50,12 +50,12 @@
 
 <table>
 <tr>
-    <td><img src="./P/ell2_n2_log.svg"></td>
-    <td><img src="./P/ell2_n2_lin.svg"></td>
+    <td><img src="./P/n2_log.svg"></td>
+    <td><img src="./P/n2_lin.svg"></td>
 </tr>
 <tr>
-    <td><img src="./R/ell2_n2_log.svg"></td>
-    <td><img src="./R/ell2_n2_lin.svg"></td>
+    <td><img src="./R/n2_log.svg"></td>
+    <td><img src="./R/n2_lin.svg"></td>
 </tr>
 </table>
 
@@ -63,12 +63,12 @@
 
 <table>
 <tr>
-    <td><img src="./P/ell2_n3_log.svg"></td>
-    <td><img src="./P/ell2_n3_lin.svg"></td>
+    <td><img src="./P/n3_log.svg"></td>
+    <td><img src="./P/n3_lin.svg"></td>
 </tr>
 <tr>
-    <td><img src="./R/ell2_n3_log.svg"></td>
-    <td><img src="./R/ell2_n3_lin.svg"></td>
+    <td><img src="./R/n3_log.svg"></td>
+    <td><img src="./R/n3_lin.svg"></td>
 </tr>
 </table>
 

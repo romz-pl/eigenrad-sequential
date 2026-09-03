@@ -31,8 +31,8 @@ do for [L=0:4] {
                     label = sprintf("Function R(r) = P(r) / r, L = %d, n = %d", L, n)
                 }
 
-                set output sprintf("./ell%d/%s/ell%d_n%d_%s.svg", L, quantity, L, n, scale)
-                plot sprintf("./ell%d/ell%d_n%d.dat", L, L, n) \
+                set output sprintf("./ell%d/%s/n%d_%s.svg", L, quantity, n, scale)
+                plot sprintf("./ell%d/n%d.dat", L, n) \
                     using 1:col \
                     with points pt W lc rgb color \
                     title label

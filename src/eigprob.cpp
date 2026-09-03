@@ -408,7 +408,7 @@ void EigProb::write_all_eigenfunctions() const
 {
     for( size_t eig = 0; eig < m_eigNo; eig++ )
     {
-        std::string filename = std::format("ell{}_n{}.dat", m_ell, eig);
+        std::string filename = std::format("n{}.dat", eig);
         const std::string path = m_out_directory + "/" + filename;
         // const std::filesystem::path path = std::filesystem::path{directory} / filename;
         write_eigenfunction( path, eig );
