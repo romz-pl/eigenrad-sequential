@@ -1,6 +1,6 @@
 # Coulomb potential, L = 0
 
-## L = 0, n = 0, $E_{n, l}$ = -5.000000000E-01
+## Eigenvalue convergence analysis
 
 | Step | Dofs | n = 0 | n = 1 | n = 2 | n = 3 |
 | ---  | ---  | ---   | ---   | ---   | ---   |
@@ -15,7 +15,7 @@
 
 <img src="./eigenvalue_log.svg">
 
-
+## Eigenfunction: L = 0, n = 0, $E_{n, l}$ = -5.000000000E-01
 
 <table>
 <tr>
@@ -28,7 +28,7 @@
 </tr>
 </table>
 
-## L = 0, n = 1, $E_{n, l}$ = -1.250000000E-01
+## Eigenfunction:L = 0, n = 1, $E_{n, l}$ = -1.250000000E-01
 
 <table>
 <tr>
@@ -41,7 +41,7 @@
 </tr>
 </table>
 
-## L = 0, n = 2, $E_{n, l}$ = -5.555555554E-02
+## Eigenfunction:L = 0, n = 2, $E_{n, l}$ = -5.555555554E-02
 
 <table>
 <tr>
@@ -54,7 +54,7 @@
 </tr>
 </table>
 
-## L = 0, n = 3, $E_{n, l}$ = -3.124999875E-02
+## Eigenfunction:L = 0, n = 3, $E_{n, l}$ = -3.124999875E-02
 
 <table>
 <tr>
