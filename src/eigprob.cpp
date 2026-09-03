@@ -442,7 +442,7 @@ void EigProb::write_coefficients( ) const
     }
 }
 
-void EigProb::write_egenvalues() const
+void EigProb::write_egenvalues( size_t step ) const
 {
     if( !m_create_log_file )
         return;
@@ -452,6 +452,13 @@ void EigProb::write_egenvalues() const
     {
         std::print( m_log, "EIGENVALUE n={} {:16.9E}\n", eig, GetEigVal(eig) );
     }
+
+    std::print( m_log, "\nALL_EIGENVALUES: | {} | {} | ", step, GetDofs());
+    for(size_t eig = 0; eig < m_eigNo; eig++ )
+    {
+        std::print( m_log, " {:16.9E} |", GetEigVal(eig) );
+    }
+    std::print( m_log, "\n");
 }
 
 void EigProb::write_solution( size_t step ) const
@@ -461,10 +468,10 @@ void EigProb::write_solution( size_t step ) const
 
     std::print( m_log, "\n\n========== ADAPTIVE STEP {} ==========\n", step );
     std::print( m_log, "Number of elements: {}\n", m_mesh.EltNo() );
-    std::print( m_log, "Degrees of freedom: {}\n", m_mesh.Dim( BndrType_Dir, BndrType_Dir ) );
+    std::print( m_log, "Degrees of freedom: {}\n", GetDofs() );
     std::print( m_log, "Domain: [0, {:15.9E}]\n", m_mesh.XBack());
 
     write_coefficients();
-    write_egenvalues();
+    write_egenvalues( step );
 
 }

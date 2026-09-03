@@ -90,13 +90,14 @@ public:
 
     double GetEigVal( size_t eig ) const;
     double GetEigFun( size_t eig, double x ) const;
+    size_t GetDofs() const { return m_mesh.Dim( BndrType_Dir, BndrType_Dir ); }
 
 
     void write_solution( size_t step ) const;
     void write_all_egenfunctions() const;
     void write_egenfunction( const std::string &path, size_t eig ) const;
     void write_coefficients() const;
-    void write_egenvalues() const;
+    void write_egenvalues( size_t step ) const;
 
 private:
     void Malloc();
