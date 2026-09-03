@@ -92,9 +92,11 @@ public:
     double GetEigFun( size_t eig, double x ) const;
 
 
-    void WriteAllEigFun() const;
-    void WriteEigFun( const std::string &path, size_t eig ) const;
+    void write_solution( size_t step ) const;
+    void write_all_egenfunctions() const;
+    void write_egenfunction( const std::string &path, size_t eig ) const;
     void write_coefficients() const;
+    void write_egenvalues() const;
 
 private:
     void Malloc();

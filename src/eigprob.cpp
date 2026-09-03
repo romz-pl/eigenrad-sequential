@@ -76,17 +76,6 @@ std::string EigProb::get_now_as_string()
     return std::format("\nDATETIME: {:%d %b %Y %H:%M:%S}", local);
 }
 
-void EigProb::write_intro() const
-{
-    std::print( m_log,
-            "===============================================================================\n"
-            " EEEEE I   GGG  EEEEE N   N RRRR   AAA  DDDD         Zbigniew Romanowski       \n"
-            " E     I  G     E     NN  N R   R A   A D   D                                  \n"
-            " EEE   I  G  GG EEE   N N N RRRR  AAAAA D   D        romz@wp.pl                \n"
-            " E     I  G   G E     N  NN R  R  A   A D   D                                  \n"
-            " EEEEE I   GGG  EEEEE N   N R   R A   A DDDD         https://github.com/romz-pl\n"
-            "===============================================================================\n\n\n");
-}
 
 //
 // Solves the eigenproblem, WITHOUT adaptive procedure
@@ -106,11 +95,11 @@ void EigProb::SolveAdapt( )
     std::vector< EltInfo > eltInfo( m_eigNo );
     std::vector< size_t > eltToSplit;
 
-
+    size_t step = 0;
     while( true )
     {
         Solve( );
-        write_coefficients( );
+        write_solution( step );
         MaxMinCoef( eltInfo );
         std::sort( eltInfo.begin(), eltInfo.end() );
         const auto newEnd = std::unique( eltInfo.begin(), eltInfo.end() );
@@ -134,52 +123,11 @@ void EigProb::SolveAdapt( )
 
         m_mesh.AddToMesh( eltToSplit );
         m_mesh.CreateCnnt( BndrType_Dir, BndrType_Dir );
+        step++;
     }
 }
 
-//
-// Write Lobbato coefficients into the file
-//
-void EigProb::write_coefficients( ) const
-{
-    if( !m_create_log_file )
-        return;
 
-    assert( m_log );
-
-    const size_t N = m_mesh.EltNo(); // Number of elements
-
-    std::print( m_log, "-------\n" );
-    std::print( m_log, "Number of elements: {}\n", N );
-    std::print( m_log, "Number of degrees of freedom: {}\n", m_mesh.Dim( BndrType_Dir, BndrType_Dir ) );
-    std::print( m_log, "Domain: [0, {:15.6e}]\n", m_mesh.XBack());
-
-
-
-    // Element loop
-    for( size_t n = 0; n < N; n++ )
-    {
-        std::print( m_log, "\n{} {:15.6e} {:15.6e}\n", n, m_mesh.X(n), m_mesh.X(n + 1));
-        const Element& e = m_mesh.Elt( n );
-        const size_t DofNo = e.DofNo();
-
-        for( size_t eig = 0; eig < m_eigNo; eig++ )
-        {
-
-            // Loop over basis functions
-            for( size_t i = 0; i < DofNo; i++ )
-            {
-                const int ni = e.m_dof[ i ];
-                if( ni < 0 )
-                    continue;
-
-
-                std::print( m_log, "{:15.6e} ", m_z.Get(ni, eig) );
-            }
-            std::print( m_log, "\n" );
-        }
-    }
-}
 
 
 //
@@ -320,15 +268,67 @@ double EigProb::GetEigVal( size_t eig ) const
     return m_w[ eig ];
 }
 
-void EigProb::WriteAllEigFun() const
+
+//
+// Finds the element with the largest coefficient contained in the minimal coefficients
+// BUBBLE functins are considered only.
+//
+void EigProb::MaxMinCoef( std::vector< EltInfo >& eltInfo ) const
+{
+    const size_t eigNo = eltInfo.size();
+    double minCoef;
+
+
+    for( size_t i = 0; i < eigNo; i++ ) // For each eigenfunction
+    {
+        eltInfo[ i ].Set( 0, -1 ); // Inicjalizacja
+        for( size_t n = 0; n < m_mesh.EltNo(); n++ ) // For each element
+        {
+            const Element& e = m_mesh.Elt( n );
+            minCoef = DBL_MAX;
+
+            for( size_t j = 1; j < e.DofNo() - 1; j++ ) // For each BUBBLE DOF at element
+            {
+                const int dof = e.m_dof[ j ];
+                if( dof < 0 ) // Skip Dirichlet boundary conditions
+                    continue;
+
+                // Find the minimal coefficient for element "e"
+                const double coef = fabs( m_z.Get( dof, i ) );
+                if( coef < minCoef )
+                    minCoef = coef;
+            }
+
+            // Set the largest coefficient for the smallest coefficients
+            if( minCoef > eltInfo[ i ].GetMaxMinCoef() )
+            {
+                eltInfo[ i ].Set( minCoef, n );
+            }
+        }
+    }
+}
+
+
+void EigProb::write_intro() const
+{
+    std::print( m_log,
+               "===============================================================================\n"
+               " EEEEE I   GGG  EEEEE N   N RRRR   AAA  DDDD         Zbigniew Romanowski       \n"
+               " E     I  G     E     NN  N R   R A   A D   D                                  \n"
+               " EEE   I  G  GG EEE   N N N RRRR  AAAAA D   D        romz@wp.pl                \n"
+               " E     I  G   G E     N  NN R  R  A   A D   D                                  \n"
+               " EEEEE I   GGG  EEEEE N   N R   R A   A DDDD         https://github.com/romz-pl\n"
+               "===============================================================================\n\n\n");
+}
+
+void EigProb::write_all_egenfunctions() const
 {
     for(size_t eig = 0; eig < m_eigNo; eig++ )
     {
-
         std::string filename = std::format("ell{}_n{}.dat", m_ell, eig);
         const std::string path = m_out_directory + "/" + filename;
         // const std::filesystem::path path = std::filesystem::path{directory} / filename;
-        WriteEigFun( path, eig );
+        write_egenfunction( path, eig );
     }
 }
 
@@ -337,7 +337,7 @@ void EigProb::WriteAllEigFun() const
 // Argument "pointNo" determines number of addtional points netween mesh nodes
 // where the eigenfunction is stored.
 //
-void EigProb::WriteEigFun( const std::string& path, size_t eig ) const
+void EigProb::write_egenfunction( const std::string& path, size_t eig ) const
 {
     std::ofstream out( path.c_str(), std::ios::out );
     if( !out )
@@ -407,43 +407,64 @@ void EigProb::WriteEigFun( const std::string& path, size_t eig ) const
     out  << r << " " << GetEigFun( eig, r ) << std::endl;
 }
 
-
-
 //
-// Finds the element with the largest coefficient contained in the minimal coefficients
-// BUBBLE functins are considered only.
+// Write Lobbato coefficients into the file
 //
-void EigProb::MaxMinCoef( std::vector< EltInfo >& eltInfo ) const
+void EigProb::write_coefficients( ) const
 {
-    const size_t eigNo = eltInfo.size();
-    double minCoef;
+    if( !m_create_log_file )
+        return;
 
+    assert( m_log );
 
-    for( size_t i = 0; i < eigNo; i++ ) // For each eigenfunction
+    // Element loop
+    for( size_t n = 0; n < m_mesh.EltNo(); n++ )
     {
-        eltInfo[ i ].Set( 0, -1 ); // Inicjalizacja
-        for( size_t n = 0; n < m_mesh.EltNo(); n++ ) // For each element
-        {
-            const Element& e = m_mesh.Elt( n );
-            minCoef = DBL_MAX;
+        std::print( m_log, "\n{} {:15.6E} {:15.6E}\n", n, m_mesh.X(n), m_mesh.X(n + 1));
+        const Element& e = m_mesh.Elt( n );
+        const size_t DofNo = e.DofNo();
 
-            for( size_t j = 1; j < e.DofNo() - 1; j++ ) // For each BUBBLE DOF at element
+        for( size_t eig = 0; eig < m_eigNo; eig++ )
+        {
+
+            // Loop over basis functions
+            for( size_t i = 0; i < DofNo; i++ )
             {
-                const int dof = e.m_dof[ j ];
-                if( dof < 0 ) // Skip Dirichlet boundary conditions
+                const int ni = e.m_dof[ i ];
+                if( ni < 0 )
                     continue;
 
-                // Find the minimal coefficient for element "e"
-                const double coef = fabs( m_z.Get( dof, i ) );
-                if( coef < minCoef )
-                    minCoef = coef;
-            }
 
-            // Set the largest coefficient for the smallest coefficients
-            if( minCoef > eltInfo[ i ].GetMaxMinCoef() )
-            {
-                eltInfo[ i ].Set( minCoef, n );
+                std::print( m_log, "{:15.6E} ", m_z.Get(ni, eig) );
             }
+            std::print( m_log, "\n" );
         }
     }
+}
+
+void EigProb::write_egenvalues() const
+{
+    if( !m_create_log_file )
+        return;
+
+    std::print( m_log, "\n----- EIGENVALUES -----\n" );
+    for(size_t eig = 0; eig < m_eigNo; eig++ )
+    {
+        std::print( m_log, "EIGENVALUE n={} {:16.9E}\n", eig, GetEigVal(eig) );
+    }
+}
+
+void EigProb::write_solution( size_t step ) const
+{
+    if( !m_create_log_file )
+        return;
+
+    std::print( m_log, "\n\n========== ADAPTIVE STEP {} ==========\n", step );
+    std::print( m_log, "Number of elements: {}\n", m_mesh.EltNo() );
+    std::print( m_log, "Degrees of freedom: {}\n", m_mesh.Dim( BndrType_Dir, BndrType_Dir ) );
+    std::print( m_log, "Domain: [0, {:15.9E}]\n", m_mesh.XBack());
+
+    write_coefficients();
+    write_egenvalues();
+
 }

@@ -44,11 +44,11 @@ int main(int argc, char* argv[])
                         out_points );
 
         eigProb.SolveAdapt();
-        eigProb.WriteAllEigFun();
+        eigProb.write_all_egenfunctions();
 
         for(size_t eig = 0; eig < eigNo; eig++ )
         {
-            std::print( "{:16.9e}\n", eigProb.GetEigVal(eig) );
+            std::print( "{:16.9E}\n", eigProb.GetEigVal(eig) );
         }
 
     }
