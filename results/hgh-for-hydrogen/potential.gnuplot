@@ -5,10 +5,13 @@ set ylabel 'HGH pseudopotential for hydrogen'
 
 C1 = -4.180237
 C2 =  0.725075
+Zion = 1
 rloc = 0.2
 
-V(x) = -erf(x/rloc) / x \
-       + exp(-(x/rloc)**2 / 2) * (C1 + C2 * (x/rloc)**2)
+w(x) = x/rloc
+
+V(x) = -Zion * erf( w(x) / sqrt(2) ) / x \
+       + exp(-w(x)**2 / 2) * (C1 + C2 * w(x)**2)
 
 set style line 1 linewidth 2.5
 
