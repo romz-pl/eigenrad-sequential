@@ -33,7 +33,7 @@ $$
 E_{n, \ell} = -\frac{1}{2 (n + \ell)^2}
 $$
 
-## Plots of the Coulomb on a linear and a logarithmic scale
+## Plots of the on a linear and a logarithmic scale
 
 <table>
 <tr>
