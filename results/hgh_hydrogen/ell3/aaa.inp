@@ -1,0 +1,13 @@
+potential_name hgh_hydrogen
+
+Solver_Ell 3
+Solver_Rc 160
+Solver_EigNode 4
+Solver_EigDeg 6
+Solver_EigAbsMaxCoef 1E-4
+Solver_EigAbsTol 1E-14
+Solver_EigNo 4
+
+Out_points 30
+Out_create_log_file Yes
+Out_directory ./results/hgh_hydrogen/ell3

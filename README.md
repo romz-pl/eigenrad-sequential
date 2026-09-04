@@ -43,4 +43,4 @@ The **EIGENRAD** package is written in C++ and uses the following external libra
 The EIGENRAD package provides native definitions of the potentials commonly used in theoretical physics and chemistry. Each available potential has been applied to evaluate selected eigenvalues and their corresponding eigenfunctions. Convergence analysis of the numerically calculated eigenvalues is presented in both tabular and graphical form. The following potentials have been thoroughly analysed so far:
 
 + [Coulomb potential](./results/coulomb/README.md)
-+ [Hartwigsen-Goedecker-Hutter pseudopotential for hydrogen](./results/hgh-for-hydrogen/README.md)
++ [Hartwigsen-Goedecker-Hutter pseudopotential for hydrogen](./results/hgh_hydrogen/README.md)
