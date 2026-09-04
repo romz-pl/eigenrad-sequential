@@ -19,7 +19,7 @@ set style line 1 linewidth 2.5
 unset logscale x
 set output 'potential_lin.svg'
 
-plot [0:2] V(x) with lines ls 1 \
+plot [0:2] V(x) with lines lw 2.5 \
     title 'HGH pseudopotential for hydrogen'
 
 
@@ -27,5 +27,5 @@ plot [0:2] V(x) with lines ls 1 \
 set logscale x
 set output 'potential_log.svg'
 
-plot [0.0001:50] V(x) with lines ls 1 \
+plot [0.0001:50] V(x) with lines lc rgb "red" lw 2.5 \
     title 'HGH pseudopotential for hydrogen'
