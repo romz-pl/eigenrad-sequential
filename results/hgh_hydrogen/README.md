@@ -33,7 +33,7 @@ $$
 E_{n, \ell} = -\frac{1}{2 (n + \ell)^2}
 $$
 
-## Plots of the on a linear and a logarithmic scale
+## Plots of the potential on a linear and a logarithmic scale
 
 <table>
 <tr>
@@ -42,7 +42,7 @@ $$
 </tr>
 </table>
 
-## Eigenvalues for the potential final adaptive step for $Z = 1$
+## Eigenvalues for the final adaptive step for $Z = 1$
 
 | n   | L = 0 | L = 1 | L = 2 | L = 3 | L = 4 |
 | --- | ---   | ---   | ---   | ---   | ---   |
