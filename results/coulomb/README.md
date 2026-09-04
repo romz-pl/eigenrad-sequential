@@ -1,7 +1,35 @@
 # Coulomb potential
 
+## Potential definition
 
-## Eigenvalues - final adaptive step
+The Coulomb potential is defined by the following equation:
+
+$$
+V(r) = -\frac{Z}{r}
+$$
+
+where $Z$ is the nuclear charge number. This potential has the infinite value for $r = 0$:
+
+$$
+\lim_{r \rightarrow 0}V(r) = \lim_{r \rightarrow 0} -\frac{Z}{r} = -\infty
+$$
+
+For the Coulomb potential the eigenvalues are given in analytical form:
+
+$$
+E_{n, \ell} = -\frac{Z^2}{2 (n + \ell)^2}
+$$
+
+<table>
+<tr>
+    <td><img src="./potential_lin.svg"></td>
+    <td><img src="./potential_log.svg"></td>
+</tr>
+</table>
+
+## Numerical resuls for $Z = 1$
+
+### Eigenvalues for the final adaptive step
 
 | n   | L = 0 | L = 1 | L = 2 | L = 3 | L = 4 |
 | --- | ---   | ---   | ---   | ---   | ---   |
@@ -12,10 +40,10 @@
 
 
 
-## Eigenfunctions
+### Convergence analysis and evaluated eigenfunctions
 
-+ [L = 0](./ell0/README.md)
-+ [L = 1](./ell1/README.md)
-+ [L = 2](./ell2/README.md)
-+ [L = 3](./ell3/README.md)
-+ [L = 4](./ell4/README.md)
++ [Case L = 0](./ell0/README.md)
++ [Case L = 1](./ell1/README.md)
++ [Case L = 2](./ell2/README.md)
++ [Case L = 3](./ell3/README.md)
++ [Case L = 4](./ell4/README.md)

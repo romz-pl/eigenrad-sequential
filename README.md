@@ -37,7 +37,7 @@ The application of Lobbato polynomials in the high-order finite element method i
 
 The **EIGENRAD** package provides the native definition of the potentials V used in theoretical physics and chemistry. The following is the list of currently implemented potentials:
 
-+ [Coulomb potential](./doc/coulomb-potential.md)
++ [Coulomb potential](./results/coulomb/README.md)
 + [Hartwigsen-Goedecker-Hutter pseudopotential for hydrogen](./doc/hgh-for-hydrogen.md)
 
 ## Implementation
