@@ -20,7 +20,7 @@ $$
 E_{n, \ell} = -\frac{Z^2}{2 (n + \ell)^2}
 $$
 
-### Plots of the Coulomb potential on a linear and a logarithmic scale
+## Plots of the Coulomb potential on a linear and a logarithmic scale
 
 <table>
 <tr>
@@ -29,9 +29,7 @@ $$
 </tr>
 </table>
 
-## Numerical resuls for $Z = 1$
-
-### Eigenvalues for the final adaptive step
+## Eigenvalues for the final adaptive step for $Z = 1$
 
 | n   | L = 0 | L = 1 | L = 2 | L = 3 | L = 4 |
 | --- | ---   | ---   | ---   | ---   | ---   |
@@ -42,7 +40,7 @@ $$
 
 
 
-### Convergence analysis and evaluated eigenfunctions
+## Convergence analysis and evaluated eigenfunctions
 
 + [Case L = 0](./ell0/README.md)
 + [Case L = 1](./ell1/README.md)
