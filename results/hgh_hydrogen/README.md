@@ -30,7 +30,7 @@ For details about the Hartwigsen-Goedecker-Hutter pseudopotential, refer to the 
 According to the definition of the pseudopotential for the hydrogen atom, this potential has eigenvalues that are close to those of the hydrogen atom. Therefore:
 
 $$
-E_{n, \ell} = -\frac{1}{2 (n + \ell)^2}
+E_{n, \ell} = -\frac{1}{2 (n + 1 + \ell)^2}
 $$
 
 ## Plots of the potential on a linear and a logarithmic scale
