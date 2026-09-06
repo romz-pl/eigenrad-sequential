@@ -14,6 +14,7 @@ add_library( ${LIB_NAME}
     mesh.cpp
     potential_coulomb.cpp
     potential_hgh_hydrogen.cpp
+    potential_soft_coulomb.cpp
     step_info.cpp
 )
 

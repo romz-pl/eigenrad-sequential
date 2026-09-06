@@ -6,14 +6,14 @@
 class potential_coulomb : public Fun1D
 {
 public:
-    potential_coulomb(double z) : m_z(z) { }
+    potential_coulomb(double Z) : m_Z(Z) { }
     virtual ~potential_coulomb() { }
 
     virtual double Get(double r) const
     {
         assert( r > 0 );
-        return -m_z / r;
+        return -m_Z / r;
     }
 private:
-    const double m_z;
+    const double m_Z;
 };
