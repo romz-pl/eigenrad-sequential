@@ -76,4 +76,4 @@ The EIGENRAD package provides native definitions of the potentials commonly used
 </tr>
 </table>
 
-[Complete set of results for L=0,1,2,3,4](./results/v1/coulomb/README.md)
+[Complete set of results for L=0,1,2,3,4](./results/v1/soft_coulomb/README.md)
