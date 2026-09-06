@@ -65,3 +65,15 @@ The EIGENRAD package provides native definitions of the potentials commonly used
 </table>
 
 [Complete set of results for L=0,1,2,3,4](./results/v1/hgh_hydrogen/README.md)
+
+### Soft-Coulomb potential
+
+<table>
+<tr>
+    <td><img src="./results/v1/soft_coulomb/potential_lin.svg"></td>
+    <td><img src="./results/v1/soft_coulomb/ell0/eigenvalue_log.svg"></td>
+    <td><img src="./results/v1/soft_coulomb/ell0/P/n0_log.svg"></td>
+</tr>
+</table>
+
+[Complete set of results for L=0,1,2,3,4](./results/v1/coulomb/README.md)
