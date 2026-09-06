@@ -5,7 +5,7 @@
 The Soft-Coulomb potential is defined by the following equation:
 
 $$
-V(r) = -\frac{Z}{ (r^q + a^q)^(1/q) }
+V(r) = -Z / (r^q + a^q)^{1/q}
 $$
 
 where $Z, a, q \in \mathbb{R}$ are parameters of the potential.
