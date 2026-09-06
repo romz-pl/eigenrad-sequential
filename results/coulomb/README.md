@@ -17,7 +17,7 @@ $$
 For the Coulomb potential the eigenvalues are given in analytical form:
 
 $$
-E_{n, \ell} = -\frac{Z^2}{2 (n + \ell)^2}
+E_{n, \ell} = -\frac{Z^2}{2 (n + 1 + \ell)^2}
 $$
 
 ## Plots of the potential on a linear and a logarithmic scale
