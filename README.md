@@ -48,11 +48,11 @@ The EIGENRAD package provides native definitions of the potentials commonly used
 <tr>
     <td><img src="./results/v1/coulomb/potential_lin.svg"></td>
     <td><img src="./results/v1/coulomb/ell0/eigenvalue_log.svg"></td>
-   <td><img src="results/v1/coulomb/ell0/P/n0_log.svg"></td>
+    <td><img src="./results/v1/coulomb/ell0/P/n0_log.svg"></td>
 </tr>
 </table>
 
-[Complete set of results for L=0,1,2,3,4](./v1/results/coulomb/README.md)
+[Complete set of results for L=0,1,2,3,4](./results/v1/coulomb/README.md)
 
 ### Hartwigsen-Goedecker-Hutter pseudopotential for hydrogen
 
@@ -60,8 +60,8 @@ The EIGENRAD package provides native definitions of the potentials commonly used
 <tr>
     <td><img src="./results/v1/hgh_hydrogen/potential_lin.svg"></td>
     <td><img src="./results/v1/hgh_hydrogen/ell0/eigenvalue_log.svg"></td>
-   <td><img src="results/v1/hgh_hydrogen/ell0/P/n0_log.svg"></td>
+    <td><img src="./results/v1/hgh_hydrogen/ell0/P/n0_log.svg"></td>
 </tr>
 </table>
 
-[Complete set of results for L=0,1,2,3,4](./results/hgh_hydrogen/README.md)
+[Complete set of results for L=0,1,2,3,4](./results/v1/hgh_hydrogen/README.md)
