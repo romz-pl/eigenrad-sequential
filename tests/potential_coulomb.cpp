@@ -21,11 +21,26 @@ static void calculate_eigen(size_t deg, size_t ell, double rc)
     const size_t eigNode = 4;
     const double abstol = 1E-14;
     const double absMaxCoef = 1E-4;
+    const double length_domain_increase = 0.07;
+    const double abs_last_coef = 1E-8;
     bool create_log_file = false;
     const std::string out_directory = std::string();
     size_t out_points = 0;
 
-    EigProb eigProb( ell, rc, eigNode, deg, pot, eigNo, absMaxCoef, abstol, create_log_file, out_directory, out_points );
+    EigProb eigProb( ell,
+                    rc,
+                    eigNode,
+                    deg,
+                    pot,
+                    eigNo,
+                    absMaxCoef,
+                    abstol,
+                    length_domain_increase,
+                    abs_last_coef,
+                    create_log_file,
+                    out_directory,
+                    out_points );
+
     ASSERT_NO_THROW( eigProb.SolveAdapt( ) );
 
     const double abs_error = 1E-6;

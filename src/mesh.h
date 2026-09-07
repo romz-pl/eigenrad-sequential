@@ -40,6 +40,8 @@ public:
     bool IsInRange(double x) const;
     size_t FindElt(double x) const;
 
+    void append_elt( double length );
+
 
 private:
     // Array of elements

@@ -264,3 +264,12 @@ std::vector<size_t> newDegree(m_x.size() - 1 + eltToSplit.size(), m_elt[0].P());
 
     Set(newX, newDegree);
 }
+
+void Mesh::append_elt( double length )
+{
+    std::vector<size_t> newDegree(m_x.size() - 1 + 1, m_elt[0].P()); // All elements has the same degree
+    const double rmax = m_x.back();
+    std::vector<double> newX(m_x);
+    newX.push_back( rmax + length );
+    Set(newX, newDegree);
+}

@@ -24,6 +24,8 @@ int main(int argc, char* argv[])
         const size_t eigNode    = ParamDb::GetSize_t( "Solver_EigNode" );
         const size_t eigDeg     = ParamDb::GetSize_t( "Solver_EigDeg" );
         const double abstol     = ParamDb::GetDouble( "Solver_EigAbsTol" );
+        const double length_domain_increase = ParamDb::GetDouble( "Solver_length_domain_increase" );
+        const double abs_last_coef = ParamDb::GetDouble( "Solver_abs_last_coef" );
         const double absMaxCoef = ParamDb::GetDouble( "Solver_EigAbsMaxCoef" );
         const size_t out_points     = ParamDb::GetSize_t( "Out_points" );
         bool create_log_file    = ParamDb::GetBool( "Out_create_log_file" );
@@ -39,6 +41,8 @@ int main(int argc, char* argv[])
                         eigNo,
                         absMaxCoef,
                         abstol,
+                        length_domain_increase,
+                        abs_last_coef,
                         create_log_file,
                         out_directory,
                         out_points );
@@ -72,7 +76,7 @@ int main(int argc, char* argv[])
 
 
 //
-// cmake -B build && cmake --build build/ &&  ctest --test-dir build && ./build/src/eigenrad ./results/aaa.inp
+// cmake -B build && cmake --build build/ &&  ctest --test-dir build && ./build/src/eigenrad ./results/v2/coulomb/ell0/aaa.inp
 //
-// cmake -B build && cmake --build build/ &&  ./build/src/eigenrad ./results/aaa.inp
+// cmake -B build && cmake --build build/ &&  ./build/src/eigenrad ./results/v2/coulomb/ell0/aaa.inp
 //

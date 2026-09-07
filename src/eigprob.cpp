@@ -23,6 +23,8 @@ EigProb::EigProb(size_t ell,
                  size_t eigNo,
                  double absMaxCoef,
                  double abstol,
+                 double length_domain_increase,
+                 double abs_last_coef,
                  bool create_log_file,
                  const std::string& out_directory,
                  size_t out_points )
@@ -34,6 +36,8 @@ EigProb::EigProb(size_t ell,
     , m_eigNo( eigNo )
     , m_absMaxCoef( absMaxCoef )
     , m_abstol( abstol )
+    , m_length_domain_increase( length_domain_increase )
+    , m_abs_last_coef( abs_last_coef )
     , m_create_log_file( create_log_file )
     , m_out_directory( out_directory )
     , m_out_points( out_points )
@@ -110,37 +114,55 @@ void EigProb::SolveAdapt( )
     std::vector< EltInfo > eltInfo( m_eigNo );
     std::vector< size_t > eltToSplit;
 
-    size_t step = 0;
-    while( true )
-    {
-        Solve( );
-        append_step_info( step );
-        write_solution( step );
-        MaxMinCoef( eltInfo );
-        std::sort( eltInfo.begin(), eltInfo.end() );
-        const auto newEnd = std::unique( eltInfo.begin(), eltInfo.end() );
+    size_t step = -1;
 
-        double maxCoef = 0;
-        for( size_t i = 0; i < eltInfo.size(); ++i )
+    // domain (Rmax) adaptive loop
+    while( true)
+    {
+        // h-adaptive loop
+        while( true )
         {
-            if( eltInfo[i].GetMaxMinCoef() > maxCoef )
-                maxCoef = eltInfo[i].GetMaxMinCoef();
+            step++;
+
+            Solve( );
+            append_step_info( step );
+            write_solution( step );
+            MaxMinCoef( eltInfo );
+            std::sort( eltInfo.begin(), eltInfo.end() );
+            const auto newEnd = std::unique( eltInfo.begin(), eltInfo.end() );
+
+            double maxCoef = 0;
+            for( size_t i = 0; i < eltInfo.size(); ++i )
+            {
+                if( eltInfo[i].GetMaxMinCoef() > maxCoef )
+                    maxCoef = eltInfo[i].GetMaxMinCoef();
+            }
+            if( maxCoef < m_absMaxCoef )
+                break;
+
+            // The Elt was splitted
+
+            eltToSplit.clear();
+            for( auto ii = eltInfo.begin(); ii != newEnd; ++ii )
+            {
+                eltToSplit.push_back( ii->GetEltId() );
+            }
+
+            log_elements_to_split( eltToSplit );
+            m_mesh.AddToMesh( eltToSplit );
+            m_mesh.CreateCnnt( BndrType_Dir, BndrType_Dir );
+
         }
-        if( maxCoef < m_absMaxCoef )
+
+        const size_t n0 = m_mesh.EltBack().m_dof[ 0 ];
+        const double c0 = std::fabs(m_z.Get( n0, m_eigNo - 1 ));
+        std::print(m_log, "C0 {:16.9E}\n", c0);
+
+        if( c0 < m_abs_last_coef )
             break;
 
-        // The Elt was splitted
-
-        eltToSplit.clear();
-        for( auto ii = eltInfo.begin(); ii != newEnd; ++ii )
-        {
-            eltToSplit.push_back( ii->GetEltId() );
-        }
-
-        log_elements_to_split( eltToSplit );
-        m_mesh.AddToMesh( eltToSplit );
+        m_mesh.append_elt( m_length_domain_increase * m_mesh.XBack() );
         m_mesh.CreateCnnt( BndrType_Dir, BndrType_Dir );
-        step++;
     }
 }
 

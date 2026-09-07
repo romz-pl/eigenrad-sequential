@@ -82,6 +82,8 @@ public:
             size_t eigNo,
             double absMaxCoef,
             double abstol,
+            double length_domain_increase,
+            double m_abs_last_coef,
             bool create_log_file,
             const std::string& out_directory,
             size_t out_points            );
@@ -162,6 +164,10 @@ private:
     const double m_absMaxCoef;
 
     const double m_abstol;
+
+    const double m_length_domain_increase;
+
+    const double m_abs_last_coef;
 
     const bool m_create_log_file;
 
