@@ -10,6 +10,13 @@ $$
 
 where $Z, a, q \in \mathbb{R}$ are parameters of the potential.
 
+## References
+
++ D. Singh, Y.P. Varshni, R. Dutt, *Bound eigenstates for two truncated Coulomb potentials*, [Phys. Rev. A 32, 619](https://doi.org/10.1103/PhysRevA.32.619) 
+
+
+
+
 ## Plots of the potential on a linear and a logarithmic scale
 
 <table>
