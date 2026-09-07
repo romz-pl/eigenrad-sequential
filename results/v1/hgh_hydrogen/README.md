@@ -20,6 +20,8 @@ r_{\mathrm{loc}} &= 0.2.
 \end{aligned}
 $$
 
+### References
+
 For details about the Hartwigsen-Goedecker-Hutter pseudopotential, refer to the following article:
 
 + C. Hartwigsen, S. Goedecker, and J. Hutter, *Relativistic separable dual-space Gaussian pseudopotentials from H to Rn*, [Phys. Rev. B 58, 3641](https://doi.org/10.1103/PhysRevB.58.3641)
