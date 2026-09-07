@@ -1,4 +1,4 @@
-# Soft-Coulomb potential, L = 2
+# Soft-Coulomb potential (Z = 1 , a = 1 , q = 1): L = 2
 
 ## Eigenvalue convergence analysis
 
