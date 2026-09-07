@@ -28,7 +28,7 @@ where $Z, a, q \in \mathbb{R}$ are parameters of the potential.
 </tr>
 </table>
 
-## Eigenvalues for the final adaptive step for (Z = 1 , a = 1 , q = 1):
+## Eigenvalues for the final adaptive step for (Z = 1 , a = 1 , q = 2):
 
 | n   | L = 0 | L = 1 | L = 2 | L = 3 | L = 4 |
 | --- | ---   | ---   | ---   | ---   | ---   |
