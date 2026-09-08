@@ -20,7 +20,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build
+          sudo apt-get install -y \
+          cmake \
+          ninja-build \
+          gcc \
+          g++ \
+          clang \
+          libblas-dev \
+          liblapack-dev
 
       - name: Configure CMake
         run: |
