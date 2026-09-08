@@ -52,7 +52,7 @@ The EIGENRAD package provides native definitions of the potentials commonly used
 </tr>
 </table>
 
-[Complete set of results for L=0,1,2,3,4](./results/v1/coulomb/README.md)
+[Complete set of results for L=0,1,2,3,4](./results/v2/coulomb/README.md)
 
 ### Hartwigsen-Goedecker-Hutter pseudopotential for hydrogen
 
@@ -64,7 +64,7 @@ The EIGENRAD package provides native definitions of the potentials commonly used
 </tr>
 </table>
 
-[Complete set of results for L=0,1,2,3,4](./results/v1/hgh_hydrogen/README.md)
+[Complete set of results for L=0,1,2,3,4](./results/v2/hgh_hydrogen/README.md)
 
 ### Soft-Coulomb potential
 
@@ -76,4 +76,4 @@ The EIGENRAD package provides native definitions of the potentials commonly used
 </tr>
 </table>
 
-[Complete set of results for L=0,1,2,3,4](./results/v1/soft_coulomb/README.md)
+[Complete set of results for L=0,1,2,3,4](./results/v2/soft_coulomb/README.md)
