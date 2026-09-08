@@ -42,7 +42,7 @@ public:
         constexpr double C1 = -4.180237;
         constexpr double C2 = 0.725075;
         constexpr double Zion = 1;
-        constexpr double q = 1.0 / sqrt(2.);
+        /*constexpr*/ double q = 1.0 / sqrt(2.);
 
         const double w = r / rloc;
         const double v0 = -(Zion / r) * std::erf(w * q);

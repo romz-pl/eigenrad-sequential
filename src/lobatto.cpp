@@ -144,7 +144,7 @@ double Lobatto::Poly1( double s )
 double Lobatto::Poly2( double s )
 {
     assert( s >= -1 && s <= 1 );
-    constexpr double c = sqrt( 3. / 2.) / 2.;
+    /*constexpr*/ const double c = sqrt( 3. / 2.) / 2.;
     const double s2 = s * s;
     const double v = s2 - 1;
     return c * v;
@@ -156,7 +156,7 @@ double Lobatto::Poly2( double s )
 double Lobatto::Poly3( double s )
 {
     assert( s >= -1 && s <= 1 );
-    constexpr double c = sqrt( 5. / 2.) / 2.;
+    /*constexpr*/ const double c = sqrt( 5. / 2.) / 2.;
     const double s2 = s * s;
     const double v = ( s2 - 1 ) * s;
     return c * v;
@@ -168,7 +168,7 @@ double Lobatto::Poly3( double s )
 double Lobatto::Poly4( double s )
 {
     assert( s >= -1 && s <= 1 );
-    constexpr double c = sqrt( 7. / 2.) / 8.;
+    /*constexpr*/ const double c = sqrt( 7. / 2.) / 8.;
     const double s2 = s * s;
     const double v = ( s2 - 1 ) * ( 5 * s2 - 1 );
     return c * v;
@@ -180,7 +180,7 @@ double Lobatto::Poly4( double s )
 double Lobatto::Poly5( double s )
 {
     assert( s >= -1 && s <= 1 );
-    constexpr double c = sqrt( 9. / 2.) / 8.;
+    /*constexpr*/ const double c = sqrt( 9. / 2.) / 8.;
     const double s2 = s * s;
     const double v = ( s2 - 1 ) * ( 7 * s2 - 3 ) * s;
     return c * v;
@@ -192,7 +192,7 @@ double Lobatto::Poly5( double s )
 double Lobatto::Poly6( double s )
 {
     assert( s >= -1 && s <= 1 );
-    constexpr double c = sqrt( 11. / 2. ) / 16.;
+    /*constexpr*/ const double c = sqrt( 11. / 2. ) / 16.;
     const double s2 = s * s;
     // const double s4 = s2 * s2;
     // const double v = ( s2 - 1 ) * ( 21 * s4 - 14 * s2 + 1 );
@@ -207,7 +207,7 @@ double Lobatto::Poly6( double s )
 double Lobatto::Poly7( double s )
 {
     assert( s >= -1 && s <= 1 );
-    constexpr double c = sqrt( 13. / 2. ) / 16.;
+    /*constexpr*/ const double c = sqrt( 13. / 2. ) / 16.;
     const double s2 = s * s;
     // const double s4 = s2 * s2;
     // const double v = ( s2 - 1 ) * ( 33 * s4 - 30 * s2 + 5 ) * s;
@@ -222,7 +222,7 @@ double Lobatto::Poly7( double s )
 double Lobatto::Poly8( double s )
 {
     assert( s >= -1 && s <= 1 );
-    constexpr double c = sqrt( 15. / 2. ) / 128.;
+    /*constexpr*/ const double c = sqrt( 15. / 2. ) / 128.;
     const double s2 = s * s;
     // const double s4 = s2 * s2;
     // const double s6 = s4 * s2;
@@ -238,7 +238,7 @@ double Lobatto::Poly8( double s )
 double Lobatto::Poly9( double s )
 {
     assert( s >= -1 && s <= 1 );
-    constexpr double c = sqrt( 17. / 2. ) / 128.;
+    /*constexpr*/ const double c = sqrt( 17. / 2. ) / 128.;
     const double s2 = s * s;
     // const double s4 = s2 * s2;
     // const double s6 = s4 * s2;
@@ -254,7 +254,7 @@ double Lobatto::Poly9( double s )
 double Lobatto::Poly10( double s )
 {
     assert( s >= -1 && s <= 1 );
-    constexpr double c = sqrt( 19. / 2. ) / 256;
+    /*constexpr*/ const double c = sqrt( 19. / 2. ) / 256;
     const double s2 = s * s;
     // const double s4 = s2 * s2;
     // const double s6 = s4 * s2;
