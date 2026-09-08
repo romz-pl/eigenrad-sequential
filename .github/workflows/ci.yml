@@ -13,8 +13,8 @@ jobs:
       matrix:
         build_type: [Debug, Release]
         compiler: 
-          - { name: gcc, cxx: g++-14 }
-          - { name: clang, cxx: clang++ }
+          - { name: gcc, cxx: g++-15 }
+          - { name: clang, cxx: clang++-22 }
 
     steps:
       - uses: actions/checkout@v4
@@ -25,9 +25,9 @@ jobs:
           sudo apt-get install -y \
           cmake \
           ninja-build \
-          gcc-14 \
-          g++-14 \
-          clang \
+          gcc-15 \
+          g++-15 \
+          clang-22 \
           libblas-dev \
           liblapack-dev \
           libgtest-dev
