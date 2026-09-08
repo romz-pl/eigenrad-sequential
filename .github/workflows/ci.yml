@@ -12,7 +12,9 @@ jobs:
     strategy:
       matrix:
         build_type: [Debug, Release]
-        compiler: [g++, clang]
+        compiler: 
+          - { name: gcc, cxx: g++-14 }
+          - { name: clang, cxx: clang++ }
 
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +35,7 @@ jobs:
         run: |
           cmake -B build -G Ninja \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-            -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'clang' && 'clang++' || 'g++' }}
+            -DCMAKE_CXX_COMPILER=${{ matrix.compiler.cxx }}
 
       - name: Build
         run: cmake --build build --parallel
