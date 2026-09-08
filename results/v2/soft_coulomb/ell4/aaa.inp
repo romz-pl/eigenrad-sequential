@@ -1,0 +1,20 @@
+potential_name soft_coulomb
+
+potential_soft_coulomb_Z 1
+potential_soft_coulomb_a 1
+potential_soft_coulomb_q 2
+
+
+Solver_Ell 4
+Solver_Rc 180
+Solver_EigNode 4
+Solver_EigDeg 6
+Solver_EigAbsMaxCoef 1E-4
+Solver_EigAbsTol 1E-14
+Solver_EigNo 4
+Solver_length_domain_increase 0.1
+Solver_abs_last_coef 1E-6
+
+Out_points 30
+Out_create_log_file Yes
+Out_directory ./results/v2/soft_coulomb/ell4
