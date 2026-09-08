@@ -1,3 +1,11 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/romz-pl/eigenrad-sequential/blob/main/LICENSE)
+![C++](https://img.shields.io/badge/C%2B%2B-23-blue.svg)
+[![CMake](https://img.shields.io/badge/build-CMake-064F8C.svg)](https://cmake.org/)
+![GitHub last commit](https://img.shields.io/github/last-commit/romz-pl/eigenrad-sequential)
+![GitHub repo size](https://img.shields.io/github/repo-size/romz-pl/eigenrad-sequential)
+![GitHub stars](https://img.shields.io/github/stars/romz-pl/eigenrad-sequential?style=social)
+[![CI](https://github.com/romz-pl/eigenrad-sequential/actions/workflows/ci.yml/badge.svg)](https://github.com/romz-pl/eigenrad-sequential/actions/workflows/ci.yml)
+
 # EIGENRAD: adaptive Schrödinger solver
 
 ## Problem
