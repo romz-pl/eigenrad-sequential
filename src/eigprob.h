@@ -122,6 +122,11 @@ private:
 
     void log_elements_to_split( const std::vector< size_t >& eltToSplit ) const;
 
+    void normalize();
+    void normalize_eigenfunction(double norm, size_t eig);
+    double calculate_l2_integral(size_t eig);
+    double calculate_l2_integral_elt(const Element& e, size_t eig);
+
 
 private:
     // Lobat functions. Initialization in constructor!

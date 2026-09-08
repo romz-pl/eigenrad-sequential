@@ -27,7 +27,9 @@
 //	co jest rownowazne ukladowi rownan na P i Q
 //		a = -P + Q
 //		b =  P + Q
-//	Z powyzszego otrzymujemy Q = (a + b) / 2,  P = (b - a) / 2
+//	Z powyzszego otrzymujemy
+//       Q = (a + b) / 2,
+//       P = (b - a) / 2
 //	Ostatecznie otrzymujemy:
 //	\f[
 //		I = \int_a^b f(x) dx = P * \int_{-1}^1 f(P * t + Q) dt

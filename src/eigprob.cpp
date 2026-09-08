@@ -170,6 +170,9 @@ void EigProb::SolveAdapt( )
         std::print(m_log, "RMAX BEFORE: {:16.9E}\n", rmax_before);
         std::print(m_log, "RMAX AFTER: {:16.9E}\n", rmax_after);
     }
+
+    // Normalization is not required, since the eigenfunctions are already normalized.
+    // normalize();
 }
 
 
@@ -350,6 +353,57 @@ void EigProb::MaxMinCoef( std::vector< EltInfo >& eltInfo ) const
         }
     }
 }
+
+
+void EigProb::normalize()
+{
+    for( size_t eig = 0; eig < m_eigNo; eig++ )
+    {
+        const double norm = calculate_l2_integral(eig);
+        std::print("NORM {:16.9E}\n", norm);
+        normalize_eigenfunction(norm, eig);
+    }
+}
+
+double EigProb::calculate_l2_integral(size_t eig)
+{
+    double v = 0;
+    for( size_t n = 0; n < m_mesh.EltNo(); n++ )
+    {
+        const Element& e = m_mesh.Elt( n );
+        v += calculate_l2_integral_elt(e, eig);
+    }
+    return v;
+}
+
+double EigProb::calculate_l2_integral_elt(const Element& e, size_t eig)
+{
+    double integral = 0;
+    for( size_t n = 0; n < Gauss::Size(); n++ )
+    {
+        const double s = Gauss::X( n );
+        const double w = Gauss::W( n );
+        const double r = e.X( s );
+        const double v = GetEigFun(eig, r);
+        integral += w * v * v;
+    }
+
+    return e.Jac() * integral;
+}
+
+
+
+void EigProb::normalize_eigenfunction(double norm, size_t eig)
+{
+    const double v = 1 / std::sqrt(norm);
+
+    for(size_t row = 0; row < m_z.RowNo(); row++)
+    {
+        const double w = m_z.Get( row, eig );
+        m_z.Set( row, eig ) = v * w;
+    }
+}
+
 
 
 void EigProb::write_intro() const
