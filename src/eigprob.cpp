@@ -156,13 +156,19 @@ void EigProb::SolveAdapt( )
 
         const size_t n0 = m_mesh.EltBack().m_dof[ 0 ];
         const double c0 = std::fabs(m_z.Get( n0, m_eigNo - 1 ));
-        std::print(m_log, "C0 {:16.9E}\n", c0);
+
 
         if( c0 < m_abs_last_coef )
             break;
 
+        const double rmax_before = m_mesh.XBack();
         m_mesh.append_elt( m_length_domain_increase * m_mesh.XBack() );
         m_mesh.CreateCnnt( BndrType_Dir, BndrType_Dir );
+        const double rmax_after = m_mesh.XBack();
+
+        std::print(m_log, "\n----- DOMAIN EXPANDED -----\n");
+        std::print(m_log, "RMAX BEFORE: {:16.9E}\n", rmax_before);
+        std::print(m_log, "RMAX AFTER: {:16.9E}\n", rmax_after);
     }
 }
 
