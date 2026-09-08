@@ -21,8 +21,8 @@ static void calculate_eigen(size_t deg, size_t ell, double rc)
     const size_t eigNode = 4;
     const double abstol = 1E-14;
     const double absMaxCoef = 1E-4;
-    const double length_domain_increase = 0.07;
-    const double abs_last_coef = 1E-8;
+    const double length_domain_increase = 0.1;
+    const double abs_last_coef = 1E-6;
     bool create_log_file = false;
     const std::string out_directory = std::string();
     size_t out_points = 0;

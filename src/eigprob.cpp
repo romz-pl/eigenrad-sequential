@@ -166,9 +166,12 @@ void EigProb::SolveAdapt( )
         m_mesh.CreateCnnt( BndrType_Dir, BndrType_Dir );
         const double rmax_after = m_mesh.XBack();
 
-        std::print(m_log, "\n----- DOMAIN EXPANDED -----\n");
-        std::print(m_log, "RMAX BEFORE: {:16.9E}\n", rmax_before);
-        std::print(m_log, "RMAX AFTER: {:16.9E}\n", rmax_after);
+        if( m_create_log_file )
+        {
+            std::print(m_log, "\n----- DOMAIN EXPANDED -----\n");
+            std::print(m_log, "RMAX BEFORE: {:16.9E}\n", rmax_before);
+            std::print(m_log, "RMAX AFTER: {:16.9E}\n", rmax_after);
+        }
     }
 
     // Normalization is not required, since the eigenfunctions are already normalized.
