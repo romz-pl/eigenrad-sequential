@@ -27,7 +27,8 @@ jobs:
           g++ \
           clang \
           libblas-dev \
-          liblapack-dev
+          liblapack-dev \
+          libgtest-dev
 
       - name: Configure CMake
         run: |
