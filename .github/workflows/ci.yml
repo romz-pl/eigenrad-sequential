@@ -10,11 +10,21 @@ jobs:
   build:
     runs-on: ubuntu-26.04
     strategy:
+      fail-fast: false
       matrix:
         build_type: [Debug, Release]
-        compiler: 
+        compiler:
           - { name: gcc, cxx: g++-14 }
           - { name: clang, cxx: clang++-22 }
+        sanitizer: [none, address, undefined]
+        exclude:
+          # Sanitizers are only meaningful for Debug builds
+          - build_type: Release
+            sanitizer: address
+          - build_type: Release
+            sanitizer: undefined
+          - build_type: Release
+            sanitizer: thread
 
     steps:
       - uses: actions/checkout@v5
@@ -31,14 +41,38 @@ jobs:
           liblapack-dev \
           libgtest-dev
 
+      - name: Set sanitizer flags
+        id: sanitizer
+        run: |
+          case "${{ matrix.sanitizer }}" in
+            address)
+              echo "flags=-fsanitize=address -fno-omit-frame-pointer" >> "$GITHUB_OUTPUT"
+              ;;
+            undefined)
+              echo "flags=-fsanitize=undefined -fno-omit-frame-pointer" >> "$GITHUB_OUTPUT"
+              ;;
+            thread)
+              echo "flags=-fsanitize=thread -fno-omit-frame-pointer" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "flags=" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+
       - name: Configure CMake
         run: |
           cmake -B build -G Ninja \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-            -DCMAKE_CXX_COMPILER=${{ matrix.compiler.cxx }}
+            -DCMAKE_CXX_COMPILER=${{ matrix.compiler.cxx }} \
+            -DCMAKE_CXX_FLAGS="${{ steps.sanitizer.outputs.flags }}" \
+            -DCMAKE_EXE_LINKER_FLAGS="${{ steps.sanitizer.outputs.flags }}"
 
       - name: Build
         run: cmake --build build --parallel
 
       - name: Test
+        env:
+          ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+          UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
+          TSAN_OPTIONS: halt_on_error=1
         run: ctest --test-dir build --output-on-failure
