@@ -86,3 +86,32 @@ The EIGENRAD package provides native definitions of the potentials commonly used
 </table>
 
 [Complete set of results for L=0,1,2,3,4](./results/v2/soft_coulomb/README.md)
+
+
+## How to build and run EIGENRAD
+
+```bash
+# BLAS, LAPACK, and GTEST libraries are required
+sudo apt-get install -y libblas-dev liblapack-dev libgtest-dev
+
+# Clone the GitHub repo
+git clone git@github.com:romz-pl/eigenrad-sequential.git
+
+# Change to project directory
+cd ./eigenrad-sequential
+
+# Configure CMake
+cmake -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+
+# Build eigenrad binary and its tests
+cmake --build build --parallel
+
+# Execute test
+ctest --test-dir build --output-on-failure
+
+# Run EIGENRAD for Coulomb potential for angular quantum number L=0
+./build/src/eigenrad ./results/v2/coulomb/ell0/aaa.inp
+
+# Chack the results in result directory
+ls -l ./results/v2/coulomb/ell0/
+```
