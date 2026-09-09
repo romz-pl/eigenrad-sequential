@@ -103,7 +103,7 @@ cd ./eigenrad-sequential
 # Configure CMake
 cmake -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
 
-# Build eigenrad binary and its tests
+# Build EIGENRAD binary and its tests
 cmake --build build --parallel
 
 # Execute test
