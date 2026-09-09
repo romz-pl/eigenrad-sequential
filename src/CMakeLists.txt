@@ -10,6 +10,7 @@ add_library( ${LIB_NAME}
     fun1D.cpp
     gauleg.cpp
     gauss.cpp
+    gauss_integral.cpp
     lobatto.cpp
     mesh.cpp
     potential_coulomb.cpp

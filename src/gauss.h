@@ -44,28 +44,23 @@
 //
 
 
-
+#include <cassert>
 #include <cstddef>
 #include <vector>
-#include "fun1D.h"
+
 
 class Gauss
 {
 public:
-    Gauss();
+    Gauss(size_t deg);
     ~Gauss() = default;
-
-    static double Calc( const Fun1D& f, double a, double b );
 
     static double X( size_t i )  { return m_x[ i ]; }
     static double W( size_t i )  { return m_w[ i ]; }
-    static double Size( )  { return m_x.size(); }
+    static size_t Size( )  { assert(m_x.size() == m_w.size()); return m_x.size(); }
 
 
 private:
-    // Quadrature degree
-    static const size_t m_deg;
-
     // Quadrature weights
     static std::vector< double > m_w;
 

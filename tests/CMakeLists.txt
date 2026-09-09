@@ -1,6 +1,7 @@
 set( TEST_NAME eigenrad_tests )
 
 add_executable( ${TEST_NAME}
+    gauss_integral.cpp
     lobatto.cpp
     potential_coulomb.cpp
 )

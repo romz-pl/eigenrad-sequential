@@ -28,7 +28,7 @@ class LobattoCheckMtxK : public ::testing::TestWithParam<std::tuple<size_t, size
 TEST_P(LobattoCheckMtxK, CheckMtxK)
 {
     Lobatto lobatto;
-    Gauss gauss;
+    Gauss gauss(3 * ( Lobatto::MAXP - 1 ));
     const double abs_error = 1E-14;
     const size_t i = std::get<0>(GetParam());
     const size_t j = std::get<1>(GetParam());
