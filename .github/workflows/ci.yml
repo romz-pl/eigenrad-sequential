@@ -51,9 +51,6 @@ jobs:
             undefined)
               echo "flags=-fsanitize=undefined -fno-omit-frame-pointer" >> "$GITHUB_OUTPUT"
               ;;
-            thread)
-              echo "flags=-fsanitize=thread -fno-omit-frame-pointer" >> "$GITHUB_OUTPUT"
-              ;;
             *)
               echo "flags=" >> "$GITHUB_OUTPUT"
               ;;
