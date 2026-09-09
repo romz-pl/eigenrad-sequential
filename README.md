@@ -43,9 +43,6 @@ The application of Lobbato polynomials in the high-order finite element method i
 
 
 
-## Implementation
-
-The **EIGENRAD** package is written in C++ and uses the following external libraries: BLAS, [LAPACK](https://github.com/reference-lapack/lapack), and [GoogleTest (gtest)](https://github.com/google/googletest). The build system is implemented using [CMake](https://cmake.org/).
 
 ## Available potentials
 
@@ -86,6 +83,11 @@ The EIGENRAD package provides native definitions of the potentials commonly used
 </table>
 
 [Complete set of results for L=0,1,2,3,4](./results/v2/soft_coulomb/README.md)
+
+
+## Implementation
+
+The **EIGENRAD** package is written in `C++23` and uses the following external libraries: BLAS, [LAPACK](https://github.com/reference-lapack/lapack), and [GoogleTest (gtest)](https://github.com/google/googletest). The build system is implemented using [CMake](https://cmake.org/).
 
 
 ## How to build and run EIGENRAD
