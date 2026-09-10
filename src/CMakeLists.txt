@@ -23,6 +23,8 @@ target_compile_options( ${LIB_NAME} PRIVATE
     -Wall
     -Wextra
     -Wpedantic
+    -march=native
+    -mtune=native
 )
 
 target_include_directories( ${LIB_NAME}
@@ -43,6 +45,8 @@ target_compile_options( ${EXE_NAME} PRIVATE
     -Wall
     -Wextra
     -Wpedantic
+    -march=native
+    -mtune=native
 )
 
 target_link_libraries(${EXE_NAME}

@@ -11,7 +11,6 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
-# set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -fopenmp -march=native -mtune=native")
 
 find_package(BLAS REQUIRED)
 find_package(LAPACK REQUIRED)
