@@ -12,13 +12,10 @@
 class Mesh
 {
 public:
-    Mesh() = default;
+    Mesh(double a, double b, size_t nodeNo, size_t degree);
     ~Mesh() = default;
 
-    void GenLin(double a, double b, size_t nodeNo, size_t degree);
     void AddToMesh(const std::vector<size_t>& eltToSplit);
-
-    void Set(const std::vector<double>& x, size_t degree);
 
     size_t Dim() const;
     size_t GetBand() const;
@@ -39,9 +36,12 @@ public:
 
 private:
     void CreateCnnt();
+    void Set(const std::vector<double>& x);
 
 
 private:
+    const size_t m_degree;
+
     // Array of elements
     std::vector<Element> m_elt;
 
