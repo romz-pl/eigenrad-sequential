@@ -18,7 +18,7 @@ public:
     void GenLin(double a, double b, size_t nodeNo, size_t degree);
     void AddToMesh(const std::vector<size_t>& eltToSplit);
 
-    void Set(const std::vector<double>& x, const std::vector<size_t>& degree);
+    void Set(const std::vector<double>& x, size_t degree);
 
     void CreateCnnt();
 
