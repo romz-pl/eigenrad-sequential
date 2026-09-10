@@ -108,20 +108,14 @@ size_t m;
 //
 void Mesh::CreateCnnt()
 {
-const size_t N = m_elt.size();
-int idx;
-size_t n, j;
-
     assert(!m_elt.empty());
 
-    // Left end: Dirichled boundary conditions
-    idx = -1;
+    // Left end: Dirichlet boundary conditions
+    int idx = -1;
 
-    for(n = 0; n < N; n++)
+    for (Element& e : m_elt)
     {
-        Element& e = m_elt[n];
-
-        for(j = 0; j < e.DofNo(); j++)
+        for (size_t j = 0; j < e.DofNo(); j++)
         {
             e.SetDof(j, idx);
             idx++;
@@ -131,8 +125,8 @@ size_t n, j;
         idx--;
     }
 
-    // Right end: Dirichled boundary conditions
-    m_elt.back().SetLastDof( -2 );
+    // Right end: Dirichlet boundary conditions
+    m_elt.back().SetLastDof(-2);
 }
 
 //
@@ -152,7 +146,7 @@ size_t Mesh::Dim() const
 //
 // Returns the bandwith of band matrix
 //
-size_t Mesh::GetBand(void) const
+size_t Mesh::GetBand() const
 {
     size_t pMax = 1;
 
