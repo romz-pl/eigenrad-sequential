@@ -1,21 +1,8 @@
-// #include "stdafx.h"
 #include "mesh.h"
+
 #include <cassert>
 #include <algorithm>
 
-//
-// Constructor
-//
-Mesh::Mesh(void)
-{
-}
-
-//
-// Destructor
-//
-Mesh::~Mesh(void)
-{
-}
 
 
 //
@@ -62,39 +49,6 @@ std::vector<size_t> deg(nodeNo - 1, degree);
     Set(x, deg);
 }
 
-//
-// Generates the mesh on the interval [a, b]
-//
-void Mesh::GenLinExp(double a, double b, int m, size_t degree)
-{
-const size_t linNodeNo = (1 << m);
-const double h = 1. / (double)linNodeNo;
-std::vector<double> x;
-double r;
-
-    assert(b > a);
-
-    r = a;
-    for(size_t i = 0; i < linNodeNo; i++)
-    {
-        x.push_back(r);
-        r += h;
-    }
-
-    while(r < b)
-    {
-        x.push_back(r);
-        r *= (1 + h);
-    }
-
-        // The last node must be on the end of interval
-    x.push_back(b);
-
-    std::vector<size_t> deg(x.size() - 1, degree);
-
-    Set(x, deg);
-
-}
 
 /*
 //!
