@@ -12,11 +12,10 @@
 class Mesh
 {
 public:
-    Mesh(void);
-    ~Mesh(void);
+    Mesh() = default;
+    ~Mesh() = default;
 
     void GenLin(double a, double b, size_t nodeNo, size_t degree);
-    void GenLinExp(double a, double b, int m, size_t degree);
     void AddToMesh(const std::vector<size_t>& eltToSplit);
 
     void Set(const std::vector<double>& x, const std::vector<size_t>& degree);
@@ -46,6 +45,6 @@ private:
     // Array of elements
     std::vector<Element> m_elt;
 
-    // vertex coordinates (rozmiar o jeden wiekszy od m_elt.size())
+    // vertex coordinates (the size one larger than m_elt.size())
     std::vector<double> m_x;
 };
