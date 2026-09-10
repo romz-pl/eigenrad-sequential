@@ -8,7 +8,6 @@
 
 
 #include "element.h"
-#include "bndr.h"
 
 class Mesh
 {
@@ -22,9 +21,9 @@ public:
 
     void Set(const std::vector<double>& x, const std::vector<size_t>& degree);
 
-    void CreateCnnt(BndrType left, BndrType right);
+    void CreateCnnt();
 
-    size_t Dim(BndrType left, BndrType right) const;
+    size_t Dim() const;
     size_t GetBand() const;
 
     const Element& Elt(size_t i) const { return m_elt[i];      }

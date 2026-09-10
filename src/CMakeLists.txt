@@ -1,7 +1,6 @@
 SET( LIB_NAME eigenradengine )
 
 add_library( ${LIB_NAME}
-    bndr.cpp
     clpmtx.cpp
     clpmtxband.cpp
     eigprob.cpp
