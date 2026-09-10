@@ -48,61 +48,6 @@ std::vector<double> x(nodeNo);
 }
 
 
-/*
-//!
-//! Create connectivity array
-//!
-void Mesh::CreateCnnt()
-{
-int count = 0;
-size_t m;
-
-    assert(!m_elt.empty());
-
-    // Visiting vertex basis functions on the first element
-    if(m_elt[0].m_vertBnd[0] == BndType_Dir)
-        m_elt[0].m_vertDof[0] = -1;
-    else
-    {
-        m_elt[0].m_vertDof[0] = count;
-        count++;
-    }
-    m_elt[0].m_vertDof[1] = count;
-
-    // Visiting vertex basis functions on interior elements
-    for(m = 1; m < m_elt.size() - 1; m++)
-    {
-        m_elt[m].m_vertDof[0] = count;
-        count++;
-        m_elt[m].m_vertDof[1] = count;
-    }
-
-    // Visiting vertex basis functions on the last element
-    m = m_elt.size() - 1;
-
-    m_elt[m].m_vertDof[0] = count;
-    count++;
-    if(m_elt[m].m_vertBnd[1] == BndType_Dir)
-        m_elt[m].m_vertDof[1] = -2;
-    else
-    {
-        m_elt[m].m_vertDof[1] = count;
-        count++;
-    }
-
-    // Visiting buble basis functions on all elements
-    for(m = 0; m < m_elt.size(); m++)
-    {
-        for(size_t j = 0; j < m_elt[m].m_p - 1; j++)
-        {
-            m_elt[m].m_bubbDof[j] = count;
-            count++;
-        }
-    }
-}
-*/
-
-
 //
 // Create connectivity array
 //
