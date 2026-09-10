@@ -23,6 +23,8 @@ void Mesh::Set(const std::vector<double>& x, size_t degree)
 
     for(size_t n = 0; n < N; n++)
         m_elt.emplace_back(x[n], x[n + 1], degree);
+
+    CreateCnnt();
 }
 
 //

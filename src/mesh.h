@@ -20,8 +20,6 @@ public:
 
     void Set(const std::vector<double>& x, size_t degree);
 
-    void CreateCnnt();
-
     size_t Dim() const;
     size_t GetBand() const;
 
@@ -38,6 +36,9 @@ public:
     size_t FindElt(double x) const;
 
     void append_elt( double length );
+
+private:
+    void CreateCnnt();
 
 
 private:
