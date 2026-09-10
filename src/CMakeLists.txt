@@ -19,6 +19,12 @@ add_library( ${LIB_NAME}
     step_info.cpp
 )
 
+target_compile_options( ${LIB_NAME} PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+)
+
 target_include_directories( ${LIB_NAME}
     PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -31,6 +37,12 @@ add_executable( ${EXE_NAME}
     create_potential.cpp
     main.cpp
     paramdb.cpp
+)
+
+target_compile_options( ${EXE_NAME} PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
 )
 
 target_link_libraries(${EXE_NAME}
