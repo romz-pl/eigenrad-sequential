@@ -57,7 +57,6 @@ EigProb::EigProb(size_t ell,
     }
 
     m_mesh.GenLin( 0, m_rc, m_eigNode, m_eigDeg );
-    m_mesh.CreateCnnt();
 }
 
 EigProb::~EigProb()
@@ -151,7 +150,6 @@ void EigProb::SolveAdapt( )
 
             log_elements_to_split( eltToSplit );
             m_mesh.AddToMesh( eltToSplit );
-            m_mesh.CreateCnnt();
 
         }
 
@@ -164,7 +162,6 @@ void EigProb::SolveAdapt( )
 
         const double rmax_before = m_mesh.XBack();
         m_mesh.append_elt( m_length_domain_increase * m_mesh.XBack() );
-        m_mesh.CreateCnnt();
         const double rmax_after = m_mesh.XBack();
 
         if( m_create_log_file )
