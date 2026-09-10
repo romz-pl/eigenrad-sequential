@@ -155,7 +155,7 @@ void EigProb::SolveAdapt( )
 
         }
 
-        const size_t n0 = m_mesh.EltBack().m_dof[ 0 ];
+        const size_t n0 = m_mesh.EltBack().Dof( 0 );
         const double c0 = std::fabs(m_z.Get( n0, m_eigNo - 1 ));
 
 
@@ -210,7 +210,7 @@ void EigProb::Assemble( )
         // Loop over basis functions
         for( size_t i = 0; i < DofNo; i++ )
         {
-            const int ni = e.m_dof[ i ];
+            const int ni = e.Dof( i );
             if( ni < 0 )
                 continue;
 
@@ -221,7 +221,7 @@ void EigProb::Assemble( )
             {
                 const size_t psiJ = e.PsiId( j );
 
-                const int nj = e.m_dof[ j ];
+                const int nj = e.Dof( j );
                 if( nj > -1 )
                 {
                     m_s.Set( ni, nj ) += CalcS( e, psiI, psiJ );
@@ -292,9 +292,9 @@ double EigProb::GetEigFun( size_t eig, double r ) const
     // Sum over all basis function with support on the element $e$
     double val = 0;
 
-    for( size_t i = 0; i < e.m_dof.size(); i++ )
+    for( size_t i = 0; i < e.DofNo(); i++ )
     {
-        const int mi = e.m_dof[ i ];
+        const int mi = e.Dof( i );
         if( mi < 0 )
             continue;
 
@@ -339,7 +339,7 @@ void EigProb::MaxMinCoef( std::vector< EltInfo >& eltInfo ) const
 
             for( size_t j = 1; j < e.DofNo() - 1; j++ ) // For each BUBBLE DOF at element
             {
-                const int dof = e.m_dof[ j ];
+                const int dof = e.Dof( j );
                 if( dof < 0 ) // Skip Dirichlet boundary conditions
                     continue;
 
@@ -617,7 +617,7 @@ void EigProb::write_coefficients( ) const
             // Loop over basis functions
             for( size_t i = 0; i < DofNo; i++ )
             {
-                const int ni = e.m_dof[ i ];
+                const int ni = e.Dof( i );
                 if( ni < 0 )
                     continue;
 

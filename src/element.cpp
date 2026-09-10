@@ -3,23 +3,13 @@
 
 
 //
-// Constructor
-//
-Element::Element()
-    : m_c1( 0 )
-    , m_c2( 0 )
-{
-
-}
-
-
-//
 // Returns ID of referenced Lobatto basis function.
 // Returns function cooperates with function Mesh::CreateCnnt()
 //
 size_t Element::PsiId( size_t i ) const
 {
     assert( i < m_dof.size() );
+    assert( m_dof.size() > 0 );
 
     if( i == 0 )
         return 0;
@@ -38,8 +28,8 @@ void Element::Set( double x0, double x1, size_t p )
     assert( x1 > x0 );
 
     // Calculates the transformation coefficients form interval $[x_m, x_{m+1}]$ to reference interval $[-1, 1]$.
-    m_c1 = ( x1 + x0 ) / 2;
-    m_c2 = ( x1 - x0 ) / 2;
+    m_c1 = 0.5 * ( x1 + x0 );
+    m_c2 = 0.5 * ( x1 - x0 );
 
     m_dof.resize( p + 1 );
 }
