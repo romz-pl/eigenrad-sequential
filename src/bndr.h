@@ -14,7 +14,6 @@
 //
 enum BndrType
 {
-    BndrType_Emp = 0, // Empty
     BndrType_Dir, // Dirichlet
     BndrType_Neu // Neumann
 };
