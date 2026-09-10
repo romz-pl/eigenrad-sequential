@@ -1,6 +1,21 @@
 #include <cassert>
 #include "element.h"
 
+//
+// Construct the element woth ends [x0, x1] and degree "p".
+//
+// Calculates the transformation coefficients form interval $[x_m, x_{m+1}]$ to reference interval $[-1, 1]$.
+//
+Element::Element( double x0, double x1, size_t p )
+    : m_c1(0.5 * ( x1 + x0 ))
+    , m_c2(0.5 * ( x1 - x0 ))
+{
+    assert( p >= 2 );
+    assert( x1 > x0 );
+
+    m_dof.resize( p + 1 );
+}
+
 
 //
 // Returns ID of referenced Lobatto basis function.
@@ -20,16 +35,4 @@ size_t Element::PsiId( size_t i ) const
     return i + 1;
 }
 
-//
-// Sets (defines) the element woth ends [x0, x1] and degree "p".
-//
-void Element::Set( double x0, double x1, size_t p )
-{
-    assert( x1 > x0 );
 
-    // Calculates the transformation coefficients form interval $[x_m, x_{m+1}]$ to reference interval $[-1, 1]$.
-    m_c1 = 0.5 * ( x1 + x0 );
-    m_c2 = 0.5 * ( x1 - x0 );
-
-    m_dof.resize( p + 1 );
-}

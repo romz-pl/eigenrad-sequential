@@ -33,10 +33,10 @@ void Mesh::Set(const std::vector<double>& x, const std::vector<size_t>& degree)
     m_x = x;
 
     const size_t N = degree.size();
-    m_elt.resize(N);
+    m_elt.clear();
 
     for(size_t n = 0; n < N; n++)
-        m_elt[n].Set(x[n], x[n + 1], degree[n]);
+        m_elt.emplace_back(x[n], x[n + 1], degree[n]);
 }
 
 //
