@@ -28,7 +28,8 @@ EigProb::EigProb(size_t ell,
                  bool create_log_file,
                  const std::string& out_directory,
                  size_t out_points )
-    : m_ell( ell )
+    : m_gauss(3 * ( Lobatto::MAXP - 1 ))
+    , m_ell( ell )
     , m_rc( rc )
     , m_eigNode( eigNode )
     , m_eigDeg( eigDeg )
@@ -41,7 +42,6 @@ EigProb::EigProb(size_t ell,
     , m_create_log_file( create_log_file )
     , m_out_directory( out_directory )
     , m_out_points( out_points )
-    , m_gauss(3 * ( Lobatto::MAXP - 1 ))
 
 {
     if( m_create_log_file )
