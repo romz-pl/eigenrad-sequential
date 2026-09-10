@@ -9,11 +9,5 @@
 
 
 
-//
-// Vertex boundary conditions
-//
-enum BndrType
-{
-    BndrType_Dir, // Dirichlet
-};
+
 

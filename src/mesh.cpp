@@ -154,7 +154,7 @@ size_t m;
 //
 // Create connectivity array
 //
-void Mesh::CreateCnnt(BndrType left, BndrType right)
+void Mesh::CreateCnnt()
 {
 const size_t N = m_elt.size();
 int idx;
@@ -162,11 +162,8 @@ size_t n, j;
 
     assert(!m_elt.empty());
 
-    // Left end
-    if(left  == BndrType_Dir)
-        idx = -1;
-    else
-        idx = 0;
+    // Left end: Dirichled boundary conditions
+    idx = -1;
 
     for(n = 0; n < N; n++)
     {
@@ -182,9 +179,8 @@ size_t n, j;
         idx--;
     }
 
-    // Right end
-    if(right == BndrType_Dir)
-        m_elt.back().SetLastDof( -2 );
+    // Right end: Dirichled boundary conditions
+    m_elt.back().SetLastDof( -2 );
 }
 
 //

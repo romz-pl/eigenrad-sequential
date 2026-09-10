@@ -22,7 +22,7 @@ public:
 
     void Set(const std::vector<double>& x, const std::vector<size_t>& degree);
 
-    void CreateCnnt(BndrType left, BndrType right);
+    void CreateCnnt();
 
     size_t Dim() const;
     size_t GetBand() const;
