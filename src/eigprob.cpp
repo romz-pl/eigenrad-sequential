@@ -32,8 +32,6 @@ EigProb::EigProb(size_t ell,
     , m_mesh( 0, rc, eigNode, eigDeg )
     , m_ell( ell )
     , m_rc( rc )
-    , m_eigNode( eigNode )
-    , m_eigDeg( eigDeg )
     , m_g( g )
     , m_eigNo( eigNo )
     , m_absMaxCoef( absMaxCoef )

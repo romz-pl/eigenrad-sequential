@@ -158,10 +158,6 @@ private:
 
     const double m_rc;
 
-    const size_t m_eigNode;
-
-    const size_t m_eigDeg;
-
     const Fun1D& m_g;
 
     const size_t m_eigNo;
