@@ -35,7 +35,6 @@ public:
     double XBack()     const { return m_x.back();  }
     size_t XNo()       const { return m_x.size();  }
 
-    bool IsInRange(double x) const;
     size_t FindElt(double x) const;
 
     void append_elt( double length );
