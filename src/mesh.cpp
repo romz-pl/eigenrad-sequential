@@ -165,17 +165,6 @@ size_t Mesh::GetBand(void) const
 }
 
 //
-// Returns "true" if "x" belongs to interval
-//
-bool Mesh::IsInRange(double x) const
-{
-    const bool b1 = (x >= m_x.front());
-    const bool b2 = (x <= m_x.back());
-
-    return b1 && b2;
-}
-
-//
 // Searching the interval containg the value $x$: $x_{m} <= x <= x_{m+1}$
 // returns index $m$
 //
