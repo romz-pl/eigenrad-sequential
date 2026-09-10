@@ -20,23 +20,35 @@ public:
 
     double X( double s ) const;
     double Xinv( double x ) const;
-    double Jac() const;
 
-    size_t P() const;
-    size_t DofNo() const;
+    // Jacobian of the element
+    double Jac() const {
+        return m_c2;
+    }
+
+    size_t P() const {
+        assert( m_dof.size() > 0 );
+        return m_dof.size() - 1;
+    }
+
+    size_t DofNo() const {
+        assert( m_dof.size() > 0 );
+        return m_dof.size();
+    }
+
     size_t PsiId( size_t i ) const;
 
     size_t Dof( size_t i ) const {
-        assert(i < m_dof.size());
-        return m_dof[i];
+        assert( i < m_dof.size() );
+        return m_dof[ i ];
     }
 
-    void SetDof( size_t i, size_t d ) {
-        assert(i < m_dof.size());
-        m_dof[i] = d;
+    void SetDof( size_t i, int d ) {
+        assert( i < m_dof.size() );
+        m_dof[ i ] = d;
     }
 
-    void SetLastDof( size_t d ) {
+    void SetLastDof( int d ) {
         m_dof.back() = d;
     }
 
@@ -54,15 +66,6 @@ private:
     // Jacobian: (x[m+1] - x[m]) / 2
     double m_c2 = 0;
 };
-
-//
-//
-//
-inline
-size_t Element::P() const
-{
-    return m_dof.size() - 1;
-}
 
 //
 //
@@ -92,21 +95,3 @@ double Element::Xinv( double x ) const
     return s;
 }
 
-//
-//
-//
-inline
-size_t Element::DofNo() const
-{
-    return m_dof.size();
-}
-
-//
-//
-// Jacobian
-//
-inline
-double Element::Jac() const
-{
-    return m_c2;
-}

@@ -9,6 +9,7 @@
 size_t Element::PsiId( size_t i ) const
 {
     assert( i < m_dof.size() );
+    assert( m_dof.size() > 0 );
 
     if( i == 0 )
         return 0;
