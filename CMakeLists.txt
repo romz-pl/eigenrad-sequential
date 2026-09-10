@@ -21,20 +21,20 @@ set( CMAKE_CXX_EXTENSIONS OFF )
 find_package(BLAS REQUIRED)
 find_package(LAPACK REQUIRED)
 
-# Configure a project for testing with CTest/CDash
-# See https://cmake.org/cmake/help/latest/module/CTest.html
-include(CTest)
-
-# Defines functions to help use the Google Test infrastructure
-# See https://cmake.org/cmake/help/latest/module/FindGTest.html
-find_package(GTest REQUIRED)
-include(GoogleTest)
-
-
 # Add subdirectory for this project
 add_subdirectory(src)
 
+
+
+# Configure a project for testing with CTest/CDash
+# See https://cmake.org/cmake/help/latest/module/CTest.html
+include(CTest)
 if(BUILD_TESTING)
+    # Defines functions to help use the Google Test infrastructure
+    # See https://cmake.org/cmake/help/latest/module/FindGTest.html
+    find_package(GTest REQUIRED)
+    include(GoogleTest)
+    
     add_subdirectory(tests)
 endif()
 
