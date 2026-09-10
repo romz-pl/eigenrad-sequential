@@ -4,13 +4,35 @@
 #include <algorithm>
 
 
+//
+// Genarates the mesh on the interval [a, b].
+// Mesh has $nodeNo$ nodes (it means $nodeNo-1$ elements).
+// Each element has $degree$
+//
+Mesh::Mesh(double a, double b, size_t nodeNo, size_t degree)
+    : m_degree(degree)
+{
+    const double dx = (b - a) / (nodeNo - 1);
+    std::vector<double> x(nodeNo);
+
+    assert(b > a);
+    assert(nodeNo >= 2);
+
+    for(size_t i = 0; i < nodeNo - 1; i++)
+        x[i] = a + i * dx;
+
+    // To avoid the rounding errors
+    x.back() = b;
+
+    Set(x);
+}
 
 //
 // Defines the mesh.
 // x      - vertex coordinates (order ascending)
 // degree - polynomial degrees
 //
-void Mesh::Set(const std::vector<double>& x, size_t degree)
+void Mesh::Set(const std::vector<double>& x)
 {
     assert(x.size() >= 2);
     assert(std::ranges::is_sorted(x));
@@ -22,32 +44,12 @@ void Mesh::Set(const std::vector<double>& x, size_t degree)
     m_elt.clear();
 
     for(size_t n = 0; n < N; n++)
-        m_elt.emplace_back(x[n], x[n + 1], degree);
+        m_elt.emplace_back(x[n], x[n + 1], m_degree);
 
     CreateCnnt();
 }
 
-//
-// Genarates the mesh on the interval [a, b].
-// Mesh has $nodeNo$ nodes (it means $nodeNo-1$ elements).
-// Each element has $degree$
-//
-void Mesh::GenLin(double a, double b, size_t nodeNo, size_t degree)
-{
-const double dx = (b - a) / (nodeNo - 1);
-std::vector<double> x(nodeNo);
 
-    assert(b > a);
-    assert(nodeNo >= 2);
-
-    for(size_t i = 0; i < nodeNo - 1; i++)
-        x[i] = a + i * dx;
-
-    // To avoid the rounding errors
-    x.back() = b;
-
-    Set(x, degree);
-}
 
 
 //
@@ -127,8 +129,6 @@ void Mesh::AddToMesh(const std::vector<size_t>& eltToSplit)
 {
     std::vector<double> newX(m_x);
 
-    const size_t degree = m_elt[0].P(); // All elements has the same degree
-
     for(size_t i = 0; i < eltToSplit.size(); i++)
     {
         const size_t n = eltToSplit[i];
@@ -137,14 +137,13 @@ void Mesh::AddToMesh(const std::vector<size_t>& eltToSplit)
     }
     std::sort(newX.begin(), newX.end());
 
-    Set(newX, degree);
+    Set(newX);
 }
 
 void Mesh::append_elt( double length )
 {
-    const size_t degree = m_elt[0].P(); // All elements has the same degree
     const double rmax = m_x.back();
     std::vector<double> newX(m_x);
     newX.push_back( rmax + length );
-    Set(newX, degree);
+    Set(newX);
 }

@@ -29,6 +29,7 @@ EigProb::EigProb(size_t ell,
                  const std::string& out_directory,
                  size_t out_points )
     : m_gauss(3 * ( Lobatto::MAXP - 1 ))
+    , m_mesh( 0, rc, eigNode, eigDeg )
     , m_ell( ell )
     , m_rc( rc )
     , m_eigNode( eigNode )
@@ -42,7 +43,6 @@ EigProb::EigProb(size_t ell,
     , m_create_log_file( create_log_file )
     , m_out_directory( out_directory )
     , m_out_points( out_points )
-
 {
     if( m_create_log_file )
     {
@@ -55,8 +55,6 @@ EigProb::EigProb(size_t ell,
         write_intro();
         std::print(m_log, "{}\n\n", get_now_as_string());
     }
-
-    m_mesh.GenLin( 0, m_rc, m_eigNode, m_eigDeg );
 }
 
 EigProb::~EigProb()
