@@ -72,11 +72,3 @@ int main(int argc, char* argv[])
     printf("\n\n********** CALCULATIONS FINISHED SUCCESSFULLY! **********\n\n\n");
     return 0;
 }
-
-
-
-//
-// cmake -B build && cmake --build build/ &&  ctest --test-dir build && ./build/src/eigenrad ./results/v2/coulomb/ell0/aaa.inp
-//
-// cmake -B build && cmake --build build/ &&  ./build/src/eigenrad ./results/v2/coulomb/ell0/aaa.inp
-//
