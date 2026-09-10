@@ -24,7 +24,7 @@ public:
 
     void CreateCnnt(BndrType left, BndrType right);
 
-    size_t Dim(BndrType left, BndrType right) const;
+    size_t Dim() const;
     size_t GetBand() const;
 
     const Element& Elt(size_t i) const { return m_elt[i];      }

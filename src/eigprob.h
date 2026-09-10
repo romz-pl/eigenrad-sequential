@@ -95,7 +95,7 @@ public:
 
     double GetEigVal( size_t eig ) const;
     double GetEigFun( size_t eig, double x ) const;
-    size_t GetDofs() const { return m_mesh.Dim( BndrType_Dir, BndrType_Dir ); }
+    size_t GetDofs() const { return m_mesh.Dim(); }
 
 
     void write_solution( size_t step ) const;

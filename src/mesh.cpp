@@ -190,19 +190,13 @@ size_t n, j;
 //
 // Calculate the dimension of the finite element space
 //
-size_t Mesh::Dim(BndrType left, BndrType right) const
+size_t Mesh::Dim() const
 {
 size_t M = 0;
 
     assert(m_elt.size() > 0);
     for(size_t n = 0; n < m_elt.size(); n++)
         M += m_elt[n].P();
-
-    if(left == BndrType_Neu)
-        M++;
-
-    if(right == BndrType_Neu)
-        M++;
 
     return (M - 1);
 }

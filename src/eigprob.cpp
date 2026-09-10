@@ -185,7 +185,7 @@ void EigProb::SolveAdapt( )
 //
 void EigProb::Malloc()
 {
-    const size_t M = m_mesh.Dim( BndrType_Dir, BndrType_Dir );
+    const size_t M = m_mesh.Dim();
     const size_t band = m_mesh.GetBand();
 
     m_s.Assign( M, band, 0, 0 );

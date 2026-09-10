@@ -15,6 +15,5 @@
 enum BndrType
 {
     BndrType_Dir, // Dirichlet
-    BndrType_Neu // Neumann
 };
 
