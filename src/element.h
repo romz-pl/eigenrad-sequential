@@ -7,6 +7,7 @@
 // Zbigniew Romanowski [ROMZ@wp.pl]
 //
 
+#include <cassert>
 #include <cstddef>
 #include <vector>
 
@@ -25,14 +26,28 @@ public:
     size_t DofNo() const;
     size_t PsiId( size_t i ) const;
 
+    size_t Dof( size_t i ) const {
+        assert(i < m_dof.size());
+        return m_dof[i];
+    }
+
+    void SetDof( size_t i, size_t d ) {
+        assert(i < m_dof.size());
+        m_dof[i] = d;
+    }
+
+    void SetLastDof( size_t d ) {
+        m_dof.back() = d;
+    }
+
     void Set( double x0, double x1, size_t p );
 
-public:
+
+private:
     // DOF - DEGREE OF FREEDOM
     // The length of this vector is (p + 1), where "p" is the maximal degree of applied Lobatto functions
     std::vector< int > m_dof;
 
-private:
     // (x[m+1] + x[m]) / 2
     double m_c1 = 0;
 

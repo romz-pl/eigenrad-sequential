@@ -172,8 +172,11 @@ size_t n, j;
     {
         Element& e = m_elt[n];
 
-        for(j = 0; j < e.m_dof.size(); j++)
-            e.m_dof[j] = idx++;
+        for(j = 0; j < e.DofNo(); j++)
+        {
+            e.SetDof(j, idx);
+            idx++;
+        }
 
         // The last basis function of the last element must be the first basis function of the next element.
         idx--;
@@ -181,7 +184,7 @@ size_t n, j;
 
     // Right end
     if(right == BndrType_Dir)
-        m_elt.back().m_dof.back() = -2;
+        m_elt.back().SetLastDof( -2 );
 }
 
 //
