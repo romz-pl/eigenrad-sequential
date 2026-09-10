@@ -3,17 +3,6 @@
 
 
 //
-// Constructor
-//
-Element::Element()
-    : m_c1( 0 )
-    , m_c2( 0 )
-{
-
-}
-
-
-//
 // Returns ID of referenced Lobatto basis function.
 // Returns function cooperates with function Mesh::CreateCnnt()
 //

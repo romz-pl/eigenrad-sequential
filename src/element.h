@@ -14,7 +14,7 @@
 class Element
 {
 public:
-    Element();
+    Element() = default;
     ~Element() = default;
 
     double X( double s ) const;
@@ -34,10 +34,10 @@ public:
 
 private:
     // (x[m+1] + x[m]) / 2
-    double m_c1;
+    double m_c1 = 0;
 
     // Jacobian: (x[m+1] - x[m]) / 2
-    double m_c2;
+    double m_c2 = 0;
 };
 
 //
