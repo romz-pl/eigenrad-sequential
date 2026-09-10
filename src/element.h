@@ -15,7 +15,7 @@
 class Element
 {
 public:
-    Element() = default;
+    Element( double x0, double x1, size_t p );
     ~Element() = default;
 
     double X( double s ) const;
@@ -61,10 +61,10 @@ private:
     std::vector< int > m_dof;
 
     // (x[m+1] + x[m]) / 2
-    double m_c1 = 0;
+    const double m_c1;
 
     // Jacobian: (x[m+1] - x[m]) / 2
-    double m_c2 = 0;
+    const double m_c2;
 };
 
 //
