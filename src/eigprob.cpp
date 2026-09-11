@@ -233,10 +233,8 @@ double EigProb::CalcS( const Element& e, size_t ni, size_t nj ) const
     const double v1 = m_gamma * Lobatto::GetS( ni, nj );
     double v0 = 0;
 
-    for( size_t n = 0; n < Gauss::Size(); n++ )
+    for (auto [s, w] : m_gauss.Nodes())
     {
-        const double s = Gauss::X( n );
-        const double w = Gauss::W( n );
         const double r = e.X( s );
         v0 += w * Lobatto::Basis( ni, s ) * Lobatto::Basis( nj, s ) * GetPot( r );
     }
@@ -375,10 +373,8 @@ double EigProb::calculate_l2_integral(size_t eig)
 double EigProb::calculate_l2_integral_elt(const Element& e, size_t eig)
 {
     double integral = 0;
-    for( size_t n = 0; n < Gauss::Size(); n++ )
+    for (auto [s, w] : m_gauss.Nodes())
     {
-        const double s = Gauss::X( n );
-        const double w = Gauss::W( n );
         const double r = e.X( s );
         const double v = GetEigFun(eig, r);
         integral += w * v * v;

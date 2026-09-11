@@ -57,13 +57,13 @@ double gauss_integral( const Fun1D& f, double a, double b )
     const double q = 0.5 * ( a + b );
     const double p = 0.5 * ( b - a );
 
-    assert( Gauss::Size() > 0 );
+    Gauss gauss(10);
 
     double sum = 0;
 
-    for( size_t i = 0; i < Gauss::Size(); i++ )
+    for (auto [x, w] : gauss.Nodes())
     {
-        sum += Gauss::W( i ) * f.Get( p * Gauss::X( i ) + q );
+        sum += w * f.Get( p * x + q );
     }
 
     return p * sum;

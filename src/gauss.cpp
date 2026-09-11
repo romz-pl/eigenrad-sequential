@@ -1,22 +1,21 @@
 #include "gauss.h"
 
+#include <cassert>
 #include "gauleg.h"
 
-std::vector< double > Gauss::m_w;
-std::vector< double > Gauss::m_x;
-
 //
-// Constructor
-// deg - degree of 1D Gaussiona quadrature
+// Builds an order-`deg` 1D Gauss-Legendre quadrature on [-1, 1].
 //
 Gauss::Gauss(size_t deg)
 {
-    m_w.resize( deg );
-    m_x.resize( deg );
+    assert(deg > 0 );
 
-    ::gauleg( -1, 1, m_x, m_w, deg );
+    std::vector<double> x(deg);
+    std::vector<double> w(deg);
+
+    ::gauleg(-1, 1, x, w, deg);
+
+    m_xw.resize(deg);
+    for (size_t i = 0; i < deg; ++i)
+        m_xw[i] = { x[i], w[i] };
 }
-
-
-
-
