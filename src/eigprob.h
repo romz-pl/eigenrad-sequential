@@ -156,8 +156,6 @@ private:
     // Angular quantum number
     const size_t m_ell;
 
-    const double m_rc;
-
     const Fun1D& m_g;
 
     const size_t m_eigNo;
