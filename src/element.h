@@ -26,11 +26,6 @@ public:
         return m_c2;
     }
 
-    size_t P() const {
-        assert( m_dof.size() > 0 );
-        return m_dof.size() - 1;
-    }
-
     size_t DofNo() const {
         assert( m_dof.size() > 0 );
         return m_dof.size();
