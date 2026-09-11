@@ -32,7 +32,6 @@ void dpbsvx_(char *fact, char *uplo, int *n, int *kd,
 // Default Constructor
 //
 ClpMtxBand::ClpMtxBand( )
-    : m_zero( 0 )
 {
     m_kl = 0;
     m_ku = 0;
@@ -45,7 +44,6 @@ ClpMtxBand::ClpMtxBand( )
 // ku - number of superdiagonals
 //
 ClpMtxBand::ClpMtxBand( size_t n, size_t ku, size_t kl )
-    : m_zero( 0 )
 {
     Assign( n, ku, kl, 0 );
 }
@@ -63,12 +61,9 @@ void ClpMtxBand::Assign( size_t n, size_t ku, size_t kl, double val )
 //
 double ClpMtxBand::Get( size_t row, size_t col ) const
 {
-    if( InBand( row, col ) )
-    {
-        return m_mtx.Get( RowEx( row, col ), col );
-    }
+    assert( InBand( row, col ) );
 
-    return 0;
+    return m_mtx.Get( RowEx( row, col ), col );
 }
 
 //
@@ -76,12 +71,8 @@ double ClpMtxBand::Get( size_t row, size_t col ) const
 //
 double& ClpMtxBand::Set( size_t row, size_t col )
 {
-    if( InBand( row, col ) )
-    {
-        return m_mtx.Set( RowEx( row, col ), col );
-    }
-
-    return m_zero;
+    assert( InBand( row, col ) );
+    return m_mtx.Set( RowEx( row, col ), col );
 }
 
 

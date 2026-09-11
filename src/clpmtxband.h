@@ -45,7 +45,4 @@ private:
 
      // ku - number of superdiagonals
     size_t m_ku;
-
-    // Auxiliary mememer, works as "zero".
-    double m_zero;
 };
