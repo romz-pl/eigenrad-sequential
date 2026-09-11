@@ -274,7 +274,7 @@ double EigProb::CalcK( const Element& e, size_t ni, size_t nj ) const
 double EigProb::GetEigFun( size_t eig, double r ) const
 {
     assert( eig < m_w.size() );
-    assert( r >= 0 && r <= m_rc );
+    assert( r >= 0 && r <= m_mesh.XBack() );
 
     const size_t n = m_mesh.FindElt( r );
     const Element& e = m_mesh.Elt( n );
