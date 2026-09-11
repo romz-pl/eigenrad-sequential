@@ -31,7 +31,6 @@ EigProb::EigProb(size_t ell,
     : m_gauss(3 * ( Lobatto::MAXP - 1 ))
     , m_mesh( 0, rc, eigNode, eigDeg )
     , m_ell( ell )
-    , m_rc( rc )
     , m_g( g )
     , m_eigNo( eigNo )
     , m_absMaxCoef( absMaxCoef )
