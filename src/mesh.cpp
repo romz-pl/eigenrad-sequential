@@ -91,14 +91,7 @@ size_t Mesh::Dim() const
 //
 size_t Mesh::GetBand() const
 {
-    size_t pMax = 1;
-
-    for(size_t n = 0; n < m_elt.size(); n++)
-    {
-        if(pMax < m_elt[n].P())
-            pMax = m_elt[n].P();
-    }
-    return pMax;
+    return m_degree;
 }
 
 //
