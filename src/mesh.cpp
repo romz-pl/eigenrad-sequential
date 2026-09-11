@@ -83,13 +83,7 @@ void Mesh::CreateCnnt()
 //
 size_t Mesh::Dim() const
 {
-    size_t M = 0;
-
-    assert(m_elt.size() > 0);
-    for(size_t n = 0; n < m_elt.size(); n++)
-        M += m_elt[n].P();
-
-    return (M - 1);
+    return m_degree * m_elt.size() - 1;
 }
 
 //
