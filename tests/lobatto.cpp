@@ -11,10 +11,11 @@
 static double calculate_numeric_k( size_t i, size_t j )
 {
     double v = 0;
+    Lobatto lobatto;
     Gauss gauss(3 * ( Lobatto::MAXP - 1 ));
     for (auto [x, w] : gauss.Nodes())
     {
-        v += w * Lobatto::Basis( i, x ) * Lobatto::Basis( j, x );
+        v += w * lobatto.Basis( i, x ) * lobatto.Basis( j, x );
     }
     return v;
 }
@@ -30,7 +31,7 @@ TEST_P(LobattoCheckMtxK, CheckMtxK)
     const size_t i = std::get<0>(GetParam());
     const size_t j = std::get<1>(GetParam());
 
-    const double v0 = Lobatto::GetK(i, j);
+    const double v0 = lobatto.GetK(i, j);
     const double v1 = calculate_numeric_k(i, j);
     EXPECT_NEAR(v0, v1, abs_error);
 }

@@ -2,10 +2,7 @@
 
 #include <cassert>
 #include <cmath>
-
-const size_t Lobatto::MAXP = 11;
-ClpMtx Lobatto::m_mtxS;
-ClpMtx Lobatto::m_mtxK;
+#include <array>
 
 //
 // Constructor
@@ -92,11 +89,11 @@ void Lobatto::CalcK()
 // Returns the value of basis function $\psi_i(s)$
 // First eleven (for i = 0, 1, ..., 10) Lobatto hierarchic shape functions.
 //
-double Lobatto::Basis( size_t i, double s )
+double Lobatto::Basis( size_t i, double s ) const
 {
     using Polynomial = double (*) (double);
 
-    static const std::vector< Polynomial > poly =
+    static constexpr std::array<Polynomial, 11> poly
     {
         Poly0,
         Poly1,
@@ -112,8 +109,7 @@ double Lobatto::Basis( size_t i, double s )
     };
 
     assert( i < poly.size() );
-    const double v = poly[ i ]( s );
-    return v;
+    return poly[ i ]( s );
 }
 
 //
