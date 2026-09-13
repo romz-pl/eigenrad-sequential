@@ -54,23 +54,22 @@ void Mesh::Set(const std::vector<double>& x)
 
 //
 // Create connectivity array
+// The last basis function of the currect element must be the first basis function of the next element.
 //
 void Mesh::CreateCnnt()
 {
     assert(!m_elt.empty());
 
     // Left end: Dirichlet boundary conditions
-    size_t idx = m_elt.front().SetDofsLeft(m_degree);
-    idx--;
+    size_t idx = 0;
+    m_elt.front().SetDofsLeft(m_degree, idx);
 
     for(size_t i = 1; i < m_elt.size() - 1; i++)
     {
-        idx = m_elt[i].SetDofsMid(m_degree, idx);
-        // The last basis function of the currect element must be the first basis function of the next element.
-        idx--;
+        m_elt[i].SetDofsMid(m_degree, idx);
     }
 
-    idx = m_elt.back().SetDofsRight(m_degree, idx);
+    m_elt.back().SetDofsRight(m_degree, idx);
 }
 
 //

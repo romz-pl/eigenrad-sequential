@@ -15,9 +15,8 @@ Element::Element( double x0, double x1 )
 
 //
 // 2, 3, 4,...p, 1
-size_t Element::SetDofsLeft(size_t p)
+void Element::SetDofsLeft(size_t p, size_t& idx)
 {
-    size_t idx = 0;
     assert( p >= 2 );
     m_dof.resize( p );
 
@@ -27,14 +26,11 @@ size_t Element::SetDofsLeft(size_t p)
         idx++;
     }
     m_dof.back() = {idx, 1};
-    idx++;
-
-    return idx;
 }
 
 //
 // 0, 2, 3, 4,...p, 1
-size_t Element::SetDofsMid(size_t p, size_t idx)
+void Element::SetDofsMid(size_t p, size_t& idx)
 {
     assert( p >= 2 );
     m_dof.resize( p + 1 );
@@ -49,14 +45,11 @@ size_t Element::SetDofsMid(size_t p, size_t idx)
     }
 
     m_dof.back() = {idx, 1};
-    idx++;
-
-    return idx;
 }
 
 //
 // 0, 2, 3, 4,...p
-size_t Element::SetDofsRight(size_t p, size_t idx)
+void Element::SetDofsRight(size_t p, size_t& idx)
 {
     assert( p >= 2 );
     m_dof.resize( p );
@@ -69,8 +62,7 @@ size_t Element::SetDofsRight(size_t p, size_t idx)
         m_dof[i] = {idx, 1 + i};
         idx++;
     }
-
-    return idx;
+    idx--;
 }
 
 

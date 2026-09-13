@@ -18,9 +18,9 @@ public:
     Element( double x0, double x1 );
     ~Element() = default;
 
-    size_t SetDofsLeft(size_t p);
-    size_t SetDofsMid(size_t p, size_t idx);
-    size_t SetDofsRight(size_t p, size_t idx);
+    void SetDofsLeft(size_t p, size_t &idx);
+    void SetDofsMid(size_t p, size_t& idx);
+    void SetDofsRight(size_t p, size_t& idx);
 
     double X( double s ) const;
     double Xinv( double x ) const;
