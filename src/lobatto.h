@@ -62,16 +62,16 @@ public:
     Lobatto();
     ~Lobatto() = default;
 
-    static double Basis( size_t i, double s );
+    double Basis( size_t i, double s ) const;
 
-    static double GetK( size_t i, size_t j );
-    static double GetS( size_t i, size_t j );
+    double GetK( size_t i, size_t j ) const;
+    double GetS( size_t i, size_t j ) const;
 
 private:
-    static void CalcS();
-    static void CalcK();
-    // static bool CheckMtxK( );
-    // static double CalcNumericK( size_t i, size_t j );
+    void CalcS();
+    void CalcK();
+    // bool CheckMtxK( );
+    // double CalcNumericK( size_t i, size_t j );
 
     static double Poly0( double s );
     static double Poly1( double s );
@@ -87,16 +87,16 @@ private:
 
 public:
     // Maximal element degree
-    static const size_t MAXP;
+    static const size_t MAXP = 11;
 
 private:
     // Matrix S
     // S_{i,j} = \int_{-1}^{1} \psi_i'(s) \psi_j'(s) ds
-    static ClpMtx m_mtxS;
+    ClpMtx m_mtxS;
 
     // Matrix K
     // K_{i,j} = \int_{-1}^{1} \psi_i(s) \psi_j(s) ds
-    static ClpMtx m_mtxK;
+    ClpMtx m_mtxK;
 
 };
 
@@ -105,7 +105,7 @@ private:
 // Returns element of matrix K
 //
 inline
-double Lobatto::GetK( size_t i, size_t j )
+double Lobatto::GetK( size_t i, size_t j ) const
 {
     assert( i < MAXP );
     assert( j < MAXP );
@@ -117,7 +117,7 @@ double Lobatto::GetK( size_t i, size_t j )
 // Returns element of matrix S
 //
 inline
-double Lobatto::GetS( size_t i, size_t j )
+double Lobatto::GetS( size_t i, size_t j ) const
 {
     assert( i < MAXP );
     assert( j < MAXP );

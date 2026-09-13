@@ -230,13 +230,13 @@ void EigProb::Assemble( )
 //
 double EigProb::CalcS( const Element& e, size_t ni, size_t nj ) const
 {
-    const double v1 = m_gamma * Lobatto::GetS( ni, nj );
+    const double v1 = m_gamma * m_lobatto.GetS( ni, nj );
     double v0 = 0;
 
     for (auto [s, w] : m_gauss.Nodes())
     {
         const double r = e.X( s );
-        v0 += w * Lobatto::Basis( ni, s ) * Lobatto::Basis( nj, s ) * GetPot( r );
+        v0 += w * m_lobatto.Basis( ni, s ) * m_lobatto.Basis( nj, s ) * GetPot( r );
     }
 
     const double jac = e.Jac();
@@ -261,7 +261,7 @@ double EigProb::GetPot( double r ) const
 //
 double EigProb::CalcK( const Element& e, size_t ni, size_t nj ) const
 {
-    return e.Jac() * Lobatto::GetK( ni, nj );
+    return e.Jac() * m_lobatto.GetK( ni, nj );
 }
 
 
@@ -290,7 +290,7 @@ double EigProb::GetEigFun( size_t eig, double r ) const
 
         const size_t psiI = e.PsiId( i );
 
-        val += m_z.Get( mi, eig ) * Lobatto::Basis( psiI, s );
+        val += m_z.Get( mi, eig ) * m_lobatto.Basis( psiI, s );
     }
     return val;
 }
