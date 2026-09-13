@@ -44,7 +44,7 @@ void Mesh::Set(const std::vector<double>& x)
     m_elt.clear();
 
     for(size_t n = 0; n < N; n++)
-        m_elt.emplace_back(x[n], x[n + 1], m_degree);
+        m_elt.emplace_back(x[n], x[n + 1]);
 
     CreateCnnt();
 }
@@ -60,22 +60,17 @@ void Mesh::CreateCnnt()
     assert(!m_elt.empty());
 
     // Left end: Dirichlet boundary conditions
-    int idx = -1;
+    size_t idx = m_elt.front().SetDofsLeft(m_degree);
+    idx--;
 
-    for (Element& e : m_elt)
+    for(size_t i = 1; i < m_elt.size() - 1; i++)
     {
-        for (size_t j = 0; j < e.DofNo(); j++)
-        {
-            e.SetDof(j, idx);
-            idx++;
-        }
-
-        // The last basis function of the last element must be the first basis function of the next element.
+        idx = m_elt[i].SetDofsMid(m_degree, idx);
+        // The last basis function of the currect element must be the first basis function of the next element.
         idx--;
     }
 
-    // Right end: Dirichlet boundary conditions
-    m_elt.back().SetLastDof(-2);
+    idx = m_elt.back().SetDofsRight(m_degree, idx);
 }
 
 //
