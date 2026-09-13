@@ -15,8 +15,12 @@
 class Element
 {
 public:
-    Element( double x0, double x1, size_t p );
+    Element( double x0, double x1 );
     ~Element() = default;
+
+    size_t SetDofsLeft(size_t p);
+    size_t SetDofsMid(size_t p, size_t idx);
+    size_t SetDofsRight(size_t p, size_t idx);
 
     double X( double s ) const;
     double Xinv( double x ) const;
@@ -31,29 +35,32 @@ public:
         return m_dof.size();
     }
 
-    size_t PsiId( size_t i ) const;
+    size_t PsiId( size_t i ) const {
+        assert( i < m_dof.size() );
+        return m_dof[ i ].second;
+    }
 
     size_t Dof( size_t i ) const {
         assert( i < m_dof.size() );
-        return m_dof[ i ];
+        return m_dof[ i ].first;
     }
 
     void SetDof( size_t i, int d ) {
         assert( i < m_dof.size() );
-        m_dof[ i ] = d;
+        m_dof[ i ].first = d;
     }
 
     void SetLastDof( int d ) {
-        m_dof.back() = d;
+        m_dof.back().first = d;
     }
 
     void Set( double x0, double x1, size_t p );
 
 
 private:
-    // DOF - DEGREE OF FREEDOM
-    // The length of this vector is (p + 1), where "p" is the maximal degree of applied Lobatto functions
-    std::vector< int > m_dof;
+    // FIRST: DEGREE OF FREEDOM (DOF)
+    // SECONd: applied Lobatto functions
+    std::vector< std::pair< size_t, size_t > > m_dof;
 
     // (x[m+1] + x[m]) / 2
     const double m_c1;

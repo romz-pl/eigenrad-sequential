@@ -202,23 +202,18 @@ void EigProb::Assemble( )
         // Loop over basis functions
         for( size_t i = 0; i < DofNo; i++ )
         {
-            const int ni = e.Dof( i );
-            if( ni < 0 )
-                continue;
-
+            const size_t ni = e.Dof( i );
             const size_t psiI = e.PsiId( i );
 
             // Loop over basis functions
             for( size_t j = i; j < DofNo; j++ )
             {
                 const size_t psiJ = e.PsiId( j );
+                const size_t nj = e.Dof( j );
 
-                const int nj = e.Dof( j );
-                if( nj > -1 )
-                {
-                    m_s.Set( ni, nj ) += CalcS( e, psiI, psiJ );
-                    m_o.Set( ni, nj ) += CalcK( e, psiI, psiJ );
-                }
+                m_s.Set( ni, nj ) += CalcS( e, psiI, psiJ );
+                m_o.Set( ni, nj ) += CalcK( e, psiI, psiJ );
+
             }
         }
     }
@@ -284,10 +279,7 @@ double EigProb::GetEigFun( size_t eig, double r ) const
 
     for( size_t i = 0; i < e.DofNo(); i++ )
     {
-        const int mi = e.Dof( i );
-        if( mi < 0 )
-            continue;
-
+        const size_t mi = e.Dof( i );
         const size_t psiI = e.PsiId( i );
 
         val += m_z.Get( mi, eig ) * m_lobatto.Basis( psiI, s );
@@ -327,11 +319,13 @@ void EigProb::MaxMinCoef( std::vector< EltInfo >& eltInfo ) const
             const Element& e = m_mesh.Elt( n );
             minCoef = DBL_MAX;
 
-            for( size_t j = 1; j < e.DofNo() - 1; j++ ) // For each BUBBLE DOF at element
+            for( size_t j = 0; j < e.DofNo(); j++ )
             {
-                const int dof = e.Dof( j );
-                if( dof < 0 ) // Skip Dirichlet boundary conditions
+                const size_t psiJ = e.PsiId( j );
+                if(psiJ == 0 || psiJ == 1) // For each BUBBLE DOF at element
                     continue;
+
+                const size_t dof = e.Dof( j );
 
                 // Find the minimal coefficient for element "e"
                 const double coef = fabs( m_z.Get( dof, i ) );
@@ -605,9 +599,7 @@ void EigProb::write_coefficients( ) const
             // Loop over basis functions
             for( size_t i = 0; i < DofNo; i++ )
             {
-                const int ni = e.Dof( i );
-                if( ni < 0 )
-                    continue;
+                const size_t ni = e.Dof( i );
 
                 const double coef = m_z.Get(ni, eig);
                 const double abs_coef = std::fabs(coef);
