@@ -8,8 +8,6 @@
 
 int main(int argc, char* argv[])
 {
-    argc = 2;
-    argv[1] = "/home/romz/tmp/coulomb/aaa.inp";
     if(argc != 2)
     {
         printf("Usage: eigenrad <input_file>\n\n");
