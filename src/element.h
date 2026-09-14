@@ -45,18 +45,6 @@ public:
         return m_dof[ i ].first;
     }
 
-    void SetDof( size_t i, int d ) {
-        assert( i < m_dof.size() );
-        m_dof[ i ].first = d;
-    }
-
-    void SetLastDof( int d ) {
-        m_dof.back().first = d;
-    }
-
-    void Set( double x0, double x1, size_t p );
-
-
 private:
     // FIRST: DEGREE OF FREEDOM (DOF)
     // SECONd: applied Lobatto functions
