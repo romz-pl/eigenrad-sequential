@@ -3,6 +3,7 @@ SET( LIB_NAME eigenradengine )
 add_library( ${LIB_NAME}
     clpmtx.cpp
     clpmtxband.cpp
+    conn.cpp
     eigprob.cpp
     element.cpp
     eltinfo.cpp

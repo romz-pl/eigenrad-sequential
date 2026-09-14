@@ -61,15 +61,15 @@ void Mesh::CreateCnnt()
     assert(!m_elt.empty());
 
     // Left end: Dirichlet boundary conditions
-    size_t idx = 0;
-    m_elt.front().SetDofsLeft(m_degree, idx);
+    size_t dof = 0;
+    m_elt.front().SetDofsLeft(m_degree, dof);
 
     for(size_t i = 1; i < m_elt.size() - 1; i++)
     {
-        m_elt[i].SetDofsMid(m_degree, idx);
+        m_elt[i].SetDofsMid(m_degree, dof);
     }
 
-    m_elt.back().SetDofsRight(m_degree, idx);
+    m_elt.back().SetDofsRight(m_degree, dof);
 }
 
 //

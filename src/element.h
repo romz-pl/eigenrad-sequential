@@ -11,6 +11,7 @@
 #include <cstddef>
 #include <vector>
 
+#include "conn.h"
 
 class Element
 {
@@ -18,9 +19,9 @@ public:
     Element( double x0, double x1 );
     ~Element() = default;
 
-    void SetDofsLeft(size_t p, size_t &idx);
-    void SetDofsMid(size_t p, size_t& idx);
-    void SetDofsRight(size_t p, size_t& idx);
+    void SetDofsLeft(size_t p, size_t& dof);
+    void SetDofsMid(size_t p, size_t& dof);
+    void SetDofsRight(size_t p, size_t& dof);
 
     double X( double s ) const;
     double Xinv( double x ) const;
@@ -31,24 +32,23 @@ public:
     }
 
     size_t DofNo() const {
-        assert( m_dof.size() > 0 );
-        return m_dof.size();
+        assert( m_conn.size() > 0 );
+        return m_conn.size();
     }
 
     size_t PsiId( size_t i ) const {
-        assert( i < m_dof.size() );
-        return m_dof[ i ].second;
+        assert( i < m_conn.size() );
+        return m_conn[ i ].m_psi_id;
     }
 
     size_t Dof( size_t i ) const {
-        assert( i < m_dof.size() );
-        return m_dof[ i ].first;
+        assert( i < m_conn.size() );
+        return m_conn[ i ].m_dof;
     }
 
 private:
-    // FIRST: DEGREE OF FREEDOM (DOF)
-    // SECONd: applied Lobatto functions
-    std::vector< std::pair< size_t, size_t > > m_dof;
+    // Connectivity vector
+    std::vector< Conn > m_conn;
 
     // (x[m+1] + x[m]) / 2
     const double m_c1;
